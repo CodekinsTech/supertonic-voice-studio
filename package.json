@@ -1,0 +1,26 @@
+{
+  "name": "supertonic-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cap:sync": "npx cap sync",
+    "cap:android": "vite build && npx cap sync android && npx cap open android",
+    "cap:ios": "vite build && npx cap sync ios && npx cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
+    "@capacitor/filesystem": "^8.1.3",
+    "@capacitor/ios": "^8.5.1",
+    "@capacitor/preferences": "^8.0.1",
+    "onnxruntime-web": "^1.17.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

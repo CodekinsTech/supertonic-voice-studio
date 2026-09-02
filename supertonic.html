@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#F7F9FD" />
+<title>Supertonic Voice Studio</title>
+<style>
+:root{
+  --bg-0:#F7F9FD; --bg-1:#EDF2F9; --bg-2:#E1E8F4;
+  --ink:#1E2A52; --ink-mid:#2C3E80; --ink-soft:#4D5DA8; --muted:#8A92BE;
+  --hair:rgba(0,0,0,.16); --hair-strong:rgba(0,0,0,.30);
+  --brand:#2563FF; --brand-light:#3DA5FF; --brand-deep:#1A4DD9;
+  --aqua:#00B8D4; --cyan:#60D7E8; --mint:#10D9A0; --emerald:#0EA672;
+  --coral:#FF6B5C; --tangerine:#FFB02E; --amber:#E89A2B; --rose:#E0457B;
+  --shadow-sm:0 1px 2px rgba(40,60,120,.06), 0 4px 12px rgba(40,60,120,.07);
+  --shadow-md:0 1px 3px rgba(40,60,120,.07), 0 12px 30px rgba(40,60,120,.10);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{margin:0;color:var(--ink-mid)}
+body{
+  font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  min-height:100vh;padding:14px;
+  background:
+    radial-gradient(900px 600px at 12% -10%, rgba(37,99,255,.10), transparent 60%),
+    radial-gradient(700px 500px at 110% 5%, rgba(61,165,255,.10), transparent 65%),
+    radial-gradient(800px 600px at 50% 110%, rgba(16,217,160,.07), transparent 60%),
+    radial-gradient(700px 500px at -5% 80%, rgba(255,107,92,.06), transparent 65%),
+    linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 60%,var(--bg-2) 100%);
+  background-attachment:fixed;
+  display:grid;grid-template-rows:auto 1fr;gap:0;
+  max-width:1440px;margin:0 auto;
+}
+header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+.brand-mark{display:flex;align-items:center;gap:14px}
+.brand-mark h1{
+  margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em;
+  color:transparent;
+  background:linear-gradient(135deg,#1E0A3E 0%,#4C1D95 45%,#0E3A5C 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+.brand-mark .tag{font-size:10px;font-weight:600;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.crumbs{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumb{
+  font-size:10.5px;font-weight:600;color:var(--ink-soft);
+  padding:5px 10px;border-radius:99px;
+  background:rgba(255,255,255,.65);border:1px solid var(--hair);
+  backdrop-filter:blur(10px);letter-spacing:.02em;
+}
+.crumb b{color:var(--brand);font-weight:700}
+
+.studio{display:grid;grid-template-columns:380px 1fr;gap:10px;min-height:0}
+.col{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;max-height:calc(100vh - 80px)}
+@media (max-width:980px){.studio{grid-template-columns:1fr}}
+
+.panel{
+  position:relative;padding:13px 15px;border-radius:18px;
+  background:linear-gradient(155deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.74) 100%);
+  backdrop-filter:blur(40px) saturate(180%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(255,255,255,.4),var(--shadow-sm);
+  --g1:#2563FF;--g2:#3DA5FF;
+}
+.panel::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(60% 40% at 100% 0%,color-mix(in oklab,var(--g1) 18%,transparent),transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.50) 0%,transparent 28%);
+  opacity:.85;
+}
+.panel::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;opacity:.85;
+}
+.panel-aqua{--g1:#3D7BC9;--g2:#B2DAE4}
+.panel-mint{--g1:#029456;--g2:#B2DAE4}
+
+h3{
+  margin:0 0 9px;font-size:11px;font-weight:800;color:var(--ink);
+  letter-spacing:.10em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;position:relative;
+}
+h3 .swatch{
+  width:8px;height:8px;border-radius:99px;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  box-shadow:0 0 0 3px rgba(255,255,255,.85),0 3px 8px rgba(40,60,120,.22);
+}
+h3 small{font-size:9.5px;font-weight:600;color:var(--muted);letter-spacing:.05em;text-transform:none;margin-left:auto}
+
+.row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+label{font-size:10px;color:var(--ink-soft);min-width:60px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+select,textarea{
+  flex:1;min-width:0;padding:7px 10px;border-radius:9px;
+  border:1px solid var(--hair);background:rgba(255,255,255,.85);
+  color:var(--ink-mid);font-size:12.5px;font-weight:500;font-family:inherit;
+  outline:none;transition:.15s;box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+}
+select:hover,textarea:hover{background:#fff;border-color:var(--hair-strong)}
+select:focus,textarea:focus{
+  border-color:var(--brand);background:#fff;
+  box-shadow:0 0 0 3px rgba(37,99,255,.13),inset 0 1px 0 rgba(255,255,255,.95);
+}
+textarea{min-height:100px;resize:vertical;line-height:1.55;padding:10px 12px}
+
+.slider-wrap{display:flex;flex:1;gap:8px;align-items:center;min-width:0}
+input[type=range]{
+  flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,var(--brand) 0%,var(--brand) var(--p,50%),rgba(60,80,140,.14) var(--p,50%));
+  outline:none;min-width:60px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:#fff;border:2px solid var(--brand);cursor:pointer;margin-top:-5px;
+  box-shadow:0 2px 6px rgba(37,99,255,.30);transition:transform .15s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.factor-val{font-family:'SF Mono',ui-monospace,monospace;color:var(--brand);min-width:42px;text-align:right;font-size:11px;font-weight:700;background:rgba(37,99,255,.08);padding:2px 7px;border-radius:6px}
+
+.char-counter{font-size:10px;font-weight:600;color:var(--muted);text-align:right;margin-top:3px;transition:color .2s}
+.char-counter.warn{color:#E89A2B}
+.char-counter.over{color:#E0457B}
+
+button{padding:7px 14px;border:1px solid transparent;border-radius:10px;cursor:pointer;font-weight:700;font-size:11.5px;letter-spacing:.02em;transition:.18s;font-family:inherit}
+.btn-go{
+  background:linear-gradient(180deg,#1A4DD9 0%,#0D2670 100%);
+  color:#fff;border-color:rgba(255,255,255,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 4px 12px rgba(26,77,217,.35);
+  width:100%;padding:12px;font-size:13px;letter-spacing:.03em;
+}
+.btn-go:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 18px rgba(26,77,217,.45)}
+.btn-go:disabled{opacity:.5;cursor:wait;transform:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse-bg{0%,100%{opacity:.7}50%{opacity:1}}
+.btn-go.generating{position:relative;pointer-events:none}
+.btn-go.generating::after{content:'';position:absolute;right:16px;top:50%;width:18px;height:18px;margin-top:-9px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+.gen-overlay{display:none;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,255,.10),rgba(0,184,212,.10));border:1px solid rgba(37,99,255,.18);margin-top:10px;font-size:12px;font-weight:700;color:var(--brand);animation:pulse-bg 1.8s ease-in-out infinite}
+.gen-overlay.show{display:flex}
+.gen-spinner{width:20px;height:20px;border:3px solid rgba(37,99,255,.18);border-top-color:var(--brand);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+.gen-overlay .gen-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.mobile-warning{display:none;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(255,160,0,.1),rgba(255,107,92,.1));border:1px solid rgba(255,160,0,.25);margin:8px 12px;font-size:11px;font-weight:600;color:#B45309;line-height:1.5;text-align:center}
+@media(max-width:768px){.mobile-warning{display:block}}
+
+audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
+
+.dl-row{display:flex;gap:7px;margin-top:8px}
+.dl-btn{
+  flex:1;padding:7px 10px;border-radius:9px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:10.5px;
+  font-weight:700;text-align:center;cursor:pointer;transition:.15s;
+}
+.dl-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
+
+.voice-chip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:8px}
+.voice-chip{
+  padding:6px 4px;border-radius:10px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);
+  color:var(--ink-soft);font-size:10.5px;
+  font-weight:700;text-align:center;cursor:pointer;
+  transition:.18s;
+}
+.voice-chip:hover{background:#fff;border-color:var(--hair-strong);transform:translateY(-1px)}
+.voice-chip.active{
+  background:linear-gradient(135deg,var(--brand),var(--brand-light));
+  color:#fff;border-color:transparent;
+  box-shadow:0 2px 8px rgba(37,99,255,.30);
+}
+.voice-chip .gender{font-size:8px;display:block;opacity:.7;margin-top:1px}
+#voiceGrid .voice-chip{position:relative;padding-bottom:22px}
+.voice-chip .preview-btn{display:inline-flex;align-items:center;justify-content:center;width:20px;height:14px;border-radius:4px;border:1px solid rgba(37,99,255,.2);background:rgba(37,99,255,.08);color:var(--brand);font-size:7px;cursor:pointer;padding:0;position:absolute;bottom:3px;left:50%;transform:translateX(-50%);transition:.18s;line-height:1;letter-spacing:.02em;font-weight:700}
+.voice-chip .preview-btn:hover{background:rgba(37,99,255,.2);border-color:rgba(37,99,255,.35)}
+.voice-chip .preview-btn.loading{animation:spin .6s linear infinite;opacity:.6;pointer-events:none}
+.voice-chip .preview-btn.playing{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* DSP Preset — solid coloured cards like Kokoro */
+.voice-chip[data-q]{
+  background:linear-gradient(145deg,var(--c) 0%,var(--c2) 100%)!important;
+  color:#fff!important;border-color:rgba(255,255,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 2px 8px rgba(0,0,0,.12)!important;
+  backdrop-filter:none!important;
+}
+.voice-chip[data-q]:hover{filter:brightness(1.09);transform:translateY(-1px)}
+.voice-chip[data-q].active{filter:brightness(1.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 4px 14px rgba(0,0,0,.18),0 0 0 2px rgba(255,255,255,.60)!important}
+.voice-chip[data-q="raw"]     {--c:#06B6D4;--c2:#0284C7}
+.voice-chip[data-q="polished"]{--c:#8B5CF6;--c2:#7C3AED}
+.voice-chip[data-q="premium"] {--c:#F43F5E;--c2:#BE123C}
+.voice-chip[data-q="propack"] {--c:#10B981;--c2:#047857}
+
+/* Emotion FX — per-emotion colours */
+.voice-chip[data-fx]{--c:inherit;--c-rgb:0,0,0}
+.voice-chip[data-fx="none"]     {--c:#7A90A8;--c-rgb:122,144,168}
+.voice-chip[data-fx="happy"]    {--c:#00E8A0;--c-rgb:0,232,160}
+.voice-chip[data-fx="sad"]      {--c:#2080FF;--c-rgb:32,128,255}
+.voice-chip[data-fx="calm"]     {--c:#9B5EFF;--c-rgb:155,94,255}
+.voice-chip[data-fx="angry"]    {--c:#FF3030;--c-rgb:255,48,48}
+.voice-chip[data-fx="whisper"]  {--c:#FF2D87;--c-rgb:255,45,135}
+.voice-chip[data-fx="hero"]     {--c:#A020F0;--c-rgb:160,32,240}
+.voice-chip[data-fx="cartoon"]  {--c:#FF9500;--c-rgb:255,149,0}
+.voice-chip[data-fx="cinematic"]{--c:#E8A020;--c-rgb:232,160,32}
+.voice-chip[data-fx="polish"]   {--c:#00C8E8;--c-rgb:0,200,232}
+.voice-chip[data-fx].active{
+  background:rgba(var(--c-rgb),.18)!important;
+  color:var(--c)!important;border-color:rgba(var(--c-rgb),.50)!important;
+  box-shadow:0 2px 8px rgba(var(--c-rgb),.20)!important;
+}
+.voice-chip[data-fx]:hover{border-color:rgba(var(--c-rgb),.35)}
+
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:4px;margin-bottom:8px}
+.lang-chip{
+  padding:5px 6px;border-radius:8px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);
+  color:var(--ink-soft);font-size:10px;
+  font-weight:600;text-align:center;cursor:pointer;transition:.18s;
+}
+.lang-chip:hover{background:#fff;border-color:var(--hair-strong)}
+.lang-chip.active{
+  background:linear-gradient(135deg,#0891A8,var(--aqua));
+  color:#fff;border-color:transparent;
+}
+
+.status-bar{
+  padding:8px 12px;border-radius:10px;font-size:11px;font-weight:600;
+  color:var(--ink-soft);margin-bottom:8px;
+  background:rgba(255,255,255,.7);border:1px solid var(--hair);
+  min-height:32px;display:flex;align-items:center;gap:8px;
+}
+.status-bar .badge{
+  padding:3px 8px;border-radius:6px;font-size:9.5px;font-weight:700;
+  color:#fff;background:#FF9800;letter-spacing:.03em;
+}
+.status-bar .badge.ok{background:#4CAF50}
+.status-bar.error{border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08);color:#C62828}
+
+.progress-bar{height:4px;border-radius:99px;background:rgba(37,99,255,.12);overflow:hidden;margin-top:6px;display:none}
+.progress-bar.show{display:block}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:99px;width:0%;transition:width .3s ease}
+
+.result-stats{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
+.stat{font-size:10.5px;font-weight:600;color:var(--muted)}
+.stat b{color:var(--ink);font-weight:700}
+
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 20px;color:var(--muted);text-align:center;
+}
+.empty-state .icon{font-size:48px;margin-bottom:12px;opacity:.5}
+.empty-state p{font-size:12px;font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand-mark">
+    <div>
+      <h1>Supertonic Voice Studio</h1>
+      <div class="tag">31-language text-to-speech</div>
+    </div>
+  </div>
+  <div class="crumbs">
+    <span class="crumb" id="crumbRuntime">Runtime <b>Loading…</b></span>
+    <span class="crumb" id="crumbLang">Lang <b>EN</b></span>
+  </div>
+</header>
+
+<div class="studio">
+  <!-- LEFT COLUMN -->
+  <div class="col">
+    <!-- Voice -->
+    <div class="panel">
+      <h3><span class="swatch"></span> Voice Style</h3>
+      <div class="voice-chip-grid" id="voiceGrid">
+        <div class="voice-chip active" data-voice="M1">M1<span class="gender">Male</span><button class="preview-btn" data-preview="M1" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="M2">M2<span class="gender">Male</span><button class="preview-btn" data-preview="M2" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="M3">M3<span class="gender">Male</span><button class="preview-btn" data-preview="M3" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="M4">M4<span class="gender">Male</span><button class="preview-btn" data-preview="M4" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="M5">M5<span class="gender">Male</span><button class="preview-btn" data-preview="M5" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="F1">F1<span class="gender">Female</span><button class="preview-btn" data-preview="F1" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="F2">F2<span class="gender">Female</span><button class="preview-btn" data-preview="F2" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="F3">F3<span class="gender">Female</span><button class="preview-btn" data-preview="F3" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="F4">F4<span class="gender">Female</span><button class="preview-btn" data-preview="F4" title="Preview voice">&#9654;</button></div>
+        <div class="voice-chip" data-voice="F5">F5<span class="gender">Female</span><button class="preview-btn" data-preview="F5" title="Preview voice">&#9654;</button></div>
+      </div>
+    </div>
+
+    <!-- Voice Presets -->
+    <div class="panel" style="--g1:#00C8E8;--g2:#0096B4">
+      <h3><span class="swatch"></span> Voice Presets <small>20 characters</small></h3>
+      <div class="voice-chip-grid" style="grid-template-columns:1fr 1fr" id="presetGrid">
+        <div class="voice-chip preset-chip" data-preset="narrator">Narrator <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="storyteller">Storyteller <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="newscaster">Newscaster <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="gentle">Gentle <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="energetic">Energetic <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="dramatic">Dramatic <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="soothing">Soothing <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="child">Child <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="villain">Villain <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="whispersoft">Whisper <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="bold">Bold <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="warmfem">Warm <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="deeptone">Deep Tone <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="bubbly">Bubbly <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="professor">Professor <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="poetess">Poetess <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="commander">Commander <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="lullaby">Lullaby <span class="gender">F</span></div>
+        <div class="voice-chip preset-chip" data-preset="hype">Hype <span class="gender">M</span></div>
+        <div class="voice-chip preset-chip" data-preset="mystic">Mystic <span class="gender">F</span></div>
+      </div>
+    </div>
+
+    <!-- Language -->
+    <div class="panel panel-aqua">
+      <h3><span class="swatch"></span> Language <small id="langCount">31 languages</small></h3>
+      <div class="lang-grid" id="langGrid"></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="panel panel-mint">
+      <h3><span class="swatch"></span> Settings</h3>
+      <div class="row">
+        <label>Speed</label>
+        <div class="slider-wrap">
+          <input type="range" id="speed" min="0.5" max="2.0" step="0.05" value="1.05" />
+          <span class="factor-val" id="speedVal">1.05x</span>
+        </div>
+      </div>
+      <div class="row">
+        <label>Steps</label>
+        <div class="slider-wrap">
+          <input type="range" id="totalStep" min="1" max="20" step="1" value="8" />
+          <span class="factor-val" id="stepVal">8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSP Preset -->
+    <div class="panel" style="--g1:#F86A38;--g2:#D8226C">
+      <h3><span class="swatch"></span> DSP Preset</h3>
+      <div class="voice-chip-grid" style="grid-template-columns:repeat(4,1fr)" id="dspStrip">
+        <div class="voice-chip" data-q="raw">Raw</div>
+        <div class="voice-chip active" data-q="polished">Polished</div>
+        <div class="voice-chip" data-q="premium">Premium</div>
+        <div class="voice-chip" data-q="propack">Pro Pack</div>
+      </div>
+    </div>
+
+    <!-- Emotion FX -->
+    <div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C">
+      <h3><span class="swatch"></span> Emotion FX</h3>
+      <div class="voice-chip-grid" style="grid-template-columns:repeat(5,1fr)" id="fxStrip">
+        <div class="voice-chip active" data-fx="none">None</div>
+        <div class="voice-chip" data-fx="happy">Happy</div>
+        <div class="voice-chip" data-fx="sad">Sad</div>
+        <div class="voice-chip" data-fx="calm">Calm</div>
+        <div class="voice-chip" data-fx="angry">Angry</div>
+        <div class="voice-chip" data-fx="whisper">Whisper</div>
+        <div class="voice-chip" data-fx="hero">Hero</div>
+        <div class="voice-chip" data-fx="cartoon">Cartoon</div>
+        <div class="voice-chip" data-fx="cinematic">Cinematic</div>
+        <div class="voice-chip" data-fx="polish">Polish</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col">
+    <!-- Composer -->
+    <div class="panel" style="flex:1;display:flex;flex-direction:column">
+      <h3><span class="swatch"></span> Composer</h3>
+      <textarea id="text" placeholder="Enter text to convert to speech…">This morning, I took a walk in the park, and the sound of the birds and the breeze was so pleasant that I stopped for a long time just to listen.</textarea>
+      <div class="char-counter" id="charCounter">0 / 2000</div>
+      <button class="btn-go" id="goBtn" disabled>Generate Speech</button>
+      <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="gen-overlay" id="genOverlay"><div class="gen-spinner"></div><span class="gen-text" id="genText">Generating speech…</span></div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-bar" id="statusBar">
+      <span id="statusText">Loading models…</span>
+      <span class="badge" id="runtimeBadge" style="display:none">WASM</span>
+    </div>
+
+    <!-- Mobile warning -->
+    <div class="mobile-warning">
+      ⚠ Supertonic downloads ~350 MB of AI models on first use. For the best experience, use a desktop browser with a stable Wi-Fi connection.
+    </div>
+
+    <!-- Output -->
+    <div class="panel" style="flex:1;display:flex;flex-direction:column">
+      <h3><span class="swatch"></span> Output</h3>
+      <div id="outputArea">
+        <div class="empty-state">
+          <div class="icon">🎤</div>
+          <p>Generated speech will appear here</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
+<script type="module" src="/main.js"></script>
+</body>
+</html>
