@@ -308,3 +308,14 @@ export async function loadTextToSpeech(progressCallback, downloadCallback) {
 export function getVoiceStyleURL(name) {
   return `${HF_VOICES}/${name}.json`;
 }
+
+export function loadVoiceStyleFromData(jsonData) {
+  const [,ttlDim1,ttlDim2] = jsonData.style_ttl.dims;
+  const [,dpDim1,dpDim2] = jsonData.style_dp.dims;
+  const ttlFlat = new Float32Array(jsonData.style_ttl.data.flat(Infinity));
+  const dpFlat = new Float32Array(jsonData.style_dp.data.flat(Infinity));
+  return new Style(
+    new ort.Tensor('float32', ttlFlat, [1, ttlDim1, ttlDim2]),
+    new ort.Tensor('float32', dpFlat, [1, dpDim1, dpDim2])
+  );
+}

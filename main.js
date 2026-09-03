@@ -1,4 +1,4 @@
-import { loadTextToSpeech, loadVoiceStyle, writeWavFile, getVoiceStyleURL, AVAILABLE_LANGS } from './helper.js';
+import { loadTextToSpeech, loadVoiceStyle, loadVoiceStyleFromData, writeWavFile, getVoiceStyleURL, AVAILABLE_LANGS } from './helper.js';
 
 const $ = id => document.getElementById(id);
 
@@ -431,6 +431,105 @@ $('goBtn').addEventListener('click', async () => {
     if (overlay) overlay.classList.remove('show');
     setTimeout(() => bar.classList.remove('show'), 1500);
   }
+});
+
+// Custom voice upload
+const customVoices = {};
+let customVoiceCount = 0;
+
+$('uploadVoiceBtn').addEventListener('click', () => $('voiceFileInput').click());
+
+$('voiceFileInput').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (!file.name.endsWith('.json')) { showStatus('Please upload a .json voice style file', 'error'); return; }
+
+  showStatus(`Loading custom voice: ${file.name}…`);
+  try {
+    const text = await file.text();
+    const json = JSON.parse(text);
+    if (!json.style_ttl || !json.style_dp) { showStatus('Invalid voice style file — missing style_ttl or style_dp', 'error'); return; }
+
+    customVoiceCount++;
+    const id = `C${customVoiceCount}`;
+    const label = file.name.replace(/\.json$/i, '').slice(0, 12);
+    customVoices[id] = json;
+
+    const chip = document.createElement('div');
+    chip.className = 'voice-chip';
+    chip.dataset.voice = id;
+    chip.dataset.custom = '1';
+    chip.innerHTML = `${label}<span class="gender">Custom</span><button class="preview-btn" data-preview="${id}" title="Preview voice">&#9654;</button>`;
+    chip.style.paddingBottom = '22px';
+    chip.style.position = 'relative';
+    $('customVoiceGrid').appendChild(chip);
+    $('customVoiceGrid').style.display = 'grid';
+    $('noCustom').style.display = 'none';
+
+    chip.addEventListener('click', async () => {
+      document.querySelectorAll('#voiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('#customVoiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentVoice = id;
+      currentStyle = loadVoiceStyleFromData(customVoices[id]);
+      showStatus(`Custom voice "${label}" selected`, 'ok');
+    });
+
+    const previewBtn = chip.querySelector('.preview-btn');
+    previewBtn.addEventListener('click', async (ev) => {
+      ev.stopPropagation();
+      if (!tts) { showStatus('Models still loading…', 'error'); return; }
+      if (previewAudio) { previewAudio.pause(); previewAudio = null; }
+      document.querySelectorAll('.preview-btn').forEach(b => b.classList.remove('playing'));
+
+      if (previewCache[id]) {
+        previewBtn.classList.add('playing');
+        previewAudio = new Audio(previewCache[id]);
+        previewAudio.onended = () => { previewBtn.classList.remove('playing'); previewAudio = null; };
+        previewAudio.play();
+        return;
+      }
+
+      previewBtn.classList.add('loading');
+      showStatus(`Generating ${label} preview…`);
+      try {
+        const style = loadVoiceStyleFromData(customVoices[id]);
+        const { wav, duration } = await tts.call(PREVIEW_TEXT, 'en', style, 8, 1.0, 0.3);
+        const wavLen = Math.floor(tts.sampleRate * duration[0]);
+        const samples = new Float32Array(wav.slice(0, wavLen));
+        const wavBuffer = writeWavFile(Array.from(samples), tts.sampleRate);
+        const blob = new Blob([wavBuffer], { type: 'audio/wav' });
+        const url = URL.createObjectURL(blob);
+        previewCache[id] = url;
+        previewBtn.classList.remove('loading');
+        previewBtn.classList.add('playing');
+        previewAudio = new Audio(url);
+        previewAudio.onended = () => { previewBtn.classList.remove('playing'); previewAudio = null; };
+        previewAudio.play();
+        showStatus(`Custom voice "${label}" preview`, 'ok');
+      } catch (err) {
+        previewBtn.classList.remove('loading');
+        showStatus(`Preview failed: ${err.message}`, 'error');
+      }
+    });
+
+    // Also deselect built-in voices when custom is picked
+    document.querySelectorAll('#voiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentVoice = id;
+    currentStyle = loadVoiceStyleFromData(json);
+    showStatus(`Custom voice "${label}" loaded and selected`, 'ok');
+  } catch (err) {
+    showStatus(`Failed to load voice file: ${err.message}`, 'error');
+  }
+  e.target.value = '';
+});
+
+// Re-attach built-in voice clicks to also deselect custom voices
+document.querySelectorAll('#voiceGrid .voice-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#customVoiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
+  });
 });
 
 window.addEventListener('load', init);
