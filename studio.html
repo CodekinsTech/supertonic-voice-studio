@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#F7F9FD" />
+<title>Voice Studio</title>
+<style>
+:root{
+  --bg:#F7F9FD;
+  --ink:#1E2A52;--ink-soft:#4D5DA8;--muted:#8A92BE;
+  --hair:rgba(0,0,0,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif}
+body{
+  display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#F7F9FD,#EDF2F9);
+}
+
+/* Tab bar */
+.tab-bar{
+  display:flex;gap:0;padding:5px;border-radius:99px;
+  background:rgba(255,255,255,.85);
+  border:1px solid var(--hair);
+  box-shadow:0 2px 12px rgba(40,60,120,.08);
+  width:fit-content;margin:12px auto 0;
+  flex-shrink:0;
+}
+.tab-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 24px;border-radius:99px;border:none;
+  background:transparent;color:var(--ink-soft);
+  font-size:13px;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:all .20s cubic-bezier(.34,1.46,.64,1);
+  white-space:nowrap;
+}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn .tab-ico{font-size:16px;line-height:1}
+.tab-btn.active[data-tab="kokoro"]{
+  background:linear-gradient(135deg,#00C8E8,#0096B4);color:#fff;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 4px 14px rgba(0,200,232,.40);
+}
+.tab-btn.active[data-tab="supertonic"]{
+  background:linear-gradient(135deg,#1A4DD9,#0D2670);color:#fff;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 4px 14px rgba(26,77,217,.40);
+}
+
+/* Frames */
+.frame-wrap{
+  flex:1;position:relative;margin:8px;border-radius:14px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(40,60,120,.10);
+}
+.frame-wrap iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  border:none;background:#fff;
+}
+.frame-wrap iframe.hidden{display:none}
+</style>
+</head>
+<body>
+
+<nav class="tab-bar" role="tablist">
+  <a href="/" style="display:inline-flex;align-items:center;gap:4px;padding:9px 16px;border-radius:99px;font-size:13px;font-weight:700;color:var(--ink-soft,#4D5DA8);text-decoration:none;transition:.18s;font-family:inherit" onmouseenter="this.style.background='rgba(37,99,255,.08)'" onmouseleave="this.style.background='transparent'">&larr; Home</a>
+  <button class="tab-btn active" data-tab="kokoro" role="tab" aria-selected="true">
+    <span class="tab-ico">🎙</span> Kokoro
+  </button>
+  <button class="tab-btn" data-tab="supertonic" role="tab" aria-selected="false">
+    <span class="tab-ico">🎵</span> Supertonic
+  </button>
+</nav>
+
+<div class="frame-wrap">
+  <iframe id="frame-kokoro" src="/kokoro/index.html"></iframe>
+  <iframe id="frame-supertonic" src="/supertonic.html" class="hidden"></iframe>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const frames = {
+  kokoro: document.getElementById('frame-kokoro'),
+  supertonic: document.getElementById('frame-supertonic')
+};
+
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+    Object.entries(frames).forEach(([key, frame]) => {
+      frame.classList.toggle('hidden', key !== target);
+    });
+  });
+});
+</script>
+
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
+</body>
+</html>

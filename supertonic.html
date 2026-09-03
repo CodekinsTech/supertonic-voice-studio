@@ -28,13 +28,13 @@ body{
     radial-gradient(700px 500px at -5% 80%, rgba(255,107,92,.06), transparent 65%),
     linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 60%,var(--bg-2) 100%);
   background-attachment:fixed;
-  display:grid;grid-template-rows:auto 1fr;gap:0;
-  max-width:1440px;margin:0 auto;
+  max-width:720px;margin:0 auto;
 }
-header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:10px;flex-wrap:wrap;gap:10px}
-.brand-mark{display:flex;align-items:center;gap:14px}
+
+/* Header */
+header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:16px;flex-wrap:wrap;gap:10px}
 .brand-mark h1{
-  margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em;
+  margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em;
   color:transparent;
   background:linear-gradient(135deg,#1E0A3E 0%,#4C1D95 45%,#0E3A5C 100%);
   -webkit-background-clip:text;background-clip:text;
@@ -49,12 +49,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:2px
 }
 .crumb b{color:var(--brand);font-weight:700}
 
-.studio{display:grid;grid-template-columns:380px 1fr;gap:10px;min-height:0}
-.col{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;max-height:calc(100vh - 80px)}
-@media (max-width:980px){.studio{grid-template-columns:1fr}}
-
+/* Panels */
 .panel{
-  position:relative;padding:13px 15px;border-radius:18px;
+  position:relative;padding:16px 18px;border-radius:18px;margin-bottom:12px;
   background:linear-gradient(155deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.74) 100%);
   backdrop-filter:blur(40px) saturate(180%);
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(255,255,255,.4),var(--shadow-sm);
@@ -73,11 +70,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:2px
   -webkit-mask-composite:xor;mask-composite:exclude;
   pointer-events:none;opacity:.85;
 }
-.panel-aqua{--g1:#3D7BC9;--g2:#B2DAE4}
-.panel-mint{--g1:#029456;--g2:#B2DAE4}
 
 h3{
-  margin:0 0 9px;font-size:11px;font-weight:800;color:var(--ink);
+  margin:0 0 10px;font-size:11px;font-weight:800;color:var(--ink);
   letter-spacing:.10em;text-transform:uppercase;
   display:flex;align-items:center;gap:8px;position:relative;
 }
@@ -88,12 +83,11 @@ h3 .swatch{
 }
 h3 small{font-size:9.5px;font-weight:600;color:var(--muted);letter-spacing:.05em;text-transform:none;margin-left:auto}
 
-.row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
-label{font-size:10px;color:var(--ink-soft);min-width:60px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+/* Form elements */
 select,textarea{
-  flex:1;min-width:0;padding:7px 10px;border-radius:9px;
+  width:100%;padding:9px 12px;border-radius:10px;
   border:1px solid var(--hair);background:rgba(255,255,255,.85);
-  color:var(--ink-mid);font-size:12.5px;font-weight:500;font-family:inherit;
+  color:var(--ink-mid);font-size:13px;font-weight:500;font-family:inherit;
   outline:none;transition:.15s;box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
 }
 select:hover,textarea:hover{background:#fff;border-color:var(--hair-strong)}
@@ -101,64 +95,16 @@ select:focus,textarea:focus{
   border-color:var(--brand);background:#fff;
   box-shadow:0 0 0 3px rgba(37,99,255,.13),inset 0 1px 0 rgba(255,255,255,.95);
 }
-textarea{min-height:100px;resize:vertical;line-height:1.55;padding:10px 12px}
+textarea{min-height:120px;resize:vertical;line-height:1.55}
+label{font-size:10px;color:var(--ink-soft);font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
 
-.slider-wrap{display:flex;flex:1;gap:8px;align-items:center;min-width:0}
-input[type=range]{
-  flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;
-  background:linear-gradient(90deg,var(--brand) 0%,var(--brand) var(--p,50%),rgba(60,80,140,.14) var(--p,50%));
-  outline:none;min-width:60px;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
-  background:#fff;border:2px solid var(--brand);cursor:pointer;margin-top:-5px;
-  box-shadow:0 2px 6px rgba(37,99,255,.30);transition:transform .15s;
-}
-input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
-.factor-val{font-family:'SF Mono',ui-monospace,monospace;color:var(--brand);min-width:42px;text-align:right;font-size:11px;font-weight:700;background:rgba(37,99,255,.08);padding:2px 7px;border-radius:6px}
-
-.char-counter{font-size:10px;font-weight:600;color:var(--muted);text-align:right;margin-top:3px;transition:color .2s}
-.char-counter.warn{color:#E89A2B}
-.char-counter.over{color:#E0457B}
-
-button{padding:7px 14px;border:1px solid transparent;border-radius:10px;cursor:pointer;font-weight:700;font-size:11.5px;letter-spacing:.02em;transition:.18s;font-family:inherit}
-.btn-go{
-  background:linear-gradient(180deg,#1A4DD9 0%,#0D2670 100%);
-  color:#fff;border-color:rgba(255,255,255,.20);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 4px 12px rgba(26,77,217,.35);
-  width:100%;padding:12px;font-size:13px;letter-spacing:.03em;
-}
-.btn-go:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 18px rgba(26,77,217,.45)}
-.btn-go:disabled{opacity:.5;cursor:wait;transform:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse-bg{0%,100%{opacity:.7}50%{opacity:1}}
-.btn-go.generating{position:relative;pointer-events:none}
-.btn-go.generating::after{content:'';position:absolute;right:16px;top:50%;width:18px;height:18px;margin-top:-9px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-.gen-overlay{display:none;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,255,.10),rgba(0,184,212,.10));border:1px solid rgba(37,99,255,.18);margin-top:10px;font-size:12px;font-weight:700;color:var(--brand);animation:pulse-bg 1.8s ease-in-out infinite}
-.gen-overlay.show{display:flex}
-.gen-spinner{width:20px;height:20px;border:3px solid rgba(37,99,255,.18);border-top-color:var(--brand);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
-.gen-overlay .gen-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-.mobile-warning{display:none;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(255,160,0,.1),rgba(255,107,92,.1));border:1px solid rgba(255,160,0,.25);margin:8px 12px;font-size:11px;font-weight:600;color:#B45309;line-height:1.5;text-align:center}
-@media(max-width:768px){.mobile-warning{display:block}}
-
-audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
-
-.dl-row{display:flex;gap:7px;margin-top:8px}
-.dl-btn{
-  flex:1;padding:7px 10px;border-radius:9px;border:1px solid var(--hair);
-  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:10.5px;
-  font-weight:700;text-align:center;cursor:pointer;transition:.15s;
-}
-.dl-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
-
+/* Voice chips */
 .voice-chip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:8px}
 .voice-chip{
-  padding:6px 4px;border-radius:10px;border:1px solid var(--hair);
+  padding:8px 4px;border-radius:10px;border:1px solid var(--hair);
   background:rgba(255,255,255,.85);
-  color:var(--ink-soft);font-size:10.5px;
-  font-weight:700;text-align:center;cursor:pointer;
-  transition:.18s;
+  color:var(--ink-soft);font-size:11px;
+  font-weight:700;text-align:center;cursor:pointer;transition:.18s;
 }
 .voice-chip:hover{background:#fff;border-color:var(--hair-strong);transform:translateY(-1px)}
 .voice-chip.active{
@@ -173,30 +119,100 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 .voice-chip .preview-btn.loading{animation:spin .6s linear infinite;opacity:.6;pointer-events:none}
 .voice-chip .preview-btn.playing{background:var(--brand);color:#fff;border-color:var(--brand)}
 
-.custom-voice-section{display:flex;flex-direction:column;gap:8px}
-.custom-voice-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.upload-btn{
-  padding:7px 14px;border-radius:9px;border:1px dashed rgba(37,99,255,.35);
-  background:rgba(37,99,255,.06);color:var(--brand);font-size:11px;font-weight:700;
-  cursor:pointer;transition:.18s;display:flex;align-items:center;gap:6px;
+/* Generate button */
+button{padding:7px 14px;border:1px solid transparent;border-radius:10px;cursor:pointer;font-weight:700;font-size:11.5px;letter-spacing:.02em;transition:.18s;font-family:inherit}
+.btn-go{
+  background:linear-gradient(180deg,#1A4DD9 0%,#0D2670 100%);
+  color:#fff;border-color:rgba(255,255,255,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 4px 12px rgba(26,77,217,.35);
+  width:100%;padding:14px;font-size:14px;letter-spacing:.03em;margin-top:8px;
 }
-.upload-btn:hover{background:rgba(37,99,255,.12);border-color:var(--brand)}
-.upload-btn svg{width:14px;height:14px;fill:currentColor}
-.clone-link{
-  font-size:10px;font-weight:700;color:var(--brand);text-decoration:none;
-  padding:5px 10px;border-radius:7px;background:rgba(37,99,255,.06);
-  border:1px solid rgba(37,99,255,.15);transition:.15s;display:flex;align-items:center;gap:4px;
-}
-.clone-link:hover{background:rgba(37,99,255,.14);border-color:rgba(37,99,255,.3)}
-.no-custom{font-size:10px;color:var(--muted);font-weight:600;font-style:italic}
-#customVoiceGrid{display:none;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:5px;margin-top:4px}
+.btn-go:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 18px rgba(26,77,217,.45)}
+.btn-go:disabled{opacity:.5;cursor:wait;transform:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse-bg{0%,100%{opacity:.7}50%{opacity:1}}
+.btn-go.generating{position:relative;pointer-events:none}
+.btn-go.generating::after{content:'';position:absolute;right:16px;top:50%;width:18px;height:18px;margin-top:-9px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
 
-/* DSP Preset — solid coloured cards like Kokoro */
+/* Char counter */
+.char-counter{font-size:10px;font-weight:600;color:var(--muted);text-align:right;margin-top:4px;transition:color .2s}
+.char-counter.warn{color:#E89A2B}
+.char-counter.over{color:#E0457B}
+
+/* Status */
+.status-bar{
+  padding:8px 12px;border-radius:10px;font-size:11px;font-weight:600;
+  color:var(--ink-soft);margin-bottom:12px;
+  background:rgba(255,255,255,.7);border:1px solid var(--hair);
+  min-height:32px;display:flex;align-items:center;gap:8px;
+}
+.status-bar .badge{padding:3px 8px;border-radius:6px;font-size:9.5px;font-weight:700;color:#fff;background:#FF9800;letter-spacing:.03em}
+.status-bar .badge.ok{background:#4CAF50}
+.status-bar.error{border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08);color:#C62828}
+
+/* Progress */
+.progress-bar{height:4px;border-radius:99px;background:rgba(37,99,255,.12);overflow:hidden;margin-top:6px;display:none}
+.progress-bar.show{display:block}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:99px;width:0%;transition:width .3s ease}
+.gen-overlay{display:none;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,255,.10),rgba(0,184,212,.10));border:1px solid rgba(37,99,255,.18);margin-top:10px;font-size:12px;font-weight:700;color:var(--brand);animation:pulse-bg 1.8s ease-in-out infinite}
+.gen-overlay.show{display:flex}
+.gen-spinner{width:20px;height:20px;border:3px solid rgba(37,99,255,.18);border-top-color:var(--brand);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+.gen-overlay .gen-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Output */
+audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
+.dl-row{display:flex;gap:7px;margin-top:8px}
+.dl-btn{
+  flex:1;padding:7px 10px;border-radius:9px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:10.5px;
+  font-weight:700;text-align:center;cursor:pointer;transition:.15s;
+}
+.dl-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;color:var(--muted);text-align:center}
+.empty-state .icon{font-size:42px;margin-bottom:10px;opacity:.5}
+.empty-state p{font-size:12px;font-weight:600}
+.result-stats{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
+.stat{font-size:10.5px;font-weight:600;color:var(--muted)}
+.stat b{color:var(--ink);font-weight:700}
+
+/* Collapsible sections */
+.section-toggle{
+  display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;
+  border-radius:12px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.7);color:var(--ink-soft);
+  font-size:11px;font-weight:700;cursor:pointer;transition:.18s;
+  margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase;
+}
+.section-toggle:hover{background:rgba(255,255,255,.9);border-color:var(--hair-strong)}
+.section-toggle.open{background:rgba(37,99,255,.06);border-color:rgba(37,99,255,.2);color:var(--brand)}
+.section-toggle .arrow{margin-left:auto;font-size:9px;transition:transform .2s}
+.section-toggle.open .arrow{transform:rotate(180deg)}
+.section-toggle .badge-count{margin-left:auto;padding:2px 7px;border-radius:5px;font-size:9px;background:rgba(37,99,255,.1);color:var(--brand)}
+.collapsible{display:none;animation:fadeIn .2s ease}
+.collapsible.open{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Slider */
+.row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.slider-wrap{display:flex;flex:1;gap:8px;align-items:center;min-width:0}
+input[type=range]{
+  flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,var(--brand) 0%,var(--brand) var(--p,50%),rgba(60,80,140,.14) var(--p,50%));
+  outline:none;min-width:60px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:#fff;border:2px solid var(--brand);cursor:pointer;margin-top:-5px;
+  box-shadow:0 2px 6px rgba(37,99,255,.30);transition:transform .15s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.factor-val{font-family:'SF Mono',ui-monospace,monospace;color:var(--brand);min-width:42px;text-align:right;font-size:11px;font-weight:700;background:rgba(37,99,255,.08);padding:2px 7px;border-radius:6px}
+
+/* DSP chips */
 .voice-chip[data-q]{
   background:linear-gradient(145deg,var(--c) 0%,var(--c2) 100%)!important;
   color:#fff!important;border-color:rgba(255,255,255,.20)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 2px 8px rgba(0,0,0,.12)!important;
-  backdrop-filter:none!important;
 }
 .voice-chip[data-q]:hover{filter:brightness(1.09);transform:translateY(-1px)}
 .voice-chip[data-q].active{filter:brightness(1.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 4px 14px rgba(0,0,0,.18),0 0 0 2px rgba(255,255,255,.60)!important}
@@ -205,7 +221,7 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 .voice-chip[data-q="premium"] {--c:#F43F5E;--c2:#BE123C}
 .voice-chip[data-q="propack"] {--c:#10B981;--c2:#047857}
 
-/* Emotion FX — per-emotion colours */
+/* Emotion FX chips */
 .voice-chip[data-fx]{--c:inherit;--c-rgb:0,0,0}
 .voice-chip[data-fx="none"]     {--c:#7A90A8;--c-rgb:122,144,168}
 .voice-chip[data-fx="happy"]    {--c:#00E8A0;--c-rgb:0,232,160}
@@ -224,6 +240,7 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 }
 .voice-chip[data-fx]:hover{border-color:rgba(var(--c-rgb),.35)}
 
+/* Language */
 .lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:4px;margin-bottom:8px}
 .lang-chip{
   padding:5px 6px;border-radius:8px;border:1px solid var(--hair);
@@ -232,38 +249,7 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
   font-weight:600;text-align:center;cursor:pointer;transition:.18s;
 }
 .lang-chip:hover{background:#fff;border-color:var(--hair-strong)}
-.lang-chip.active{
-  background:linear-gradient(135deg,#0891A8,var(--aqua));
-  color:#fff;border-color:transparent;
-}
-
-.status-bar{
-  padding:8px 12px;border-radius:10px;font-size:11px;font-weight:600;
-  color:var(--ink-soft);margin-bottom:8px;
-  background:rgba(255,255,255,.7);border:1px solid var(--hair);
-  min-height:32px;display:flex;align-items:center;gap:8px;
-}
-.status-bar .badge{
-  padding:3px 8px;border-radius:6px;font-size:9.5px;font-weight:700;
-  color:#fff;background:#FF9800;letter-spacing:.03em;
-}
-.status-bar .badge.ok{background:#4CAF50}
-.status-bar.error{border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08);color:#C62828}
-
-.progress-bar{height:4px;border-radius:99px;background:rgba(37,99,255,.12);overflow:hidden;margin-top:6px;display:none}
-.progress-bar.show{display:block}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:99px;width:0%;transition:width .3s ease}
-
-.result-stats{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
-.stat{font-size:10.5px;font-weight:600;color:var(--muted)}
-.stat b{color:var(--ink);font-weight:700}
-
-.empty-state{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:60px 20px;color:var(--muted);text-align:center;
-}
-.empty-state .icon{font-size:48px;margin-bottom:12px;opacity:.5}
-.empty-state p{font-size:12px;font-weight:600}
+.lang-chip.active{background:linear-gradient(135deg,#0891A8,var(--aqua));color:#fff;border-color:transparent}
 
 /* Mode tabs */
 .mode-tabs{display:flex;gap:4px;margin-bottom:8px}
@@ -274,6 +260,28 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 }
 .mode-tab:hover{background:#fff;border-color:var(--hair-strong)}
 .mode-tab.active{background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(37,99,255,.30)}
+.script-hint{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:4px;line-height:1.4}
+
+/* Custom voice */
+.custom-voice-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.upload-btn{
+  padding:7px 14px;border-radius:9px;border:1px dashed rgba(37,99,255,.35);
+  background:rgba(37,99,255,.06);color:var(--brand);font-size:11px;font-weight:700;
+  cursor:pointer;transition:.18s;display:flex;align-items:center;gap:6px;
+}
+.upload-btn:hover{background:rgba(37,99,255,.12);border-color:var(--brand)}
+.upload-btn svg{width:14px;height:14px;fill:currentColor}
+.clone-link{
+  font-size:10px;font-weight:700;color:var(--brand);text-decoration:none;
+  padding:5px 10px;border-radius:7px;background:rgba(37,99,255,.06);
+  border:1px solid rgba(37,99,255,.15);transition:.15s;display:flex;align-items:center;gap:4px;
+}
+.clone-link:hover{background:rgba(37,99,255,.14);border-color:rgba(37,99,255,.3)}
+.no-custom{font-size:10px;color:var(--muted);font-weight:600;font-style:italic}
+#customVoiceGrid{display:none;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:5px;margin-top:4px}
+
+/* Preset grid */
+.preset-grid{grid-template-columns:1fr 1fr!important}
 
 /* Import bar */
 .import-bar{display:flex;gap:6px;margin-bottom:6px}
@@ -284,11 +292,8 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 }
 .import-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
 
-/* Script mode hint */
-.script-hint{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:4px;line-height:1.4}
-
-/* Project buttons */
-.project-bar{display:flex;gap:6px;margin-top:6px}
+/* Project bar */
+.project-bar{display:flex;gap:6px;margin-top:8px}
 .project-btn{
   flex:1;padding:5px 8px;border-radius:7px;border:1px solid var(--hair);
   background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:9.5px;
@@ -296,7 +301,7 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 }
 .project-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
 
-/* History panel */
+/* History */
 .history-list{max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
 .history-item{
   display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;
@@ -321,7 +326,10 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 .history-item .h-dl:hover{background:#fff;color:var(--ink)}
 .history-empty{font-size:10px;color:var(--muted);font-weight:600;font-style:italic;text-align:center;padding:12px}
 
-/* Audiobook progress */
+/* Mobile warning */
+.mobile-warning{display:none;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(255,160,0,.1),rgba(255,107,92,.1));border:1px solid rgba(255,160,0,.25);margin-bottom:12px;font-size:11px;font-weight:600;color:#B45309;line-height:1.5;text-align:center}
+@media(max-width:768px){.mobile-warning{display:block}}
+
 .ab-progress{font-size:10px;font-weight:600;color:var(--brand);margin-top:6px}
 </style>
 </head>
@@ -329,10 +337,8 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 
 <header>
   <div class="brand-mark">
-    <div>
-      <h1>Supertonic Voice Studio</h1>
-      <div class="tag">31-language text-to-speech</div>
-    </div>
+    <h1>Supertonic Voice Studio</h1>
+    <div class="tag">31-language text-to-speech</div>
   </div>
   <div class="crumbs">
     <span class="crumb" id="crumbRuntime">Runtime <b>Loading…</b></span>
@@ -340,190 +346,223 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
   </div>
 </header>
 
-<div class="studio">
-  <!-- LEFT COLUMN -->
-  <div class="col">
-    <!-- Voice -->
-    <div class="panel">
-      <h3><span class="swatch"></span> Voice Style</h3>
-      <div class="voice-chip-grid" id="voiceGrid">
-        <div class="voice-chip active" data-voice="M1">M1<span class="gender">Male</span><button class="preview-btn" data-preview="M1" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="M2">M2<span class="gender">Male</span><button class="preview-btn" data-preview="M2" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="M3">M3<span class="gender">Male</span><button class="preview-btn" data-preview="M3" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="M4">M4<span class="gender">Male</span><button class="preview-btn" data-preview="M4" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="M5">M5<span class="gender">Male</span><button class="preview-btn" data-preview="M5" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="F1">F1<span class="gender">Female</span><button class="preview-btn" data-preview="F1" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="F2">F2<span class="gender">Female</span><button class="preview-btn" data-preview="F2" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="F3">F3<span class="gender">Female</span><button class="preview-btn" data-preview="F3" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="F4">F4<span class="gender">Female</span><button class="preview-btn" data-preview="F4" title="Preview voice">&#9654;</button></div>
-        <div class="voice-chip" data-voice="F5">F5<span class="gender">Female</span><button class="preview-btn" data-preview="F5" title="Preview voice">&#9654;</button></div>
-      </div>
-    </div>
+<!-- Status -->
+<div class="status-bar" id="statusBar">
+  <span id="statusText">Loading models…</span>
+  <span class="badge" id="runtimeBadge" style="display:none">WASM</span>
+</div>
 
-    <!-- Custom Voice / Clone -->
-    <div class="panel" style="--g1:#A020F0;--g2:#7C3AED">
-      <h3><span class="swatch"></span> Custom Voice <small>Upload cloned voice</small></h3>
-      <div class="custom-voice-section">
-        <div class="custom-voice-actions">
-          <button class="upload-btn" id="uploadVoiceBtn">
-            <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v5.586l1.707-1.707a1 1 0 111.414 1.414l-3.414 3.414a1 1 0 01-1.414 0L5.879 8.293a1 1 0 011.414-1.414L9 8.586V3a1 1 0 011-1z" transform="rotate(180 10 10)"/><path d="M3 14a1 1 0 011 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 112 0v1a3 3 0 01-3 3H5a3 3 0 01-3-3v-1a1 1 0 011-1z"/></svg>
-            Upload .json Voice
-          </button>
-          <a class="clone-link" href="https://colab.research.google.com/github/CodekinsTech/supertonic-voice-studio/blob/main/voice_cloner.ipynb" target="_blank" rel="noopener">
-            &#x1F9EC; Clone a Voice (Colab)
-          </a>
-        </div>
-        <span class="no-custom" id="noCustom">No custom voices loaded — upload a .json or clone one via Colab</span>
-        <span style="font-size:8.5px;color:var(--muted);line-height:1.4;display:block;margin-top:4px">By using voice cloning you agree not to clone voices without the speaker's consent. You are solely responsible for how you use cloned voices.</span>
-        <div id="customVoiceGrid"></div>
-        <input type="file" id="voiceFileInput" accept=".json" style="display:none">
-      </div>
-    </div>
+<div class="mobile-warning">
+  ⚠ Supertonic downloads ~350 MB of AI models on first use. For the best experience, use a desktop browser with a stable Wi-Fi connection.
+</div>
 
-    <!-- Voice Presets -->
-    <div class="panel" style="--g1:#00C8E8;--g2:#0096B4">
-      <h3><span class="swatch"></span> Voice Presets <small>20 characters</small></h3>
-      <div class="voice-chip-grid" style="grid-template-columns:1fr 1fr" id="presetGrid">
-        <div class="voice-chip preset-chip" data-preset="narrator">Narrator <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="storyteller">Storyteller <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="newscaster">Newscaster <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="gentle">Gentle <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="energetic">Energetic <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="dramatic">Dramatic <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="soothing">Soothing <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="child">Child <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="villain">Villain <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="whispersoft">Whisper <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="bold">Bold <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="warmfem">Warm <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="deeptone">Deep Tone <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="bubbly">Bubbly <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="professor">Professor <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="poetess">Poetess <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="commander">Commander <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="lullaby">Lullaby <span class="gender">F</span></div>
-        <div class="voice-chip preset-chip" data-preset="hype">Hype <span class="gender">M</span></div>
-        <div class="voice-chip preset-chip" data-preset="mystic">Mystic <span class="gender">F</span></div>
-      </div>
-    </div>
+<!-- ===== STEP 1: TEXT ===== -->
+<div class="panel">
+  <h3><span class="swatch"></span> Text</h3>
+  <textarea id="text" placeholder="Type or paste the text you want to hear…">This morning, I took a walk in the park, and the sound of the birds and the breeze was so pleasant that I stopped for a long time just to listen.</textarea>
+  <div class="char-counter" id="charCounter">0 / 2000</div>
+</div>
 
-    <!-- Language -->
-    <div class="panel panel-aqua">
-      <h3><span class="swatch"></span> Language <small id="langCount">31 languages</small></h3>
-      <div class="lang-grid" id="langGrid"></div>
-    </div>
-
-    <!-- Settings -->
-    <div class="panel panel-mint">
-      <h3><span class="swatch"></span> Settings</h3>
-      <div class="row">
-        <label>Speed</label>
-        <div class="slider-wrap">
-          <input type="range" id="speed" min="0.5" max="2.0" step="0.05" value="1.05" />
-          <span class="factor-val" id="speedVal">1.05x</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Steps</label>
-        <div class="slider-wrap">
-          <input type="range" id="totalStep" min="1" max="20" step="1" value="8" />
-          <span class="factor-val" id="stepVal">8</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- DSP Preset -->
-    <div class="panel" style="--g1:#F86A38;--g2:#D8226C">
-      <h3><span class="swatch"></span> DSP Preset</h3>
-      <div class="voice-chip-grid" style="grid-template-columns:repeat(4,1fr)" id="dspStrip">
-        <div class="voice-chip" data-q="raw">Raw</div>
-        <div class="voice-chip active" data-q="polished">Polished</div>
-        <div class="voice-chip" data-q="premium">Premium</div>
-        <div class="voice-chip" data-q="propack">Pro Pack</div>
-      </div>
-    </div>
-
-    <!-- Emotion FX -->
-    <div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C">
-      <h3><span class="swatch"></span> Emotion FX</h3>
-      <div class="voice-chip-grid" style="grid-template-columns:repeat(5,1fr)" id="fxStrip">
-        <div class="voice-chip active" data-fx="none">None</div>
-        <div class="voice-chip" data-fx="happy">Happy</div>
-        <div class="voice-chip" data-fx="sad">Sad</div>
-        <div class="voice-chip" data-fx="calm">Calm</div>
-        <div class="voice-chip" data-fx="angry">Angry</div>
-        <div class="voice-chip" data-fx="whisper">Whisper</div>
-        <div class="voice-chip" data-fx="hero">Hero</div>
-        <div class="voice-chip" data-fx="cartoon">Cartoon</div>
-        <div class="voice-chip" data-fx="cinematic">Cinematic</div>
-        <div class="voice-chip" data-fx="polish">Polish</div>
-      </div>
-    </div>
+<!-- ===== STEP 2: VOICE ===== -->
+<div class="panel">
+  <h3><span class="swatch"></span> Voice <small>10 voices</small></h3>
+  <div class="voice-chip-grid" id="voiceGrid">
+    <div class="voice-chip active" data-voice="M1">M1<span class="gender">Male</span><button class="preview-btn" data-preview="M1" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="M2">M2<span class="gender">Male</span><button class="preview-btn" data-preview="M2" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="M3">M3<span class="gender">Male</span><button class="preview-btn" data-preview="M3" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="M4">M4<span class="gender">Male</span><button class="preview-btn" data-preview="M4" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="M5">M5<span class="gender">Male</span><button class="preview-btn" data-preview="M5" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="F1">F1<span class="gender">Female</span><button class="preview-btn" data-preview="F1" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="F2">F2<span class="gender">Female</span><button class="preview-btn" data-preview="F2" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="F3">F3<span class="gender">Female</span><button class="preview-btn" data-preview="F3" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="F4">F4<span class="gender">Female</span><button class="preview-btn" data-preview="F4" title="Preview voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="F5">F5<span class="gender">Female</span><button class="preview-btn" data-preview="F5" title="Preview voice">&#9654;</button></div>
   </div>
+</div>
 
-  <!-- RIGHT COLUMN -->
-  <div class="col">
-    <!-- Composer -->
-    <div class="panel" style="flex:1;display:flex;flex-direction:column">
-      <h3><span class="swatch"></span> Composer</h3>
-      <div class="mode-tabs">
-        <div class="mode-tab active" data-mode="single">Single Voice</div>
-        <div class="mode-tab" data-mode="script">Multi-Voice</div>
-        <div class="mode-tab" data-mode="audiobook">Audiobook</div>
-      </div>
-      <div class="import-bar">
-        <button class="import-btn" id="importFileBtn">📄 Import .txt</button>
-        <button class="import-btn" id="clearTextBtn">✕ Clear</button>
-        <input type="file" id="textFileInput" accept=".txt,.text" style="display:none">
-      </div>
-      <div class="script-hint" id="scriptHint" style="display:none">Format: <b>M1:</b> Hello! <b>F2:</b> Hi there! — each voice tag starts a new speaker segment</div>
-      <div class="script-hint" id="abHint" style="display:none">Paste or import a long text. Each paragraph (blank line) becomes a chapter. Uses selected voice.</div>
-      <textarea id="text" placeholder="Enter text to convert to speech…">This morning, I took a walk in the park, and the sound of the birds and the breeze was so pleasant that I stopped for a long time just to listen.</textarea>
-      <div class="char-counter" id="charCounter">0 / 2000</div>
-      <button class="btn-go" id="goBtn" disabled>Generate Speech</button>
-      <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="gen-overlay" id="genOverlay"><div class="gen-spinner"></div><span class="gen-text" id="genText">Generating speech…</span></div>
-      <div class="ab-progress" id="abProgress" style="display:none"></div>
-      <div class="project-bar">
-        <button class="project-btn" id="saveProjectBtn">💾 Save Project</button>
-        <button class="project-btn" id="loadProjectBtn">📂 Load Project</button>
-      </div>
-    </div>
+<!-- ===== GENERATE ===== -->
+<button class="btn-go" id="goBtn" disabled>Generate Speech</button>
+<div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="gen-overlay" id="genOverlay"><div class="gen-spinner"></div><span class="gen-text" id="genText">Generating speech…</span></div>
+<div class="ab-progress" id="abProgress" style="display:none"></div>
 
-    <!-- Status -->
-    <div class="status-bar" id="statusBar">
-      <span id="statusText">Loading models…</span>
-      <span class="badge" id="runtimeBadge" style="display:none">WASM</span>
-    </div>
-
-    <!-- Mobile warning -->
-    <div class="mobile-warning">
-      ⚠ Supertonic downloads ~350 MB of AI models on first use. For the best experience, use a desktop browser with a stable Wi-Fi connection.
-    </div>
-
-    <!-- Output -->
-    <div class="panel" style="flex:1;display:flex;flex-direction:column">
-      <h3><span class="swatch"></span> Output</h3>
-      <div id="outputArea">
-        <div class="empty-state">
-          <div class="icon">🎤</div>
-          <p>Generated speech will appear here</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- History -->
-    <div class="panel">
-      <h3><span class="swatch"></span> History <small id="historyCount">0 items</small></h3>
-      <div class="history-list" id="historyList">
-        <div class="history-empty">No generations yet</div>
-      </div>
+<!-- ===== OUTPUT ===== -->
+<div class="panel" style="margin-top:12px">
+  <h3><span class="swatch"></span> Output</h3>
+  <div id="outputArea">
+    <div class="empty-state">
+      <div class="icon">🎤</div>
+      <p>Generated speech will appear here</p>
     </div>
   </div>
 </div>
 
-<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
-<script type="module" src="/main.js"></script>
+<!-- ===== ADVANCED SECTION (collapsed) ===== -->
+<button class="section-toggle" id="toggleAdvanced">
+  ⚙ Advanced Settings
+  <span class="arrow">▼</span>
+</button>
+<div class="collapsible" id="advancedSection">
+  <!-- Language -->
+  <div class="panel" style="--g1:#3D7BC9;--g2:#B2DAE4">
+    <h3><span class="swatch"></span> Language <small id="langCount">31 languages</small></h3>
+    <div class="lang-grid" id="langGrid"></div>
+  </div>
+
+  <!-- Speed & Steps -->
+  <div class="panel" style="--g1:#029456;--g2:#B2DAE4">
+    <h3><span class="swatch"></span> Settings</h3>
+    <div class="row">
+      <label style="min-width:60px">Speed</label>
+      <div class="slider-wrap">
+        <input type="range" id="speed" min="0.5" max="2.0" step="0.05" value="1.05" />
+        <span class="factor-val" id="speedVal">1.05x</span>
+      </div>
+    </div>
+    <div class="row">
+      <label style="min-width:60px">Steps</label>
+      <div class="slider-wrap">
+        <input type="range" id="totalStep" min="1" max="20" step="1" value="8" />
+        <span class="factor-val" id="stepVal">8</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DSP Preset -->
+  <div class="panel" style="--g1:#F86A38;--g2:#D8226C">
+    <h3><span class="swatch"></span> DSP Preset</h3>
+    <div class="voice-chip-grid" style="grid-template-columns:repeat(4,1fr)" id="dspStrip">
+      <div class="voice-chip" data-q="raw">Raw</div>
+      <div class="voice-chip active" data-q="polished">Polished</div>
+      <div class="voice-chip" data-q="premium">Premium</div>
+      <div class="voice-chip" data-q="propack">Pro Pack</div>
+    </div>
+  </div>
+
+  <!-- Emotion FX -->
+  <div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C">
+    <h3><span class="swatch"></span> Emotion FX</h3>
+    <div class="voice-chip-grid" style="grid-template-columns:repeat(5,1fr)" id="fxStrip">
+      <div class="voice-chip active" data-fx="none">None</div>
+      <div class="voice-chip" data-fx="happy">Happy</div>
+      <div class="voice-chip" data-fx="sad">Sad</div>
+      <div class="voice-chip" data-fx="calm">Calm</div>
+      <div class="voice-chip" data-fx="angry">Angry</div>
+      <div class="voice-chip" data-fx="whisper">Whisper</div>
+      <div class="voice-chip" data-fx="hero">Hero</div>
+      <div class="voice-chip" data-fx="cartoon">Cartoon</div>
+      <div class="voice-chip" data-fx="cinematic">Cinematic</div>
+      <div class="voice-chip" data-fx="polish">Polish</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRO SECTION (collapsed) ===== -->
+<button class="section-toggle" id="togglePro">
+  ⚡ Pro Features
+  <span class="arrow">▼</span>
+</button>
+<div class="collapsible" id="proSection">
+  <!-- Mode Tabs -->
+  <div class="panel">
+    <h3><span class="swatch"></span> Generation Mode</h3>
+    <div class="mode-tabs">
+      <div class="mode-tab active" data-mode="single">Single Voice</div>
+      <div class="mode-tab" data-mode="script">Multi-Voice</div>
+      <div class="mode-tab" data-mode="audiobook">Audiobook</div>
+    </div>
+    <div class="script-hint" id="scriptHint" style="display:none">Format: <b>M1:</b> Hello! <b>F2:</b> Hi there! — each voice tag starts a new speaker segment</div>
+    <div class="script-hint" id="abHint" style="display:none">Paste or import a long text. Each paragraph (blank line) becomes a chapter. Uses selected voice.</div>
+    <div class="import-bar">
+      <button class="import-btn" id="importFileBtn">📄 Import .txt</button>
+      <button class="import-btn" id="clearTextBtn">✕ Clear</button>
+      <input type="file" id="textFileInput" accept=".txt,.text" style="display:none">
+    </div>
+  </div>
+
+  <!-- Custom Voice -->
+  <div class="panel" style="--g1:#A020F0;--g2:#7C3AED">
+    <h3><span class="swatch"></span> Custom Voice <small>Upload cloned voice</small></h3>
+    <div class="custom-voice-actions">
+      <button class="upload-btn" id="uploadVoiceBtn">
+        <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v5.586l1.707-1.707a1 1 0 111.414 1.414l-3.414 3.414a1 1 0 01-1.414 0L5.879 8.293a1 1 0 011.414-1.414L9 8.586V3a1 1 0 011-1z" transform="rotate(180 10 10)"/><path d="M3 14a1 1 0 011 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 112 0v1a3 3 0 01-3 3H5a3 3 0 01-3-3v-1a1 1 0 011-1z"/></svg>
+        Upload .json Voice
+      </button>
+      <a class="clone-link" href="https://colab.research.google.com/github/CodekinsTech/supertonic-voice-studio/blob/main/voice_cloner.ipynb" target="_blank" rel="noopener">
+        &#x1F9EC; Clone a Voice (Colab)
+      </a>
+    </div>
+    <span class="no-custom" id="noCustom">No custom voices loaded</span>
+    <span style="font-size:8.5px;color:var(--muted);line-height:1.4;display:block;margin-top:4px">By using voice cloning you agree not to clone voices without the speaker's consent.</span>
+    <div id="customVoiceGrid"></div>
+    <input type="file" id="voiceFileInput" accept=".json" style="display:none">
+  </div>
+
+  <!-- Voice Presets -->
+  <div class="panel" style="--g1:#00C8E8;--g2:#0096B4">
+    <h3><span class="swatch"></span> Voice Presets <small>20 characters</small></h3>
+    <div class="voice-chip-grid preset-grid" id="presetGrid">
+      <div class="voice-chip preset-chip" data-preset="narrator">Narrator <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="storyteller">Storyteller <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="newscaster">Newscaster <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="gentle">Gentle <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="energetic">Energetic <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="dramatic">Dramatic <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="soothing">Soothing <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="child">Child <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="villain">Villain <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="whispersoft">Whisper <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="bold">Bold <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="warmfem">Warm <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="deeptone">Deep Tone <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="bubbly">Bubbly <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="professor">Professor <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="poetess">Poetess <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="commander">Commander <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="lullaby">Lullaby <span class="gender">F</span></div>
+      <div class="voice-chip preset-chip" data-preset="hype">Hype <span class="gender">M</span></div>
+      <div class="voice-chip preset-chip" data-preset="mystic">Mystic <span class="gender">F</span></div>
+    </div>
+  </div>
+
+  <!-- Project Save/Load -->
+  <div class="panel">
+    <h3><span class="swatch"></span> Project</h3>
+    <div class="project-bar" style="margin-top:0">
+      <button class="project-btn" id="saveProjectBtn">💾 Save Project</button>
+      <button class="project-btn" id="loadProjectBtn">📂 Load Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HISTORY (collapsed) ===== -->
+<button class="section-toggle" id="toggleHistory">
+  📋 History
+  <span class="badge-count" id="historyCount">0</span>
+  <span class="arrow">▼</span>
+</button>
+<div class="collapsible" id="historySection">
+  <div class="panel">
+    <div class="history-list" id="historyList">
+      <div class="history-empty">No generations yet</div>
+    </div>
+  </div>
+</div>
+
 <div style="text-align:center;padding:12px 16px;font-size:8.5px;color:#8A92BE;line-height:1.5;max-width:600px;margin:10px auto 0">By using this tool you agree not to clone or misuse generated voices without the speaker's consent. You are solely responsible for how you use generated audio.</div>
+
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
+<script type="module" src="/main-v2.js"></script>
+<script>
+document.querySelectorAll('.section-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.id.replace('toggle','').toLowerCase() + 'Section';
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const open = target.classList.toggle('open');
+    btn.classList.toggle('open', open);
+  });
+});
+</script>
 </body>
 </html>

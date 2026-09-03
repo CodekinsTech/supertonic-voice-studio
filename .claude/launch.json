@@ -5,7 +5,7 @@
       "name": "supertonic-studio",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "port": 3050
     }
   ]
 }

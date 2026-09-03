@@ -39,8 +39,7 @@ body{
     radial-gradient(700px 500px at -5% 80%, rgba(255,107,92,.06), transparent 65%),
     linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 60%,var(--bg-2) 100%);
   background-attachment:fixed;
-  display:grid;grid-template-rows:auto auto 1fr;gap:0;
-  max-width:1440px;margin:0 auto;
+  max-width:720px;margin:0 auto;
 }
 header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:10px}
 .brand-mark{display:flex;align-items:center;gap:16px}
@@ -74,9 +73,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:2px
 .crumb.warn{background:rgba(232,154,43,.12);color:#9A6B14;border-color:rgba(232,154,43,.35)}
 .crumb.warn b{color:#9A6B14}
 
-.studio{display:grid;grid-template-columns:380px 1fr;gap:10px;min-height:0}
+.studio{display:flex;flex-direction:column;gap:10px;min-height:0}
 .col{display:flex;flex-direction:column;gap:10px;min-height:0}
-@media (max-width:980px){.studio{grid-template-columns:1fr}}
 
 .panel{
   position:relative;padding:13px 15px;border-radius:18px;
@@ -100,6 +98,15 @@ header{display:flex;align-items:center;justify-content:space-between;padding:2px
   pointer-events:none;opacity:.85;
 }
 .panel-sapphire{--g1:#005BB3;--g2:#B2DAE4}
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:4px;margin-bottom:8px}
+.lang-chip{
+  padding:5px 6px;border-radius:8px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);
+  color:var(--ink-soft);font-size:10px;
+  font-weight:600;text-align:center;cursor:pointer;transition:.18s;
+}
+.lang-chip:hover{background:#fff;border-color:var(--hair-strong)}
+.lang-chip.active{background:linear-gradient(135deg,#0891A8,var(--aqua));color:#fff;border-color:transparent}
 .panel-aqua{--g1:#3D7BC9;--g2:#B2DAE4}
 .panel-mint{--g1:#029456;--g2:#B2DAE4}
 .panel-coral{--g1:#F86A38;--g2:#D8226C}
@@ -655,6 +662,23 @@ h3 small{display:none}
 
 /* Section-caps inside Style & Effects stay — they're navigation anchors */
 
+/* Collapsible sections */
+.section-toggle{
+  display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;
+  border-radius:12px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.7);color:var(--ink-soft);
+  font-size:11px;font-weight:700;cursor:pointer;transition:.18s;
+  margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase;
+}
+.section-toggle:hover{background:rgba(255,255,255,.9);border-color:var(--hair-strong)}
+.section-toggle.open{background:rgba(37,99,255,.06);border-color:rgba(37,99,255,.2);color:var(--brand)}
+.section-toggle .arrow{margin-left:auto;font-size:9px;transition:transform .2s}
+.section-toggle.open .arrow{transform:rotate(180deg)}
+.section-toggle .badge-count{margin-left:auto;padding:2px 7px;border-radius:5px;font-size:9px;background:rgba(37,99,255,.1);color:var(--brand)}
+.v2-collapsible{display:none;animation:v2FadeIn .2s ease}
+.v2-collapsible.open{display:block}
+@keyframes v2FadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
 /* ───────── Credits bar ───────── */
 /* Credits corner popup */
 .credits-corner{position:fixed;bottom:16px;right:16px;z-index:600}
@@ -724,6 +748,8 @@ h3 small{display:none}
   </div>
 </header>
 
+<!-- Tab nav hidden in v2 — single-page progressive disclosure -->
+<div style="display:none">
 <nav class="app-tabs" role="tablist" aria-label="Studio sections">
   <button type="button" class="app-tab active" role="tab" aria-selected="true" data-tab="studio">
     <span class="tab-ico" aria-hidden="true">🎛</span>
@@ -739,15 +765,17 @@ h3 small{display:none}
     <span class="tab-name">Voice Library</span>
   </button>
 </nav>
+</div>
 
 <div class="tab-panel active" id="tab-studio" role="tabpanel" data-tab="studio">
 <div class="studio">
 
-  <!-- ═══════════════ LEFT — VOICE SOURCE ═══════════════ -->
-  <aside class="col">
+  <!-- ═══════════════ MAIN FLOW — TEXT + VOICE + GENERATE ═══════════════ -->
+  <div class="col">
 
+    <!-- Voice Source (always visible) -->
     <section class="panel panel-sapphire">
-      <h3><span class="swatch"></span>Voice Source <small>Mix two voices</small></h3>
+      <h3><span class="swatch"></span>Voice Source</h3>
       <div class="vrow">
         <div class="vbead" id="beadA"></div>
         <div class="vinfo">
@@ -786,75 +814,9 @@ h3 small{display:none}
       <div class="row" style="margin-top:4px"><span id="loadStatus">Idle.</span></div>
     </section>
 
-    <section class="panel panel-mint">
-      <h3><span class="swatch"></span>Voice Presets <small>One-click recipes</small></h3>
-      <div class="preset-grid">
-        <div class="preset" data-a="af_heart" data-b="af_bella" data-f="0.5"><b>Sweet Kid</b> · F</div>
-        <div class="preset" data-a="af_heart" data-b="bf_emma" data-f="0.6"><b>Brit Hybrid</b> · F</div>
-        <div class="preset" data-a="af_nicole" data-b="af_sky" data-f="0.4"><b>Soft Whisper</b> · F</div>
-        <div class="preset" data-a="am_michael" data-b="am_eric" data-f="0.5"><b>Buddy</b> · M</div>
-        <div class="preset" data-a="am_puck" data-b="am_liam" data-f="0.5"><b>Cheeky</b> · M</div>
-        <div class="preset" data-a="bm_george" data-b="bm_lewis" data-f="0.5"><b>Brit Gent</b> · M</div>
-        <div class="preset" data-a="af_heart" data-b="am_michael" data-f="0"><b>Androgyne</b> · X</div>
-        <div class="preset" data-a="af_heart" data-b="af_bella" data-f="-1.5"><b>Extreme A</b> · F</div>
-      </div>
-    </section>
-
-    <section class="panel panel-coral">
-      <h3><span class="swatch"></span>Match Voice <small>Find closest Kokoro voice</small></h3>
-      <div class="row">
-        <label>Sample</label>
-        <input type="file" id="matchRef" accept="audio/*">
-      </div>
-      <div class="row"><span id="matchRefMeta">Upload a clean 5–15s clip</span></div>
-      <div class="row" style="margin-top:6px">
-        <button class="btn-warm" id="matchBtn">▶ Find Match</button>
-        <span id="matchStatus"></span>
-      </div>
-      <div id="matchResults" class="match-results" style="display:none">
-        <div class="section-cap" style="margin-top:12px">Best blend</div>
-        <div id="matchBlend" class="match-blend">—</div>
-        <div class="section-cap" style="margin-top:10px">Top single voices</div>
-        <div id="matchList" class="match-list"></div>
-      </div>
-      <div class="tip" style="margin-top:10px" id="matchModeTip">
-        Browser mode uses on-device fingerprinting (pitch + brightness + timbre).
-        For higher fidelity, run the local server at <code>127.0.0.1:7860</code>.
-      </div>
-    </section>
-
-    <section class="panel panel-aqua">
-      <h3><span class="swatch"></span>Quality preset <small>Model precision</small></h3>
-      <div class="strip-grid q" id="tierStrip">
-        <div class="q-btn" data-tier="fp16">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
-          <span class="q-name">Studio</span><span class="q-desc">FP16 · 155MB</span>
-        </div>
-        <div class="q-btn active" data-tier="q8">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/></svg>
-          <span class="q-name">Balanced</span><span class="q-desc">Q8 · 83MB</span>
-        </div>
-        <div class="q-btn" data-tier="q4">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9"/></svg>
-          <span class="q-name">Lite</span><span class="q-desc">Q4 · 42MB</span>
-        </div>
-        <div class="q-btn" data-tier="q4f16">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
-          <span class="q-name">Mobile</span><span class="q-desc">Q4F16 · 47MB</span>
-        </div>
-      </div>
-      <div class="tip" style="margin-top:10px">
-        Cached after first download. Switch any time to re-download at chosen quality.
-      </div>
-    </section>
-
-  </aside>
-
-  <!-- ═══════════════ RIGHT — STUDIO ═══════════════ -->
-  <main class="col">
-
+    <!-- Composer (always visible) -->
     <section class="panel panel-deep">
-      <h3><span class="swatch"></span>Composer <small>Type and generate</small>
+      <h3><span class="swatch"></span>Composer
         <span class="composer-note-wrap" id="composerNoteWrap">
           <button class="composer-note-btn" id="composerNoteBtn" aria-label="Character limits info">ℹ</button>
           <div class="composer-note-popup" id="composerNotePopup" role="dialog">
@@ -928,6 +890,51 @@ h3 small{display:none}
       </div>
     </section>
 
+    <!-- ═══════════════ ADVANCED (collapsed) ═══════════════ -->
+    <button class="section-toggle" onclick="var t=document.getElementById('v2AdvancedSection');var o=t.classList.toggle('open');this.classList.toggle('open',o)">
+      ⚙ Advanced Settings
+      <span class="arrow">▼</span>
+    </button>
+    <div class="v2-collapsible" id="v2AdvancedSection">
+
+    <section class="panel" style="--g1:#3D7BC9;--g2:#B2DAE4">
+      <h3><span class="swatch"></span> Language <small>9 languages</small></h3>
+      <div class="lang-grid" id="langGrid">
+        <div class="lang-chip active" data-lang="en-us">English (US)</div>
+        <div class="lang-chip" data-lang="en-gb">English (UK)</div>
+        <div class="lang-chip" data-lang="ja">Japanese</div>
+        <div class="lang-chip" data-lang="zh">Chinese</div>
+        <div class="lang-chip" data-lang="ko">Korean</div>
+        <div class="lang-chip" data-lang="fr">French</div>
+        <div class="lang-chip" data-lang="hi">Hindi</div>
+        <div class="lang-chip" data-lang="it">Italian</div>
+        <div class="lang-chip" data-lang="pt">Portuguese</div>
+        <div class="lang-chip" data-lang="es">Spanish</div>
+      </div>
+    </section>
+
+    <section class="panel panel-aqua">
+      <h3><span class="swatch"></span>Quality preset</h3>
+      <div class="strip-grid q" id="tierStrip">
+        <div class="q-btn" data-tier="fp16">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+          <span class="q-name">Studio</span><span class="q-desc">FP16 · 155MB</span>
+        </div>
+        <div class="q-btn active" data-tier="q8">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/></svg>
+          <span class="q-name">Balanced</span><span class="q-desc">Q8 · 83MB</span>
+        </div>
+        <div class="q-btn" data-tier="q4">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9"/></svg>
+          <span class="q-name">Lite</span><span class="q-desc">Q4 · 42MB</span>
+        </div>
+        <div class="q-btn" data-tier="q4f16">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+          <span class="q-name">Mobile</span><span class="q-desc">Q4F16 · 47MB</span>
+        </div>
+      </div>
+    </section>
+
     <section class="panel panel-amber">
       <h3><span class="swatch"></span>Style &amp; Effects</h3>
       <div class="style-fx-stack">
@@ -990,9 +997,55 @@ h3 small{display:none}
       </div>
     </section>
 
+    </div><!-- /v2AdvancedSection -->
+
+    <!-- ═══════════════ PRO FEATURES (collapsed) ═══════════════ -->
+    <button class="section-toggle" onclick="var t=document.getElementById('v2ProSection');var o=t.classList.toggle('open');this.classList.toggle('open',o)">
+      ⚡ Pro Features
+      <span class="arrow">▼</span>
+    </button>
+    <div class="v2-collapsible" id="v2ProSection">
+
+    <section class="panel panel-mint">
+      <h3><span class="swatch"></span>Voice Presets</h3>
+      <div class="preset-grid">
+        <div class="preset" data-a="af_heart" data-b="af_bella" data-f="0.5"><b>Sweet Kid</b> · F</div>
+        <div class="preset" data-a="af_heart" data-b="bf_emma" data-f="0.6"><b>Brit Hybrid</b> · F</div>
+        <div class="preset" data-a="af_nicole" data-b="af_sky" data-f="0.4"><b>Soft Whisper</b> · F</div>
+        <div class="preset" data-a="am_michael" data-b="am_eric" data-f="0.5"><b>Buddy</b> · M</div>
+        <div class="preset" data-a="am_puck" data-b="am_liam" data-f="0.5"><b>Cheeky</b> · M</div>
+        <div class="preset" data-a="bm_george" data-b="bm_lewis" data-f="0.5"><b>Brit Gent</b> · M</div>
+        <div class="preset" data-a="af_heart" data-b="am_michael" data-f="0"><b>Androgyne</b> · X</div>
+        <div class="preset" data-a="af_heart" data-b="af_bella" data-f="-1.5"><b>Extreme A</b> · F</div>
+      </div>
+    </section>
+
+    <section class="panel panel-coral">
+      <h3><span class="swatch"></span>Match Voice</h3>
+      <div class="row">
+        <label>Sample</label>
+        <input type="file" id="matchRef" accept="audio/*">
+      </div>
+      <div class="row"><span id="matchRefMeta">Upload a clean 5–15s clip</span></div>
+      <div class="row" style="margin-top:6px">
+        <button class="btn-warm" id="matchBtn">▶ Find Match</button>
+        <span id="matchStatus"></span>
+      </div>
+      <div id="matchResults" class="match-results" style="display:none">
+        <div class="section-cap" style="margin-top:12px">Best blend</div>
+        <div id="matchBlend" class="match-blend">—</div>
+        <div class="section-cap" style="margin-top:10px">Top single voices</div>
+        <div id="matchList" class="match-list"></div>
+      </div>
+      <div class="tip" style="margin-top:10px" id="matchModeTip">
+        Browser mode uses on-device fingerprinting (pitch + brightness + timbre).
+        For higher fidelity, run the local server at <code>127.0.0.1:7860</code>.
+      </div>
+    </section>
+
     <div class="side-by-side">
     <section class="panel panel-aqua">
-      <h3><span class="swatch"></span>Voice Sampling <small>Per-render shaping</small></h3>
+      <h3><span class="swatch"></span>Voice Sampling</h3>
       <div class="row">
         <label>Stability</label>
         <div class="slider-wrap">
@@ -1062,6 +1115,16 @@ h3 small{display:none}
       </details>
     </section>
 
+    </div><!-- /v2ProSection -->
+
+    <!-- ═══════════════ HISTORY (collapsed) ═══════════════ -->
+    <button class="section-toggle" onclick="var t=document.getElementById('v2HistorySection');var o=t.classList.toggle('open');this.classList.toggle('open',o)">
+      📋 Tools &amp; History
+      <span class="badge-count" id="kHistoryCount2">0</span>
+      <span class="arrow">▼</span>
+    </button>
+    <div class="v2-collapsible" id="v2HistorySection">
+
     <!-- Import + History -->
     <section class="panel">
       <h3><span class="swatch"></span>Tools</h3>
@@ -1078,7 +1141,9 @@ h3 small{display:none}
       </div>
     </section>
 
-  </main>
+    </div><!-- /v2HistorySection -->
+
+  </div><!-- /col -->
 </div>
 </div><!-- /#tab-studio -->
 
@@ -1622,6 +1687,17 @@ document.addEventListener('click',function(e){
     var p = JSON.parse(saved);
     if(p.text){ textArea.value = p.text; textArea.dispatchEvent(new Event('input')); }
     var s = document.getElementById('status'); if(s) s.textContent = 'Project loaded';
+  });
+})();
+
+// ── Language chip toggle ────────────────────────────────────────────────
+(function(){
+  var chips=document.querySelectorAll('#langGrid .lang-chip');
+  chips.forEach(function(chip){
+    chip.addEventListener('click',function(){
+      chips.forEach(function(c){c.classList.remove('active');});
+      chip.classList.add('active');
+    });
   });
 })();
 </script>

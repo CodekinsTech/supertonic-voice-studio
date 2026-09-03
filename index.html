@@ -1,99 +1,780 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="theme-color" content="#F7F9FD" />
-<title>Voice Studio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F7F9FD">
+<title>CodeKins · Kokoro Voice Studio — On-device AI voices for the web</title>
+<meta name="description" content="Kokoro Voice Studio by CodeKins Pvt. Ltd. — 50+ studio-grade AI voices, real-time mixing, emotion controls and pro DSP, all running in your browser. No server, no upload, your audio never leaves your device.">
+<link rel="icon" type="image/png" href="./logo-color-trans.png?v=2">
+<link rel="apple-touch-icon" href="./logo-color-trans.png?v=2">
+<link rel="canonical" href="./">
 <style>
+/* ═════════ CodeKins · Kokoro Voice Studio — landing site ═════════
+   Visual language mirrors the app: liquid-glass panels, sapphire→aqua
+   gradients, SF font stack, soft luminous backdrop. Self-contained.
+   ───────────────────────────────────────────────────────────────── */
 :root{
-  --bg:#F7F9FD;
-  --ink:#1E2A52;--ink-soft:#4D5DA8;--muted:#8A92BE;
-  --hair:rgba(0,0,0,.16);
+  --bg-0:#F7F9FD; --bg-1:#EDF2F9; --bg-2:#E1E8F4;
+  --ink:#1E2A52; --ink-mid:#2C3E80; --ink-soft:#4D5DA8; --muted:#8A92BE;
+  --hair:rgba(60,80,140,.10); --hair-strong:rgba(60,80,140,.20);
+  --brand:#2563FF; --brand-light:#3DA5FF; --brand-deep:#1A4DD9;
+  --aqua:#00B8D4; --cyan:#60D7E8; --mint:#10D9A0; --emerald:#0EA672;
+  --coral:#FF6B5C; --tangerine:#FFB02E; --amber:#E89A2B; --rose:#E0457B;
+  --shadow-sm:0 1px 2px rgba(40,60,120,.06), 0 4px 12px rgba(40,60,120,.07);
+  --shadow-md:0 1px 3px rgba(40,60,120,.07), 0 12px 30px rgba(40,60,120,.10);
+  --shadow-lg:0 2px 6px rgba(40,60,120,.08), 0 28px 60px rgba(40,60,120,.14);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{margin:0;color:var(--ink-mid);scroll-behavior:smooth}
 body{
+  font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  background:
+    radial-gradient(1100px 700px at 12% -8%, rgba(37,99,255,.12), transparent 60%),
+    radial-gradient(900px 600px at 110% 4%, rgba(0,184,212,.12), transparent 65%),
+    radial-gradient(1000px 700px at 50% 110%, rgba(16,217,160,.08), transparent 60%),
+    radial-gradient(900px 600px at -5% 80%, rgba(255,107,92,.07), transparent 65%),
+    linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 60%,var(--bg-2) 100%);
+  background-attachment:fixed;
+  font-size:15.5px;line-height:1.55;
+}
+a{color:var(--brand);text-decoration:none;transition:.15s}
+a:hover{color:var(--brand-deep)}
+
+/* ───── nav ───── */
+.nav-wrap{position:sticky;top:0;z-index:50;padding:10px 18px}
+.nav{
+  max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:14px;
+  padding:9px 14px;border-radius:99px;
+  background:linear-gradient(155deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.7) 100%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);
+  border:1px solid var(--hair);box-shadow:var(--shadow-sm);
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand .glyph{width:36px;height:36px;display:grid;place-items:center;overflow:visible}
+.brand .glyph img{width:115%;height:115%;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(37,99,255,.20)) drop-shadow(0 0 4px rgba(224,69,123,.25))}
+.brand .name{display:flex;flex-direction:column;line-height:1.05}
+.brand .name b{font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.brand .name span{font-size:9px;font-weight:700;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+.nav .links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav .links a{
+  font-size:12.5px;font-weight:600;color:var(--ink-soft);
+  padding:7px 12px;border-radius:99px;transition:.15s;
+}
+.nav .links a:hover{background:rgba(37,99,255,.08);color:var(--brand)}
+.nav .cta{
+  margin-left:6px;padding:8px 16px;border-radius:99px;font-size:12.5px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,var(--brand),var(--aqua));
+  box-shadow:0 4px 14px rgba(37,99,255,.32);transition:.15s;
+}
+.nav .cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,255,.42);color:#fff}
+@media (max-width:780px){.nav .links a:not(.cta){display:none}}
+
+/* ───── shared layout ───── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 18px}
+section{padding:60px 0;position:relative}
+.section-cap{font-size:10.5px;font-weight:800;color:var(--brand);letter-spacing:.20em;text-transform:uppercase;margin-bottom:14px;display:inline-block}
+h2{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin:0 0 16px;line-height:1.1}
+h3{font-size:18px;font-weight:700;color:var(--ink);margin:0 0 8px;letter-spacing:-.01em}
+p{margin:0 0 12px;color:var(--ink-mid)}
+.lead{font-size:17px;color:var(--ink-soft);max-width:640px;margin-bottom:28px}
+
+/* ───── hero ───── */
+.hero{padding:54px 0 70px;text-align:center}
+.hero .glyph-big{
+  width:300px;height:300px;margin:0 auto 30px;display:grid;place-items:center;overflow:visible;
+}
+.hero .glyph-big img{width:122%;height:122%;object-fit:contain;filter:drop-shadow(0 22px 54px rgba(37,99,255,.36)) drop-shadow(0 0 26px rgba(224,69,123,.34))}
+@media (max-width:680px){
+  .hero .glyph-big{width:200px;height:200px;margin-bottom:22px}
+}
+.hero .badge{
+  display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;
+  color:var(--ink-soft);letter-spacing:.10em;text-transform:uppercase;
+  padding:6px 14px;border-radius:99px;
+  background:rgba(255,255,255,.7);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  margin-bottom:20px;
+}
+.hero .badge .dot{width:7px;height:7px;border-radius:99px;background:var(--mint);box-shadow:0 0 0 3px rgba(16,217,160,.20)}
+.hero h1{
+  font-size:60px;font-weight:800;color:var(--ink);letter-spacing:-.025em;line-height:1.02;
+  margin:0 0 18px;max-width:920px;margin-left:auto;margin-right:auto;
+}
+.hero h1 .grad{
+  background:linear-gradient(135deg,var(--brand) 0%,var(--aqua) 60%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .sub{font-size:18.5px;color:var(--ink-soft);max-width:680px;margin:0 auto 30px;line-height:1.5}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:99px;
+  font-size:14px;font-weight:700;letter-spacing:-.005em;cursor:pointer;border:0;
+  transition:.18s cubic-bezier(.2,.8,.2,1);font-family:inherit;
+}
+.btn-primary{
+  color:#fff;background:linear-gradient(135deg,var(--brand),var(--aqua));
+  box-shadow:0 6px 20px rgba(37,99,255,.32);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,99,255,.42);color:#fff}
+.btn-ghost{
+  color:var(--ink);background:rgba(255,255,255,.78);border:1px solid var(--hair-strong);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+}
+.btn-ghost:hover{background:#fff;border-color:var(--brand);color:var(--brand)}
+.hero-meta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.hero-meta .pill{display:inline-flex;align-items:center;gap:6px}
+.hero-meta .pill svg{width:14px;height:14px;color:var(--mint)}
+
+/* hero preview card */
+.hero-preview{
+  margin:50px auto 0;max-width:980px;border-radius:22px;overflow:hidden;
+  background:linear-gradient(155deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.7) 100%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);
+  border:1px solid var(--hair);box-shadow:var(--shadow-lg);
+  padding:14px;
+}
+.hero-preview .frame{
+  border-radius:14px;background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);
+  padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:280px;
+}
+.preview-card{
+  background:rgba(255,255,255,.85);border:1px solid var(--hair);border-radius:14px;padding:18px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.preview-card h4{margin:0;font-size:10.5px;font-weight:800;color:var(--ink);letter-spacing:.12em;text-transform:uppercase}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  padding:6px 11px;border-radius:99px;font-size:11px;font-weight:700;
+  background:rgba(37,99,255,.08);color:var(--brand);border:1px solid rgba(37,99,255,.18);
+}
+.chip.coral{background:rgba(255,107,92,.10);color:var(--coral);border-color:rgba(255,107,92,.20)}
+.chip.mint{background:rgba(16,217,160,.10);color:var(--emerald);border-color:rgba(16,217,160,.22)}
+.chip.amber{background:rgba(232,154,43,.12);color:#9A6B14;border-color:rgba(232,154,43,.30)}
+.chip.rose{background:rgba(224,69,123,.10);color:var(--rose);border-color:rgba(224,69,123,.22)}
+.fake-slider{height:6px;border-radius:99px;background:linear-gradient(90deg,var(--brand) 0% 60%,rgba(60,80,140,.14) 60% 100%);position:relative}
+.fake-slider::after{content:'';position:absolute;left:60%;top:50%;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--brand);transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(37,99,255,.30)}
+.wave{display:flex;align-items:flex-end;gap:3px;height:42px;margin-top:6px}
+.wave span{width:4px;background:linear-gradient(180deg,var(--brand),var(--aqua));border-radius:99px;opacity:.85}
+
+/* ───── features ───── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:920px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.features-grid{grid-template-columns:1fr}}
+.feature{
+  position:relative;padding:22px;border-radius:18px;
+  background:linear-gradient(155deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.74) 100%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);
+  box-shadow:var(--shadow-sm);
+  --g1:#2563FF;--g2:#00B8D4;
+  transition:.25s cubic-bezier(.2,.8,.2,1);
+}
+.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.feature::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;opacity:.55;
+}
+.feature .icon{
+  width:42px;height:42px;border-radius:11px;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  display:grid;place-items:center;color:#fff;margin-bottom:14px;
+  box-shadow:0 6px 14px rgba(37,99,255,.25);
+}
+.feature .icon svg{width:22px;height:22px}
+.feature h3{font-size:16px;margin-bottom:6px}
+.feature p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.5}
+.feature.aqua{--g1:#005BB3;--g2:#B2DAE4}
+.feature.mint{--g1:#029456;--g2:#B2DAE4}
+.feature.coral{--g1:#F86A38;--g2:#D8226C}
+.feature.rose{--g1:#D8226C;--g2:#F86A38}
+.feature.deep{--g1:#4A2D9C;--g2:#005BB3}
+
+/* ───── how it works ───── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
+@media (max-width:920px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{
+  position:relative;padding:24px 20px 22px;border-radius:18px;
+  background:rgba(255,255,255,.78);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+}
+.step .num{
+  position:absolute;top:-14px;left:18px;width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--brand),var(--aqua));color:#fff;
+  display:grid;place-items:center;font-weight:800;font-size:14px;
+  box-shadow:0 4px 12px rgba(37,99,255,.30);
+}
+.step h3{margin-top:14px;font-size:15.5px}
+.step p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.5}
+
+/* ───── pricing ───── */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:920px){.pricing{grid-template-columns:1fr}}
+.tier{
+  position:relative;padding:28px 24px;border-radius:20px;
+  background:linear-gradient(155deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.76) 100%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);
+  border:1px solid var(--hair);box-shadow:var(--shadow-sm);
   display:flex;flex-direction:column;
-  background:linear-gradient(180deg,#F7F9FD,#EDF2F9);
+}
+.tier.featured{
+  background:linear-gradient(155deg,rgba(37,99,255,.10) 0%,rgba(0,184,212,.06) 100%);
+  border-color:rgba(37,99,255,.30);box-shadow:var(--shadow-md);
+  transform:scale(1.03);
+}
+@media (max-width:920px){.tier.featured{transform:none}}
+.tier .ribbon{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  font-size:10.5px;font-weight:800;color:#fff;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 12px;border-radius:99px;
+  background:linear-gradient(135deg,var(--brand),var(--aqua));
+  box-shadow:0 4px 12px rgba(37,99,255,.30);
+}
+.tier .name{font-size:13px;font-weight:800;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.tier .price{font-size:42px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.tier .price small{font-size:13.5px;font-weight:600;color:var(--muted);margin-left:4px}
+.tier .pitch{font-size:13.5px;color:var(--ink-soft);margin:8px 0 18px;min-height:42px}
+.tier ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tier li{display:flex;gap:10px;font-size:13.5px;color:var(--ink-mid);line-height:1.45}
+.tier li svg{flex-shrink:0;width:16px;height:16px;color:var(--mint);margin-top:3px}
+.tier li.dim{color:var(--muted)}
+.tier li.dim svg{color:var(--muted);opacity:.55}
+.tier .btn{justify-content:center;width:100%}
+
+/* ───── about ───── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr}}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+.stat{
+  padding:18px 16px;border-radius:14px;
+  background:rgba(255,255,255,.78);border:1px solid var(--hair);
+}
+.stat b{display:block;font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.05}
+.stat span{font-size:11.5px;color:var(--ink-soft);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:4px;display:block}
+.about-card{
+  padding:30px;border-radius:20px;
+  background:linear-gradient(155deg,rgba(37,99,255,.08) 0%,rgba(0,184,212,.05) 100%);
+  border:1px solid rgba(37,99,255,.18);
+}
+.about-card h3{font-size:15px;color:var(--brand);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px;font-weight:800}
+.about-card .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--hair);font-size:13.5px}
+.about-card .row:last-child{border-bottom:0}
+.about-card .row b{color:var(--ink);font-weight:700}
+.about-card .row span{color:var(--ink-soft)}
+
+/* ───── contact ───── */
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:1020px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.contact-grid{grid-template-columns:1fr}}
+.contact-card{
+  padding:24px;border-radius:18px;
+  background:rgba(255,255,255,.82);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  box-shadow:var(--shadow-sm);transition:.2s;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  text-decoration:none;color:inherit;
+}
+.contact-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--hair-strong)}
+.contact-card .icon{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--brand),var(--aqua));
+  box-shadow:0 4px 12px rgba(37,99,255,.25);margin-bottom:6px;
+}
+.contact-card .icon svg{width:20px;height:20px}
+.contact-card.wa .icon{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 12px rgba(37,211,102,.30)}
+.contact-card.phone .icon{background:linear-gradient(135deg,var(--coral),var(--rose));box-shadow:0 4px 12px rgba(255,107,92,.28)}
+.contact-card.site .icon{background:linear-gradient(135deg,var(--brand-deep),var(--aqua));box-shadow:0 4px 12px rgba(26,77,217,.30)}
+.contact-card .label{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.contact-card b{font-size:16px;color:var(--ink);font-weight:700;letter-spacing:-.005em}
+.contact-card span{font-size:13px;color:var(--ink-soft)}
+
+/* ───── faq ───── */
+.faq{display:grid;gap:10px;max-width:880px;margin:0 auto}
+.faq details{
+  padding:18px 22px;border-radius:14px;
+  background:rgba(255,255,255,.82);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  transition:.18s;
+}
+.faq details[open]{background:#fff;border-color:rgba(37,99,255,.30);box-shadow:var(--shadow-sm)}
+.faq summary{font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq summary::after{content:'+';font-size:22px;color:var(--brand);font-weight:600;transition:.2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary::-webkit-details-marker{display:none}
+.faq p{margin:12px 0 0;font-size:14px;color:var(--ink-soft);line-height:1.6}
+
+/* ───── cta band ───── */
+.cta-band{
+  margin:30px 0;padding:48px 32px;border-radius:22px;text-align:center;
+  background:linear-gradient(135deg,var(--brand) 0%,var(--aqua) 100%);
+  color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(60% 80% at 80% 20%,rgba(255,255,255,.20),transparent 60%);
+  pointer-events:none;
+}
+.cta-band h2{color:#fff;font-size:30px;margin-bottom:10px;position:relative}
+.cta-band p{color:rgba(255,255,255,.92);font-size:16px;max-width:520px;margin:0 auto 22px;position:relative}
+.cta-band .btn-primary{background:#fff;color:var(--brand);box-shadow:0 8px 22px rgba(0,0,0,.18);position:relative}
+.cta-band .btn-primary:hover{color:var(--brand-deep)}
+
+/* ───── footer ───── */
+footer{
+  margin-top:30px;padding:40px 0 30px;border-top:1px solid var(--hair);
+  background:rgba(255,255,255,.50);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:30px}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr;gap:24px}}
+.foot-col h4{font-size:11px;font-weight:800;color:var(--ink);letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}
+.foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.foot-col li a{font-size:13.5px;color:var(--ink-soft);font-weight:500;transition:.15s}
+.foot-col li a:hover{color:var(--brand)}
+.foot-col p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.55}
+.foot-bottom{
+  padding-top:20px;border-top:1px solid var(--hair);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  font-size:12px;color:var(--muted);font-weight:500;
 }
 
-/* Tab bar */
-.tab-bar{
-  display:flex;gap:0;padding:5px;border-radius:99px;
-  background:rgba(255,255,255,.85);
-  border:1px solid var(--hair);
-  box-shadow:0 2px 12px rgba(40,60,120,.08);
-  width:fit-content;margin:12px auto 0;
-  flex-shrink:0;
+/* utility */
+.center{text-align:center}
+.section-head{text-align:center;margin-bottom:38px}
+.section-head .lead{margin-left:auto;margin-right:auto}
+@media (max-width:680px){
+  .hero h1{font-size:42px}
+  .hero .sub{font-size:16px}
+  h2{font-size:26px}
+  .hero-preview .frame{grid-template-columns:1fr}
+  section{padding:46px 0}
 }
-.tab-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:9px 24px;border-radius:99px;border:none;
-  background:transparent;color:var(--ink-soft);
-  font-size:13px;font-weight:700;cursor:pointer;
-  font-family:inherit;transition:all .20s cubic-bezier(.34,1.46,.64,1);
-  white-space:nowrap;
-}
-.tab-btn:hover{color:var(--ink)}
-.tab-btn .tab-ico{font-size:16px;line-height:1}
-.tab-btn.active[data-tab="kokoro"]{
-  background:linear-gradient(135deg,#00C8E8,#0096B4);color:#fff;
-  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 4px 14px rgba(0,200,232,.40);
-}
-.tab-btn.active[data-tab="supertonic"]{
-  background:linear-gradient(135deg,#1A4DD9,#0D2670);color:#fff;
-  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 4px 14px rgba(26,77,217,.40);
-}
-
-/* Frames */
-.frame-wrap{
-  flex:1;position:relative;margin:8px;border-radius:14px;overflow:hidden;
-  box-shadow:0 4px 20px rgba(40,60,120,.10);
-}
-.frame-wrap iframe{
-  position:absolute;top:0;left:0;width:100%;height:100%;
-  border:none;background:#fff;
-}
-.frame-wrap iframe.hidden{display:none}
 </style>
 </head>
 <body>
 
-<nav class="tab-bar" role="tablist">
-  <button class="tab-btn active" data-tab="kokoro" role="tab" aria-selected="true">
-    <span class="tab-ico">🎙</span> Kokoro
-  </button>
-  <button class="tab-btn" data-tab="supertonic" role="tab" aria-selected="false">
-    <span class="tab-ico">🎵</span> Supertonic
-  </button>
-</nav>
-
-<div class="frame-wrap">
-  <iframe id="frame-kokoro" src="/kokoro/index.html"></iframe>
-  <iframe id="frame-supertonic" src="/supertonic.html" class="hidden"></iframe>
+<!-- ═════════ NAV ═════════ -->
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <div class="glyph"><img src="./logo-color-trans.png?v=2" alt="Wave"></div>
+      <div class="name"><b>Wave</b></div>
+    </a>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="./studio.html" class="cta">Launch Studio &rarr;</a>
+    </div>
+  </nav>
 </div>
 
-<script>
-const tabs = document.querySelectorAll('.tab-btn');
-const frames = {
-  kokoro: document.getElementById('frame-kokoro'),
-  supertonic: document.getElementById('frame-supertonic')
-};
+<!-- ═════════ HERO ═════════ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="glyph-big"><img src="./logo-color-trans.png?v=2" alt=""></div>
+    <div class="badge"><span class="dot"></span> Now in public preview &middot; v1.1</div>
+    <h1>Studio-grade AI voices, <span class="grad">running entirely in your browser.</span></h1>
+    <p class="sub">
+      Kokoro Voice Studio gives you 50+ natural voices, a real-time voice mixer,
+      one-click emotion presets and pro audio post-processing &mdash; with zero servers
+      and zero uploads. Your text and audio never leave your device.
+    </p>
+    <div class="hero-ctas">
+      <a href="./studio.html" class="btn btn-primary">
+        Launch the Studio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="#pricing" class="btn btn-ghost">View pricing</a>
+    </div>
+    <div class="hero-meta">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> No sign-up required</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Works offline (PWA)</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 100% on-device</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Studio WAV export</span>
+    </div>
 
-tabs.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
-    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected','true');
-    Object.entries(frames).forEach(([key, frame]) => {
-      frame.classList.toggle('hidden', key !== target);
-    });
-  });
-});
-</script>
+    <!-- decorative app preview card -->
+    <div class="hero-preview" aria-hidden="true">
+      <div class="frame">
+        <div class="preview-card">
+          <h4>Voice Mixer</h4>
+          <div class="chip-row">
+            <span class="chip">Bella &middot; 60%</span>
+            <span class="chip mint">Adam &middot; 25%</span>
+            <span class="chip amber">Nicole &middot; 15%</span>
+          </div>
+          <div style="margin-top:8px"><div class="fake-slider"></div></div>
+          <h4 style="margin-top:14px">Emotion</h4>
+          <div class="chip-row">
+            <span class="chip coral">Cartoon</span>
+            <span class="chip">Hero</span>
+            <span class="chip mint">Whisper</span>
+            <span class="chip rose">Polish</span>
+          </div>
+        </div>
+        <div class="preview-card">
+          <h4>Generated &middot; Take A</h4>
+          <div class="wave">
+            <span style="height:18%"></span><span style="height:38%"></span><span style="height:62%"></span>
+            <span style="height:84%"></span><span style="height:96%"></span><span style="height:74%"></span>
+            <span style="height:54%"></span><span style="height:72%"></span><span style="height:88%"></span>
+            <span style="height:60%"></span><span style="height:42%"></span><span style="height:28%"></span>
+            <span style="height:48%"></span><span style="height:78%"></span><span style="height:92%"></span>
+            <span style="height:66%"></span><span style="height:46%"></span><span style="height:34%"></span>
+            <span style="height:58%"></span><span style="height:82%"></span><span style="height:64%"></span>
+            <span style="height:40%"></span><span style="height:24%"></span><span style="height:36%"></span>
+          </div>
+          <h4 style="margin-top:14px">Pro DSP</h4>
+          <div class="chip-row">
+            <span class="chip">Warmth</span>
+            <span class="chip">De-Ess</span>
+            <span class="chip mint">Voice Double</span>
+            <span class="chip amber">Room Tone</span>
+          </div>
+          <h4 style="margin-top:14px">Export</h4>
+          <div class="chip-row">
+            <span class="chip">WAV 24-bit</span>
+            <span class="chip mint">MP3 320</span>
+            <span class="chip rose">FLAC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
+<!-- ═════════ FEATURES ═════════ -->
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-cap">What you get</span>
+      <h2>Everything a voice producer actually needs.</h2>
+      <p class="lead">From quick voiceovers to long-form audiobooks &mdash; Kokoro Voice Studio packs a full production chain into one focused interface.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feature">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></div>
+        <h3>50+ studio voices</h3>
+        <p>Curated, human-sounding voices spanning male, female and non-binary registers. Each voice is sample-accurate at 24 kHz.</p>
+      </div>
+
+      <div class="feature aqua">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h2v12H4zM10 3h2v18h-2zM16 9h2v6h-2zM22 11h0v2h0z"></path></svg></div>
+        <h3>Real-time voice mixer</h3>
+        <p>Blend any two voices with a single slider &mdash; get a brand-new voice in under a second. Save your blends to your private library.</p>
+      </div>
+
+      <div class="feature mint">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path></svg></div>
+        <h3>One-click emotions</h3>
+        <p>Cartoon, Hero, Whisper, Happy, Sad, Polish &mdash; every preset auto-renders the moment you tap it. Fine-tune intensity with a built-in slider.</p>
+      </div>
+
+      <div class="feature coral">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3M19 12h3M12 2v3M12 19v3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path><circle cx="12" cy="12" r="4"></circle></svg></div>
+        <h3>Pro DSP toggles</h3>
+        <p>Warmth, de-essing, voice doubling, room tone, multiband compression and LUFS normalisation &mdash; broadcast-quality finish in a click.</p>
+      </div>
+
+      <div class="feature rose">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+        <h3>100% on-device</h3>
+        <p>Powered by ONNX Runtime Web with WebGPU acceleration. No upload, no cloud, no telemetry &mdash; your scripts and audio never leave your machine.</p>
+      </div>
+
+      <div class="feature deep">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M2 12h6M22 12h-6M5 5l4 4M19 19l-4-4M5 19l4-4M19 5l-4 4"></path></svg></div>
+        <h3>Offline-first PWA</h3>
+        <p>Install once, generate forever &mdash; even on a flight. The app caches its model and voices locally and works fully offline after the first visit.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ HOW IT WORKS ═════════ -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-cap">How it works</span>
+      <h2>From blank page to broadcast in four steps.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Type your script</h3>
+        <p>Paste any text &mdash; a sentence, a chapter, a podcast intro. Inline markup like <code>[pause]</code> and <code>{emphasis}</code> is supported.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Pick or mix a voice</h3>
+        <p>Choose from 50+ voices or blend two together with the mixer. Save your favourite blends to your private voice library.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Style with one click</h3>
+        <p>Select an emotion preset, tweak the intensity slider and toggle Pro DSP &mdash; every change auto-renders the audio in real time.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Export &amp; ship</h3>
+        <p>Download as 24-bit WAV, 320 kbps MP3 or lossless FLAC. Use it in your video, podcast, game or app &mdash; royalty-free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ PRICING ═════════ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-cap">Pricing</span>
+      <h2>Simple, transparent, mostly free.</h2>
+      <p class="lead">Start free in your browser. Upgrade only when you need cloud sync, longer documents or a self-hosted edition.</p>
+    </div>
+    <div class="pricing">
+
+      <div class="tier">
+        <div class="name">Free &middot; Browser</div>
+        <div class="price">&#8377;0<small>/forever</small></div>
+        <p class="pitch">Everything an indie creator needs to ship beautiful voiceover from a laptop.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> All 50+ voices</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Voice mixer &amp; intensity sliders</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> All emotion presets &amp; Pro DSP</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> WAV / MP3 / FLAC export</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Offline / PWA install</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="6" y1="18" x2="18" y2="6"></line></svg> Cloud voice library</li>
+          <li class="dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="6" y1="18" x2="18" y2="6"></line></svg> Long-form audiobook export</li>
+        </ul>
+        <a href="./studio.html" class="btn btn-ghost">Open the Studio</a>
+      </div>
+
+      <div class="tier featured">
+        <div class="ribbon">Most Popular</div>
+        <div class="name">Pro &middot; Cloud</div>
+        <div class="price">&#8377;799<small>/month</small></div>
+        <p class="pitch">For podcasters, indie game devs and content teams who want sync, scale and the full clone toolkit.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Everything in Free</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Cloud voice library &amp; sync across devices</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Voice match &amp; clone (acoustic fingerprint)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Long-form audiobook export with crossfade</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> SRT / VTT timed captions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Project files (.kvs) with version history</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority email support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Join the waitlist</a>
+      </div>
+
+      <div class="tier">
+        <div class="name">Studio &middot; Self-host</div>
+        <div class="price">Custom<small></small></div>
+        <p class="pitch">For studios, agencies and enterprises with on-prem or sovereignty requirements.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Everything in Pro</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Self-hosted Docker image</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom voice training &amp; onboarding</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> SSO / SAML, audit logs</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Commercial &amp; perpetual licensing</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Dedicated solutions engineer</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> SLA-backed uptime</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Talk to sales</a>
+      </div>
+
+    </div>
+    <p class="center" style="margin-top:24px;color:var(--muted);font-size:12.5px">
+      All plans include royalty-free commercial use of generated audio. GST extra where applicable.
+    </p>
+  </div>
+</section>
+
+<!-- ═════════ ABOUT ═════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="section-cap">About CodeKins</span>
+        <h2>A small, opinionated team building creator tools.</h2>
+        <p style="font-size:15.5px;color:var(--ink-soft)">
+          CodeKins Pvt. Ltd. is an independent software studio crafting on-device AI tools for
+          creators. We believe powerful media tools shouldn't require accounts, subscriptions
+          or cloud uploads to be useful.
+        </p>
+        <p style="font-size:15.5px;color:var(--ink-soft)">
+          Kokoro Voice Studio is our flagship product &mdash; a love-letter to the open-source
+          Kokoro 82M speech model, wrapped in a producer-grade interface that runs entirely
+          inside your browser.
+        </p>
+        <div class="about-stats">
+          <div class="stat"><b>50+</b><span>Curated voices</span></div>
+          <div class="stat"><b>0 ms</b><span>Server round-trip</span></div>
+          <div class="stat"><b>&lt;100 MB</b><span>Cached model size</span></div>
+          <div class="stat"><b>100%</b><span>On-device</span></div>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Company details</h3>
+        <div class="row"><span>Legal name</span><b>CodeKins Pvt. Ltd.</b></div>
+        <div class="row"><span>Registered office</span><b>Ahmedabad, Gujarat, India</b></div>
+        <div class="row"><span>Founded</span><b>2022</b></div>
+        <div class="row"><span>Product</span><b>Kokoro Voice Studio</b></div>
+        <div class="row"><span>Status</span><b>Public preview &middot; v1.1</b></div>
+        <div class="row"><span>Website</span><b><a href="https://codekins.tech">codekins.tech &rarr;</a></b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FAQ ═════════ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-cap">FAQ</span>
+      <h2>Quick answers.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Does any audio or text leave my computer?</summary>
+        <p>No. Kokoro Voice Studio runs entirely in your browser using ONNX Runtime Web. The model and voice files are downloaded once from a public CDN and cached locally. After that, every generation, mix and effect happens on your device &mdash; no requests are made to our servers.</p>
+      </details>
+      <details>
+        <summary>Can I use the generated audio commercially?</summary>
+        <p>Yes. Audio you generate with Kokoro Voice Studio is royalty-free for both personal and commercial use, including ads, podcasts, games, films and audiobooks. You don't need to credit us, but a mention is always appreciated.</p>
+      </details>
+      <details>
+        <summary>What browsers are supported?</summary>
+        <p>Any modern Chromium-based browser (Chrome, Edge, Brave, Arc) gives you the fastest experience via WebGPU. Safari and Firefox work too with the WebAssembly fallback &mdash; slightly slower on first generation but indistinguishable in audio quality.</p>
+      </details>
+      <details>
+        <summary>How big is the download?</summary>
+        <p>About 83 MB for the default Balanced quality tier &mdash; downloaded once and cached forever. Lite mode (~42 MB) is available for slow connections; Studio FP16 (~155 MB) is offered for users who want zero compromise on fidelity.</p>
+      </details>
+      <details>
+        <summary>How is this different from cloud TTS services?</summary>
+        <p>No accounts, no API keys, no per-character charges, no rate limits, no waiting on a network round-trip and &mdash; most importantly &mdash; your scripts never touch our servers. The trade-off is the one-time model download; after that you have an unlimited TTS engine in your pocket.</p>
+      </details>
+      <details>
+        <summary>Can I install it like a real app?</summary>
+        <p>Yes &mdash; Kokoro Voice Studio is a Progressive Web App. In Chrome, click the install icon in the address bar; in Safari on iOS/iPadOS, use Share &rarr; Add to Home Screen. It then runs in its own window, fully offline.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CTA BAND ═════════ -->
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Hear the difference yourself.</h2>
+      <p>The Studio loads in under three seconds &mdash; type a sentence, pick a voice, hit generate. No sign-up.</p>
+      <a href="./studio.html" class="btn btn-primary">
+        Launch Kokoro Voice Studio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CONTACT ═════════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-cap">Contact</span>
+      <h2>Let's talk.</h2>
+      <p class="lead">Sales enquiries, partnership ideas, support questions &mdash; pick whichever channel feels easiest.</p>
+    </div>
+    <div class="contact-grid">
+
+      <a href="https://codekins.tech" class="contact-card site" target="_blank" rel="noopener">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></div>
+        <span class="label">Website</span>
+        <b>codekins.tech</b>
+        <span>Visit the company site &mdash; products, team, work.</span>
+      </a>
+
+      <a href="mailto:hello@codekins.in" class="contact-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 7 9-7"></path></svg></div>
+        <span class="label">Email</span>
+        <b>hello@codekins.in</b>
+        <span>For everything &mdash; usually back within a working day.</span>
+      </a>
+
+      <a href="tel:+918200594117" class="contact-card phone">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+        <span class="label">Phone</span>
+        <b>+91 82005 94117</b>
+        <span>Mon&ndash;Fri &middot; 10:00&ndash;18:30 IST.</span>
+      </a>
+
+      <a href="https://wa.me/918200594117" target="_blank" rel="noopener" class="contact-card wa">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"></path><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.2-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.1 14.9 3.7 13.5 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8-8.3 8z"></path></svg></div>
+        <span class="label">WhatsApp</span>
+        <b>+91 82005 94117</b>
+        <span>Quick chat &mdash; usually fastest for support.</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FOOTER ═════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a href="#top" class="brand" style="margin-bottom:14px;display:inline-flex">
+          <div class="glyph"><img src="./logo-color-trans.png?v=2" alt=""></div>
+          <div class="name">
+            <b>Kokoro Voice Studio</b>
+            <span>by CodeKins Pvt. Ltd.</span>
+          </div>
+        </a>
+        <p>Studio-grade AI voices, crafted in India. On-device, offline, private by design.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="./studio.html">Launch Studio</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="https://codekins.tech" target="_blank" rel="noopener">CodeKins website</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="mailto:hello@codekins.in">hello@codekins.in</a></li>
+          <li><a href="https://wa.me/918200594117" target="_blank" rel="noopener">WhatsApp us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="./terms.html">Terms of Service</a></li>
+          <li><a href="./privacy.html">Privacy Policy</a></li>
+          <li><a href="./terms.html#refund">Refund Policy</a></li>
+          <li><a href="./terms.html#license">License</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2024&ndash;2026 CodeKins Pvt. Ltd. All rights reserved.</span>
+      <span>Made with care in Bengaluru &middot; Powered by Kokoro 82M</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
