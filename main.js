@@ -1,4 +1,5 @@
 import { loadTextToSpeech, loadVoiceStyle, loadVoiceStyleFromData, writeWavFile, getVoiceStyleURL, AVAILABLE_LANGS } from './helper.js';
+import lamejs from 'lamejs';
 
 const $ = id => document.getElementById(id);
 
@@ -204,6 +205,170 @@ $('totalStep').addEventListener('input', e => {
 });
 document.querySelectorAll('input[type=range]').forEach(updateSlider);
 
+// Composer mode
+let currentMode = 'single';
+document.querySelectorAll('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentMode = tab.dataset.mode;
+    $('scriptHint').style.display = currentMode === 'script' ? 'block' : 'none';
+    $('abHint').style.display = currentMode === 'audiobook' ? 'block' : 'none';
+    if (currentMode === 'script') {
+      textArea.placeholder = 'M1: Hello, how are you?\nF2: I\'m doing great, thanks!\nM1: That\'s wonderful to hear.';
+    } else if (currentMode === 'audiobook') {
+      textArea.placeholder = 'Paste or import a long text here.\n\nEach paragraph separated by a blank line becomes a chapter.\n\nAll chapters will be generated with the selected voice and combined into one audio file.';
+    } else {
+      textArea.placeholder = 'Enter text to convert to speech…';
+    }
+  });
+});
+
+// Text import
+$('importFileBtn').addEventListener('click', () => $('textFileInput').click());
+$('textFileInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => { textArea.value = ev.target.result; updateCounter(); showStatus(`Imported ${file.name}`, 'ok'); };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+$('clearTextBtn').addEventListener('click', () => { textArea.value = ''; updateCounter(); });
+
+// MP3 encoding
+function encodeMP3(samples, sampleRate) {
+  const mp3enc = new lamejs.Mp3Encoder(1, sampleRate, 128);
+  const sampleBlockSize = 1152;
+  const int16 = new Int16Array(samples.length);
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    int16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+  }
+  const mp3Data = [];
+  for (let i = 0; i < int16.length; i += sampleBlockSize) {
+    const chunk = int16.subarray(i, i + sampleBlockSize);
+    const mp3buf = mp3enc.encodeBuffer(chunk);
+    if (mp3buf.length > 0) mp3Data.push(mp3buf);
+  }
+  const end = mp3enc.flush();
+  if (end.length > 0) mp3Data.push(end);
+  return new Blob(mp3Data, { type: 'audio/mp3' });
+}
+
+// History
+const history = JSON.parse(localStorage.getItem('st_history') || '[]');
+function addToHistory(entry) {
+  history.unshift(entry);
+  if (history.length > 20) history.pop();
+  localStorage.setItem('st_history', JSON.stringify(history.map(h => ({ text: h.text, voice: h.voice, dsp: h.dsp, fx: h.fx, dur: h.dur, elapsed: h.elapsed, ts: h.ts }))));
+  renderHistory();
+}
+function renderHistory() {
+  const list = $('historyList');
+  $('historyCount').textContent = `${history.length} items`;
+  if (!history.length) { list.innerHTML = '<div class="history-empty">No generations yet</div>'; return; }
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item" data-idx="${i}">
+      <span class="h-voice">${h.voice}</span>
+      <span class="h-text">${h.text.slice(0, 60)}</span>
+      <span class="h-dur">${h.dur}s</span>
+      <button class="h-play" title="Play">&#9654;</button>
+      <button class="h-dl" title="Download">&#8615;</button>
+    </div>
+  `).join('');
+  list.querySelectorAll('.h-play').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(btn.closest('.history-item').dataset.idx);
+      if (history[idx].url) new Audio(history[idx].url).play();
+    });
+  });
+  list.querySelectorAll('.h-dl').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(btn.closest('.history-item').dataset.idx);
+      if (history[idx].url) {
+        const a = document.createElement('a');
+        a.href = history[idx].url;
+        a.download = `supertonic_${history[idx].voice}_${history[idx].ts}.wav`;
+        a.click();
+      }
+    });
+  });
+}
+renderHistory();
+
+// Project save/load
+$('saveProjectBtn').addEventListener('click', () => {
+  const project = {
+    text: textArea.value, voice: currentVoice, lang: currentLang, dsp: currentDSP,
+    fx: currentFX, speed: $('speed').value, steps: $('totalStep').value, mode: currentMode
+  };
+  localStorage.setItem('st_project', JSON.stringify(project));
+  showStatus('Project saved', 'ok');
+});
+$('loadProjectBtn').addEventListener('click', () => {
+  const saved = localStorage.getItem('st_project');
+  if (!saved) { showStatus('No saved project found', 'error'); return; }
+  const p = JSON.parse(saved);
+  textArea.value = p.text || '';
+  if (p.voice) { currentVoice = p.voice; document.querySelectorAll('#voiceGrid .voice-chip').forEach(c => c.classList.toggle('active', c.dataset.voice === p.voice)); loadStyle(p.voice); }
+  if (p.lang) { currentLang = p.lang; document.querySelectorAll('.lang-chip').forEach(c => c.classList.toggle('active', c.dataset.lang === p.lang)); }
+  if (p.dsp) { currentDSP = p.dsp; document.querySelectorAll('#dspStrip .voice-chip').forEach(c => c.classList.toggle('active', c.dataset.q === p.dsp)); }
+  if (p.fx) { currentFX = p.fx; document.querySelectorAll('#fxStrip .voice-chip').forEach(c => c.classList.toggle('active', c.dataset.fx === p.fx)); }
+  if (p.speed) { $('speed').value = p.speed; $('speedVal').textContent = parseFloat(p.speed).toFixed(2) + 'x'; updateSlider($('speed')); }
+  if (p.steps) { $('totalStep').value = p.steps; $('stepVal').textContent = p.steps; updateSlider($('totalStep')); }
+  if (p.mode) { currentMode = p.mode; document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === p.mode)); }
+  updateCounter();
+  showStatus('Project loaded', 'ok');
+});
+
+// Multi-voice script parser
+function parseScript(text) {
+  const regex = /\b([MF]\d)\s*:\s*/gi;
+  const segments = [];
+  let lastIdx = 0, lastVoice = currentVoice;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIdx) {
+      const chunk = text.slice(lastIdx, match.index).trim();
+      if (chunk) segments.push({ voice: lastVoice, text: chunk });
+    }
+    lastVoice = match[1].toUpperCase();
+    lastIdx = regex.lastIndex;
+  }
+  if (lastIdx < text.length) {
+    const chunk = text.slice(lastIdx).trim();
+    if (chunk) segments.push({ voice: lastVoice, text: chunk });
+  }
+  return segments.length ? segments : [{ voice: currentVoice, text }];
+}
+
+// Audiobook chapter splitter
+function splitChapters(text) {
+  return text.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 0);
+}
+
+// Concatenate Float32Arrays
+function concatFloat32(arrays) {
+  const total = arrays.reduce((sum, a) => sum + a.length, 0);
+  const result = new Float32Array(total);
+  let offset = 0;
+  for (const a of arrays) { result.set(a, offset); offset += a.length; }
+  return result;
+}
+
+// Generate a single segment and return processed samples
+async function generateSegment(text, voice, lang, speed, steps) {
+  const style = customVoices[voice] ? loadVoiceStyleFromData(customVoices[voice]) : await loadVoiceStyle([getVoiceStyleURL(voice)]);
+  const { wav, duration } = await tts.call(text, lang, style, steps, speed, 0.3);
+  const wavLen = Math.floor(tts.sampleRate * duration[0]);
+  const rawSamples = new Float32Array(wav.slice(0, wavLen));
+  const processed = await applyDSP(rawSamples, tts.sampleRate);
+  return { samples: processed.getChannelData(0), duration: duration[0] };
+}
+
 // Char counter
 const textArea = $('text');
 const charCounter = $('charCounter');
@@ -350,11 +515,53 @@ async function init() {
   }
 }
 
+// Show output with MP3+WAV download and add to history
+function showOutput(finalSamples, totalDuration, elapsed, voiceLabel) {
+  const wavBuffer = writeWavFile(Array.from(finalSamples), tts.sampleRate);
+  const wavBlob = new Blob([wavBuffer], { type: 'audio/wav' });
+  const url = URL.createObjectURL(wavBlob);
+  const audioDur = totalDuration.toFixed(2);
+  const sizeKB = (wavBlob.size / 1024).toFixed(0);
+
+  $('outputArea').innerHTML = `
+    <audio controls src="${url}"></audio>
+    <div class="result-stats">
+      <span class="stat">Audio <b>${audioDur}s</b></span>
+      <span class="stat">Generated in <b>${elapsed}s</b></span>
+      <span class="stat">Size <b>${sizeKB} KB</b></span>
+      <span class="stat">DSP <b>${currentDSP}</b></span>
+      <span class="stat">FX <b>${currentFX}</b></span>
+    </div>
+    <div class="dl-row">
+      <button class="dl-btn" id="dlWav">Download WAV</button>
+      <button class="dl-btn" id="dlMp3">Download MP3</button>
+    </div>
+  `;
+
+  $('dlWav').addEventListener('click', () => {
+    const a = document.createElement('a'); a.href = url;
+    a.download = `supertonic_${voiceLabel}_${currentLang}.wav`; a.click();
+  });
+  $('dlMp3').addEventListener('click', () => {
+    showStatus('Encoding MP3…');
+    const mp3Blob = encodeMP3(finalSamples, tts.sampleRate);
+    const mp3Url = URL.createObjectURL(mp3Blob);
+    const a = document.createElement('a'); a.href = mp3Url;
+    a.download = `supertonic_${voiceLabel}_${currentLang}.mp3`; a.click();
+    showStatus('MP3 downloaded', 'ok');
+  });
+
+  addToHistory({
+    text: textArea.value.slice(0, 100), voice: voiceLabel, dsp: currentDSP, fx: currentFX,
+    dur: audioDur, elapsed, ts: Date.now(), url
+  });
+}
+
 // Generate
 $('goBtn').addEventListener('click', async () => {
   const text = textArea.value.trim();
   if (!text) { showStatus('Type some text first', 'error'); return; }
-  if (!tts || !currentStyle) { showStatus('Models still loading…', 'error'); return; }
+  if (!tts) { showStatus('Models still loading…', 'error'); return; }
 
   $('goBtn').disabled = true;
   $('goBtn').classList.add('generating');
@@ -365,62 +572,81 @@ $('goBtn').addEventListener('click', async () => {
   const fill = $('progressFill');
   bar.classList.add('show');
   fill.style.width = '0%';
+  const abProgress = $('abProgress');
 
   const t0 = performance.now();
-  showStatus('Generating speech…');
+  const speed = parseFloat($('speed').value);
+  const steps = parseInt($('totalStep').value);
 
   try {
-    const speed = parseFloat($('speed').value);
-    const steps = parseInt($('totalStep').value);
+    let finalSamples, totalDuration, voiceLabel;
 
-    const { wav, duration } = await tts.call(text, currentLang, currentStyle, steps, speed, 0.3, (step, total) => {
-      const pct = Math.round((step / total) * 100);
-      fill.style.width = pct + '%';
-      showStatus(`Denoising step ${step}/${total}…`);
-      if (genText) genText.textContent = `Denoising ${pct}%…`;
-    });
+    if (currentMode === 'single') {
+      // Single voice mode
+      if (!currentStyle) { showStatus('Select a voice first', 'error'); return; }
+      showStatus('Generating speech…');
+      const { wav, duration } = await tts.call(text, currentLang, currentStyle, steps, speed, 0.3, (step, total) => {
+        const pct = Math.round((step / total) * 100);
+        fill.style.width = pct + '%';
+        if (genText) genText.textContent = `Denoising ${pct}%…`;
+      });
+      fill.style.width = '100%';
+      if (genText) genText.textContent = 'Applying DSP…';
+      const wavLen = Math.floor(tts.sampleRate * duration[0]);
+      const rawSamples = new Float32Array(wav.slice(0, wavLen));
+      const processed = await applyDSP(rawSamples, tts.sampleRate);
+      finalSamples = processed.getChannelData(0);
+      totalDuration = duration[0];
+      voiceLabel = currentVoice;
 
-    fill.style.width = '100%';
-    showStatus('Applying DSP…');
-    if (genText) genText.textContent = 'Applying DSP…';
+    } else if (currentMode === 'script') {
+      // Multi-voice script mode
+      const segments = parseScript(text);
+      const allSamples = [];
+      totalDuration = 0;
+      for (let i = 0; i < segments.length; i++) {
+        const seg = segments[i];
+        showStatus(`Generating segment ${i + 1}/${segments.length} (${seg.voice})…`);
+        if (genText) genText.textContent = `Segment ${i + 1}/${segments.length} — ${seg.voice}`;
+        fill.style.width = Math.round(((i) / segments.length) * 100) + '%';
+        const result = await generateSegment(seg.text, seg.voice, currentLang, speed, steps);
+        allSamples.push(result.samples);
+        // Add 0.3s silence between segments
+        allSamples.push(new Float32Array(Math.floor(tts.sampleRate * 0.3)));
+        totalDuration += result.duration + 0.3;
+      }
+      fill.style.width = '100%';
+      finalSamples = concatFloat32(allSamples);
+      voiceLabel = 'multi';
 
-    const wavLen = Math.floor(tts.sampleRate * duration[0]);
-    const rawSamples = new Float32Array(wav.slice(0, wavLen));
-
-    // Apply DSP + FX post-processing
-    const processed = await applyDSP(rawSamples, tts.sampleRate);
-    const finalSamples = processed.getChannelData(0);
-
-    const wavBuffer = writeWavFile(Array.from(finalSamples), tts.sampleRate);
-    const blob = new Blob([wavBuffer], { type: 'audio/wav' });
-    const url = URL.createObjectURL(blob);
+    } else if (currentMode === 'audiobook') {
+      // Audiobook mode — split by paragraphs
+      const chapters = splitChapters(text);
+      if (!chapters.length) { showStatus('No paragraphs found', 'error'); return; }
+      if (!currentStyle) { showStatus('Select a voice first', 'error'); return; }
+      abProgress.style.display = 'block';
+      const allSamples = [];
+      totalDuration = 0;
+      for (let i = 0; i < chapters.length; i++) {
+        abProgress.textContent = `Chapter ${i + 1}/${chapters.length}`;
+        showStatus(`Generating chapter ${i + 1}/${chapters.length}…`);
+        if (genText) genText.textContent = `Chapter ${i + 1}/${chapters.length}`;
+        fill.style.width = Math.round(((i) / chapters.length) * 100) + '%';
+        const result = await generateSegment(chapters[i], currentVoice, currentLang, speed, steps);
+        allSamples.push(result.samples);
+        // Add 1s silence between chapters
+        allSamples.push(new Float32Array(Math.floor(tts.sampleRate * 1.0)));
+        totalDuration += result.duration + 1.0;
+      }
+      fill.style.width = '100%';
+      finalSamples = concatFloat32(allSamples);
+      voiceLabel = `audiobook_${currentVoice}`;
+      abProgress.style.display = 'none';
+    }
 
     const elapsed = ((performance.now() - t0) / 1000).toFixed(2);
-    const audioDur = duration[0].toFixed(2);
-    const sizeKB = (blob.size / 1024).toFixed(0);
-
-    $('outputArea').innerHTML = `
-      <audio controls src="${url}"></audio>
-      <div class="result-stats">
-        <span class="stat">Audio <b>${audioDur}s</b></span>
-        <span class="stat">Generated in <b>${elapsed}s</b></span>
-        <span class="stat">Size <b>${sizeKB} KB</b></span>
-        <span class="stat">DSP <b>${currentDSP}</b></span>
-        <span class="stat">FX <b>${currentFX}</b></span>
-      </div>
-      <div class="dl-row">
-        <button class="dl-btn" id="dlWav">Download WAV</button>
-      </div>
-    `;
-
-    $('dlWav').addEventListener('click', () => {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `supertonic_${currentVoice}_${currentLang}_${currentDSP}_${currentFX}.wav`;
-      a.click();
-    });
-
-    showStatus(`Done — ${audioDur}s audio in ${elapsed}s · ${currentDSP} · ${currentFX}`);
+    showOutput(finalSamples, totalDuration, elapsed, voiceLabel);
+    showStatus(`Done — ${totalDuration.toFixed(2)}s audio in ${elapsed}s`);
 
   } catch (e) {
     showStatus(`Generation failed: ${e.message}`, 'error');
@@ -429,6 +655,7 @@ $('goBtn').addEventListener('click', async () => {
     $('goBtn').disabled = false;
     $('goBtn').classList.remove('generating');
     if (overlay) overlay.classList.remove('show');
+    if (abProgress) abProgress.style.display = 'none';
     setTimeout(() => bar.classList.remove('show'), 1500);
   }
 });

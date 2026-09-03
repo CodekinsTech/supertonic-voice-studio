@@ -264,6 +264,65 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
 }
 .empty-state .icon{font-size:48px;margin-bottom:12px;opacity:.5}
 .empty-state p{font-size:12px;font-weight:600}
+
+/* Mode tabs */
+.mode-tabs{display:flex;gap:4px;margin-bottom:8px}
+.mode-tab{
+  flex:1;padding:6px 8px;border-radius:8px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:10px;
+  font-weight:700;text-align:center;cursor:pointer;transition:.18s;
+}
+.mode-tab:hover{background:#fff;border-color:var(--hair-strong)}
+.mode-tab.active{background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(37,99,255,.30)}
+
+/* Import bar */
+.import-bar{display:flex;gap:6px;margin-bottom:6px}
+.import-btn{
+  padding:4px 10px;border-radius:7px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:9.5px;
+  font-weight:700;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:4px;
+}
+.import-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
+
+/* Script mode hint */
+.script-hint{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:4px;line-height:1.4}
+
+/* Project buttons */
+.project-bar{display:flex;gap:6px;margin-top:6px}
+.project-btn{
+  flex:1;padding:5px 8px;border-radius:7px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:9.5px;
+  font-weight:700;text-align:center;cursor:pointer;transition:.15s;
+}
+.project-btn:hover{background:#fff;border-color:var(--hair-strong);color:var(--ink)}
+
+/* History panel */
+.history-list{max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+.history-item{
+  display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;
+  border:1px solid var(--hair);background:rgba(255,255,255,.85);
+  font-size:10px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.15s;
+}
+.history-item:hover{background:#fff;border-color:var(--hair-strong)}
+.history-item .h-voice{color:var(--brand);font-weight:700;min-width:24px}
+.history-item .h-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-item .h-dur{color:var(--muted);font-size:9px}
+.history-item .h-play{
+  width:20px;height:20px;border-radius:5px;border:1px solid rgba(37,99,255,.2);
+  background:rgba(37,99,255,.08);color:var(--brand);font-size:8px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;transition:.15s;
+}
+.history-item .h-play:hover{background:var(--brand);color:#fff}
+.history-item .h-dl{
+  width:20px;height:20px;border-radius:5px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-soft);font-size:8px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;transition:.15s;
+}
+.history-item .h-dl:hover{background:#fff;color:var(--ink)}
+.history-empty{font-size:10px;color:var(--muted);font-weight:600;font-style:italic;text-align:center;padding:12px}
+
+/* Audiobook progress */
+.ab-progress{font-size:10px;font-weight:600;color:var(--brand);margin-top:6px}
 </style>
 </head>
 <body>
@@ -407,11 +466,28 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
     <!-- Composer -->
     <div class="panel" style="flex:1;display:flex;flex-direction:column">
       <h3><span class="swatch"></span> Composer</h3>
+      <div class="mode-tabs">
+        <div class="mode-tab active" data-mode="single">Single Voice</div>
+        <div class="mode-tab" data-mode="script">Multi-Voice</div>
+        <div class="mode-tab" data-mode="audiobook">Audiobook</div>
+      </div>
+      <div class="import-bar">
+        <button class="import-btn" id="importFileBtn">📄 Import .txt</button>
+        <button class="import-btn" id="clearTextBtn">✕ Clear</button>
+        <input type="file" id="textFileInput" accept=".txt,.text" style="display:none">
+      </div>
+      <div class="script-hint" id="scriptHint" style="display:none">Format: <b>M1:</b> Hello! <b>F2:</b> Hi there! — each voice tag starts a new speaker segment</div>
+      <div class="script-hint" id="abHint" style="display:none">Paste or import a long text. Each paragraph (blank line) becomes a chapter. Uses selected voice.</div>
       <textarea id="text" placeholder="Enter text to convert to speech…">This morning, I took a walk in the park, and the sound of the birds and the breeze was so pleasant that I stopped for a long time just to listen.</textarea>
       <div class="char-counter" id="charCounter">0 / 2000</div>
       <button class="btn-go" id="goBtn" disabled>Generate Speech</button>
       <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
       <div class="gen-overlay" id="genOverlay"><div class="gen-spinner"></div><span class="gen-text" id="genText">Generating speech…</span></div>
+      <div class="ab-progress" id="abProgress" style="display:none"></div>
+      <div class="project-bar">
+        <button class="project-btn" id="saveProjectBtn">💾 Save Project</button>
+        <button class="project-btn" id="loadProjectBtn">📂 Load Project</button>
+      </div>
     </div>
 
     <!-- Status -->
@@ -433,6 +509,14 @@ audio{width:100%;margin-top:8px;border-radius:10px;height:36px}
           <div class="icon">🎤</div>
           <p>Generated speech will appear here</p>
         </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="panel">
+      <h3><span class="swatch"></span> History <small id="historyCount">0 items</small></h3>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">No generations yet</div>
       </div>
     </div>
   </div>
