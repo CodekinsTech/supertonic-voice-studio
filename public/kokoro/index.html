@@ -797,6 +797,70 @@ h3 small{display:none}
 .ms-label{font-size:10px;font-weight:600;color:var(--muted)}
 .ms-dl-row{display:none;gap:7px;margin-top:6px}
 .ms-dl-row.show{display:flex}
+
+/* ───── tablet (768px) ───── */
+@media(max-width:768px){
+  body{padding:10px}
+  header{gap:8px;flex-wrap:wrap}
+  .brand-mark .glyph{width:64px;height:64px}
+  .brand-mark h1{font-size:26px}
+  .crumbs{width:100%;overflow-x:auto;flex-wrap:nowrap;gap:4px}
+  .crumb{white-space:nowrap;flex-shrink:0}
+  .panel{padding:12px 12px;border-radius:14px}
+  .toggle-grid{grid-template-columns:1fr}
+  .side-by-side{flex-direction:column}
+  .strip-grid.q{grid-template-columns:repeat(2,1fr)}
+  .markup-cheats{grid-template-columns:1fr}
+  .preset-grid{grid-template-columns:1fr}
+  .vrow{grid-template-columns:28px 1fr auto auto;gap:6px}
+  .coming-soon{padding:22px}
+  .cs-lead{font-size:13px}
+  .ms-gen-row{flex-wrap:wrap}
+}
+/* ───── mobile (480px) ───── */
+@media(max-width:480px){
+  body{padding:8px}
+  header{flex-direction:column;align-items:flex-start}
+  .brand-mark .glyph{width:52px;height:52px}
+  .brand-mark h1{font-size:22px}
+  .brand-mark .tag{font-size:9px}
+  .crumbs{gap:3px;padding-bottom:2px}
+  .crumb{font-size:9px;padding:4px 8px}
+  .panel{padding:10px 10px;border-radius:12px}
+  h3{font-size:10px;gap:6px}
+  .toggle{min-height:44px}
+  .toggle-grid{grid-template-columns:1fr}
+  .strip-grid.q{grid-template-columns:1fr}
+  .strip-grid.fx{gap:4px}
+  .strip-grid.ref{gap:4px}
+  .fx-btn,.ref-btn{min-height:36px;padding:6px 10px;font-size:10px}
+  .q-btn{padding:8px 10px;min-height:48px}
+  .vrow{grid-template-columns:28px 1fr auto;gap:6px;padding:6px 6px}
+  .del-btn{width:32px;height:32px}
+  .preview-voice-btn{width:32px;height:32px}
+  .vinfo select{font-size:11px}
+  label{font-size:9px}
+  select,input[type=text],input[type=file],textarea{font-size:12px;padding:9px 10px}
+  textarea{min-height:100px}
+  .btn-go{padding:14px 12px;font-size:13px;min-height:48px}
+  .btn-stream{min-height:44px;padding:10px 16px}
+  .section-toggle{padding:12px 14px;font-size:10px;min-height:44px}
+  .save-drop-btn{min-height:36px}
+  .save-fmt{min-height:36px}
+  .dl-btn{min-height:44px}
+  .dl-row{flex-wrap:wrap}
+  .stream-dl-row{flex-wrap:wrap}
+  .lang-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr))}
+  .coming-soon{padding:16px}
+  .cs-steps{grid-template-columns:1fr}
+  .cs-lead{font-size:12px}
+  .ms-script{min-height:80px;font-size:11px}
+  .ms-speaker-row{grid-template-columns:auto 1fr;gap:6px}
+  .match-blend{flex-direction:column;align-items:flex-start;gap:8px}
+  .match-row{grid-template-columns:20px 1fr auto;gap:6px}
+  .intensity-row{flex-wrap:wrap;gap:6px}
+  .credits-corner{bottom:10px;right:10px}
+}
 </style>
 </head>
 <body>
