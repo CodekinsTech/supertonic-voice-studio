@@ -804,9 +804,11 @@ const MODEL_FILES = [
   { name: 'mimi_encoder', file: 'mimi_encoder_int8.onnx', bytes: 21800000, onnx: true },
   { name: 'text_conditioner', file: 'text_conditioner_int8.onnx', bytes: 17200000, onnx: true },
   { name: 'bundle', file: 'bundle.json', bytes: 15000 },
-  { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 },
-  { name: 'voices', file: 'voices.bin', bytes: 8000000 }
+  { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 }
 ];
+// voices.bin URL — not yet publicly available from HuggingFace model repo
+// When available, this enables distinct predefined voices; otherwise BOS-only conditioning is used
+const VOICES_BIN_URL = MODEL_BASE + 'voices.bin';
 const SPM_VOCAB_URL = '/spm_vocab.json';
 const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
 
@@ -1723,11 +1725,13 @@ async function fetchWithProgress(url, onProgress) {
     window.__waveTTS.voiceSnapshots = new Map();
     window.__waveTTS.voiceSnapshots.set('default', window.__waveTTS.defaultVoiceSnap);
 
-    // Parse voices.bin and create per-voice snapshots
-    if (window.__waveTTS.models.voices && window.__waveTTS.models.voices.data) {
-      status.textContent = 'Loading predefined voices...';
-      try {
-        const voiceRecords = parseVoiceStatesBin(window.__waveTTS.models.voices.data);
+    // Fetch and parse voices.bin for distinct built-in voices (non-blocking)
+    status.textContent = 'Loading predefined voices...';
+    try {
+      const vResp = await fetch(VOICES_BIN_URL);
+      if (vResp.ok) {
+        const vBuf = await vResp.arrayBuffer();
+        const voiceRecords = parseVoiceStatesBin(vBuf);
         for (const [uiName, modelName] of Object.entries(VOICE_MAP)) {
           if (voiceRecords[modelName]) {
             const snap = voiceRecordToSnapshot(voiceRecords[modelName], bundleData.flow_lm_state_manifest);
@@ -1735,9 +1739,11 @@ async function fetchWithProgress(url, onProgress) {
           }
         }
         console.log('Loaded voice snapshots:', [...window.__waveTTS.voiceSnapshots.keys()]);
-      } catch (e) {
-        console.warn('Failed to parse voices.bin, using BOS-only voices:', e);
+      } else {
+        console.warn('voices.bin not found (' + vResp.status + '), using BOS-only voices');
       }
+    } catch (e) {
+      console.warn('Failed to load voices.bin, using BOS-only voices:', e);
     }
 
     // Free raw ArrayBuffers (sessions hold their own copies)
@@ -1791,8 +1797,8 @@ goBtn.addEventListener('click', async () => {
     const textCondSess = engine.textCondSession;
     const tokenizer = engine.tokenizer;
 
-    // Pick voice snapshot
-    const voiceKey = state.useClone ? 'cloned' : 'default';
+    // Pick voice snapshot (use selected voice name, fall back to default)
+    const voiceKey = state.useClone ? 'cloned' : state.voice;
     const voiceSnap = engine.voiceSnapshots.get(voiceKey) || engine.defaultVoiceSnap;
 
     // Split text into sentence chunks
