@@ -552,7 +552,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       <div class="progress-fill" id="modelProgressFill" style="height:100%;width:0%;border-radius:6px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
     </div>
     <div id="modelFileList" style="display:flex;flex-direction:column;gap:3px"></div>
-    <div style="font-size:9px;color:var(--muted);margin-top:6px">5 ONNX models &middot; INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
+    <div style="font-size:9px;color:var(--muted);margin-top:6px">5 ONNX models + tokenizer &middot; INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
   </div>
 </div>
 
@@ -766,6 +766,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 const state = {
   voice: 'aria',
   clonedEmbedding: null,
+  cloneFile: null,
   useClone: false,
   lang: 'en',
   speed: 1.0,
@@ -787,15 +788,18 @@ const state = {
 /* ───────── Model config ───────── */
 const MODEL_BASE = 'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/';
 const MODEL_FILES = [
-  { name: 'flow_lm_main', file: 'flow_lm_main_int8.onnx', bytes: 80000000 },
-  { name: 'flow_lm_flow', file: 'flow_lm_flow_int8.onnx', bytes: 10440000 },
-  { name: 'mimi_decoder', file: 'mimi_decoder_int8.onnx', bytes: 23800000 },
-  { name: 'mimi_encoder', file: 'mimi_encoder_int8.onnx', bytes: 21800000 },
-  { name: 'text_conditioner', file: 'text_conditioner_int8.onnx', bytes: 17200000 }
+  { name: 'flow_lm_main', file: 'flow_lm_main_int8.onnx', bytes: 80000000, onnx: true },
+  { name: 'flow_lm_flow', file: 'flow_lm_flow_int8.onnx', bytes: 10440000, onnx: true },
+  { name: 'mimi_decoder', file: 'mimi_decoder_int8.onnx', bytes: 23800000, onnx: true },
+  { name: 'mimi_encoder', file: 'mimi_encoder_int8.onnx', bytes: 21800000, onnx: true },
+  { name: 'text_conditioner', file: 'text_conditioner_int8.onnx', bytes: 17200000, onnx: true },
+  { name: 'bundle', file: 'bundle.json', bytes: 15000 },
+  { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 }
 ];
+const SPM_VOCAB_URL = '/spm_vocab.json';
 const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
 
-window.__waveTTS = { models: {}, ready: false };
+window.__waveTTS = { models: {}, sessions: {}, ready: false };
 
 const VOICES = [
   { id: 'aria', name: 'Aria', gender: 'F' },
@@ -807,6 +811,214 @@ const VOICES = [
   { id: 'rex', name: 'Rex', gender: 'M' },
   { id: 'sage', name: 'Sage', gender: 'X' }
 ];
+
+/* ───────── Inference Engine ───────── */
+
+// NPY parser (float32 only)
+function parseNpyF32(buf) {
+  const dv = new DataView(buf);
+  const headerLen = dv.getUint16(8, true);
+  const header = new TextDecoder().decode(new Uint8Array(buf, 10, headerLen));
+  const shape = header.match(/\(([^)]*)\)/)[1].split(',').map(s => parseInt(s)).filter(n => !isNaN(n));
+  return { shape, data: new Float32Array(buf, 10 + headerLen) };
+}
+
+// Box-Muller gaussian noise
+function fillRandn(out, stddev) {
+  for (let i = 0; i < out.length; i += 2) {
+    let u1 = Math.random(); while (u1 <= 1e-10) u1 = Math.random();
+    const u2 = Math.random();
+    const r = stddev * Math.sqrt(-2 * Math.log(u1));
+    out[i] = r * Math.cos(2 * Math.PI * u2);
+    if (i + 1 < out.length) out[i + 1] = r * Math.sin(2 * Math.PI * u2);
+  }
+}
+
+// SentencePiece unigram tokenizer (Viterbi decode)
+class PocketTokenizer {
+  constructor(vocab) {
+    this.unkId = vocab.unk_id;
+    this.addDummyPrefix = vocab.add_dummy_prefix;
+    this.pieceScore = new Map();
+    this.byteId = new Map();
+    this.maxPieceLen = 1;
+    let minScore = 0;
+    vocab.pieces.forEach(([piece, score, type], id) => {
+      if (type === 6) { this.byteId.set(parseInt(piece.slice(1, 5), 16), id); return; }
+      if (type !== 1 && type !== 4) return;
+      this.pieceScore.set(piece, { id, score });
+      if (piece.length > this.maxPieceLen) this.maxPieceLen = piece.length;
+      if (score < minScore) minScore = score;
+    });
+    this.unkScore = minScore - 10.0;
+  }
+  encode(text) {
+    if (this.addDummyPrefix) text = ' ' + text;
+    const s = text.replaceAll(' ', '▁');
+    const chars = Array.from(s);
+    const n = chars.length;
+    const best = new Float64Array(n + 1).fill(-Infinity);
+    const from = new Int32Array(n + 1).fill(-1);
+    const pieceAt = new Array(n + 1).fill(0);
+    best[0] = 0;
+    for (let i = 0; i < n; i++) {
+      if (best[i] === -Infinity) continue;
+      let sub = '';
+      for (let j = i; j < Math.min(n, i + this.maxPieceLen); j++) {
+        sub += chars[j];
+        const hit = this.pieceScore.get(sub);
+        if (hit !== undefined) {
+          const sc = best[i] + hit.score;
+          if (sc > best[j + 1]) { best[j + 1] = sc; from[j + 1] = i; pieceAt[j + 1] = hit.id; }
+        }
+      }
+      const sc = best[i] + this.unkScore;
+      if (sc > best[i + 1]) {
+        best[i + 1] = sc; from[i + 1] = i;
+        const bytes = new TextEncoder().encode(chars[i]);
+        pieceAt[i + 1] = this.byteId.size > 0 ? Array.from(bytes, b => this.byteId.get(b) ?? this.unkId) : this.unkId;
+      }
+    }
+    const ids = [];
+    for (let pos = n; pos > 0; pos = from[pos]) {
+      const p = pieceAt[pos];
+      if (Array.isArray(p)) ids.push(...p.slice().reverse());
+      else ids.push(p);
+    }
+    return ids.reverse();
+  }
+}
+
+// Text processing
+const ABBREV_SET = new Set(['mr','mrs','ms','dr','st','jr','sr','vs','etc','inc','ltd','prof','gen','gov','sgt','cpl','pvt','capt','lt','col']);
+
+function splitSentences(text) {
+  const sentences = [];
+  let current = '';
+  const isAbbr = (s, dot) => { let start = dot; while (start > 0 && /[a-zA-Z]/.test(s[start-1])) start--; return ABBREV_SET.has(s.slice(start, dot).toLowerCase()); };
+  for (let i = 0; i < text.length; i++) {
+    current += text[i];
+    const c = text[i];
+    if (c === '.' || c === '!' || c === '?') {
+      if (c === '.' && text[i+1] === '.') continue;
+      if (c === '.' && text[i-1] === '.') continue;
+      if (c === '.' && isAbbr(text, i)) continue;
+      if (i+1 >= text.length || text[i+1] === ' ' || text[i+1] === '"' || text[i+1] === "'") {
+        const t = current.replace(/^[\s]+/, '');
+        if (t) sentences.push(t);
+        current = '';
+      }
+    }
+  }
+  const t = current.replace(/^[\s]+/, '');
+  if (t) sentences.push(t);
+  const chunks = [];
+  for (const sentence of sentences) {
+    let start = 0;
+    while (start < sentence.length) {
+      while (start < sentence.length && /\s/.test(sentence[start])) start++;
+      if (sentence.length - start <= 300) { const piece = sentence.slice(start).trim(); if (piece) chunks.push(piece); break; }
+      const limit = Math.min(sentence.length, start + 300);
+      let split = -1;
+      for (let i = limit; i > start; i--) { const c = sentence[i-1]; if (c === ',' || c === ';' || c === ':') { split = i; break; } }
+      if (split < 0) { for (let i = limit; i > start; i--) { if (/\s/.test(sentence[i-1])) { split = i-1; break; } } }
+      if (split < 0 || split <= start) split = limit;
+      const piece = sentence.slice(start, split).trim();
+      if (piece) chunks.push(piece);
+      start = split;
+      while (start < sentence.length && /[\s,;:]/.test(sentence[start])) start++;
+    }
+  }
+  return chunks;
+}
+
+function isTerminalBoundary(s) { const t = s.trimEnd(); const c = t[t.length-1]; return c === '.' || c === '!' || c === '?'; }
+
+function prepareText(raw) {
+  let text = raw.replace(/["`“”]/g, '');
+  while (text.startsWith("'") || text.startsWith('`') || text.startsWith('‘') || text.startsWith('’')) text = text.slice(1);
+  while (text.endsWith("'") || text.endsWith('`') || text.endsWith('‘') || text.endsWith('’')) text = text.slice(0, -1);
+  text = text.trim();
+  if (!text) return { text: '', eosExtra: 3 };
+  text = text.replace(/[\n\r]/g, ' ');
+  const nwords = (text.match(/\S+/g) || []).length;
+  const eosExtra = nwords <= 4 ? 5 : 3;
+  if (/[a-z]/.test(text[0])) text = text[0].toUpperCase() + text.slice(1);
+  if (/[a-zA-Z0-9]/.test(text[text.length-1])) text += '.';
+  if (nwords < 5) text = '        ' + text;
+  return { text, eosExtra };
+}
+
+// Stateful ONNX session runner (non-delta: replace state_i with out_state_i)
+class StateRunner {
+  constructor(session, manifest) {
+    this.sess = session;
+    this.manifest = manifest;
+    this.reset();
+  }
+  _createTensor(entry) {
+    const shape = entry.shape.slice();
+    const n = shape.reduce((a, b) => a * b, 1);
+    if (n === 0 || shape.includes(0)) {
+      if (entry.dtype === 'int64') return new ort.Tensor('int64', new BigInt64Array(0), shape);
+      if (entry.dtype === 'bool') return new ort.Tensor('bool', new Uint8Array(0), shape);
+      return new ort.Tensor('float32', new Float32Array(0), shape);
+    }
+    if (entry.dtype === 'int64') return new ort.Tensor('int64', new BigInt64Array(n), shape);
+    if (entry.dtype === 'bool') {
+      const d = new Uint8Array(n);
+      if (entry.fill === 'ones') d.fill(1);
+      return new ort.Tensor('bool', d, shape);
+    }
+    const d = new Float32Array(n);
+    if (entry.fill === 'nan') { for (let i = 0; i < n; i++) d[i] = NaN; }
+    return new ort.Tensor('float32', d, shape);
+  }
+  reset() {
+    this.states = new Map();
+    for (const entry of this.manifest) {
+      this.states.set(entry.input_name, this._createTensor(entry));
+    }
+  }
+  snapshot() {
+    const snap = new Map();
+    for (const [name, t] of this.states) {
+      snap.set(name, new ort.Tensor(t.type, t.data.slice(), [...t.dims]));
+    }
+    return snap;
+  }
+  restore(snap) {
+    this.states = new Map();
+    for (const [name, t] of snap) {
+      this.states.set(name, new ort.Tensor(t.type, t.data.slice(), [...t.dims]));
+    }
+  }
+  async run(inputs) {
+    const feeds = { ...inputs };
+    for (const [name, t] of this.states) feeds[name] = t;
+    const out = await this.sess.run(feeds);
+    for (const key of Object.keys(out)) {
+      if (key.startsWith('out_state_')) {
+        const name = key.slice(4); // out_state_X -> state_X
+        if (this.states.has(name)) this.states.set(name, out[key]);
+      }
+    }
+    const result = {};
+    for (const [key, val] of Object.entries(out)) {
+      if (!key.startsWith('out_state_')) result[key] = val;
+    }
+    return result;
+  }
+}
+
+// TTS inference constants
+const TTS_SAMPLE_RATE = 24000;
+const TTS_LATENT_DIM = 32;
+const TTS_COND_DIM = 1024;
+const TTS_TEMPERATURE = 0.7;
+const TTS_EOS_THRESHOLD = -4.0;
+const TTS_MAX_FRAMES = 500;
+const TTS_SAMPLES_PER_FRAME = 1920;
 
 /* ───────── DOM refs ───────── */
 const $ = id => document.getElementById(id);
@@ -980,6 +1192,7 @@ cloneFileInput.addEventListener('change', () => {
 });
 
 function handleCloneFile(file) {
+  state.cloneFile = file;
   const url = URL.createObjectURL(file);
   clonePlayer.src = url;
   clonePreview.classList.add('show');
@@ -1052,25 +1265,79 @@ cloneRecordBtn.addEventListener('click', async () => {
   }
 });
 
-// Clone button
-cloneBtn.addEventListener('click', () => {
+// Clone button — real mimi_encoder voice cloning
+cloneBtn.addEventListener('click', async () => {
+  if (!window.__waveTTS.ready) { cloneStatus.textContent = 'Models not loaded yet'; return; }
+  if (!state.cloneFile) { cloneStatus.textContent = 'No audio file loaded'; return; }
+
   cloneBtn.disabled = true;
   cloneStatus.textContent = 'Extracting speaker embedding...';
-  // Simulate embedding extraction
-  setTimeout(() => {
-    state.clonedEmbedding = new Float32Array(256).fill(0).map(() => Math.random() * 2 - 1);
+
+  try {
+    const engine = window.__waveTTS;
+    const encoderSess = engine.encoderSession;
+
+    // Decode the audio file to 24kHz mono PCM
+    const audioCtx = getAudioCtx();
+    const fileBuffer = await state.cloneFile.arrayBuffer();
+    const decoded = await audioCtx.decodeAudioData(fileBuffer);
+
+    // Resample to 24kHz mono
+    const offlineCtx = new OfflineAudioContext(1, Math.ceil(decoded.duration * TTS_SAMPLE_RATE), TTS_SAMPLE_RATE);
+    const source = offlineCtx.createBufferSource();
+    source.buffer = decoded;
+    source.connect(offlineCtx.destination);
+    source.start(0);
+    const resampled = await offlineCtx.startRendering();
+    let audio24k = resampled.getChannelData(0);
+
+    // Cap at 30 seconds
+    if (audio24k.length > 30 * TTS_SAMPLE_RATE) audio24k = audio24k.subarray(0, 30 * TTS_SAMPLE_RATE);
+
+    cloneStatus.textContent = 'Running encoder...';
+
+    // Run mimi_encoder: input audio [1, 1, samples] -> output latents [1, T, 1024]
+    const audioTensor = new ort.Tensor('float32', new Float32Array(audio24k), [1, 1, audio24k.length]);
+    const encOut = await encoderSess.run({ audio: audioTensor });
+    const emb = encOut[encoderSess.outputNames[0]];
+
+    // Prepend BOS embedding
+    const bosData = engine.bosEmb;
+    const embData = new Float32Array(bosData.data.length + emb.data.length);
+    embData.set(bosData.data);
+    embData.set(emb.data, bosData.data.length);
+    const T = (emb.dims.length === 3 ? emb.dims[1] : emb.dims[0]) + 1;
+    const voiceEmb = { data: embData, dims: [1, T, TTS_COND_DIM] };
+
+    // Run voice conditioning pass and snapshot
+    cloneStatus.textContent = 'Conditioning voice...';
+    engine.mainRunner.reset();
+    await engine.mainRunner.run({
+      sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
+      text_embeddings: new ort.Tensor('float32', voiceEmb.data, voiceEmb.dims),
+    });
+    engine.voiceSnapshots.set('cloned', engine.mainRunner.snapshot());
+
+    state.clonedEmbedding = embData;
     state.useClone = true;
     cloneStatus.textContent = 'Voice cloned successfully';
     cloneBtn.disabled = false;
     $('clonedVoiceChip').style.display = 'block';
     document.querySelectorAll('#voiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
     statusText.textContent = 'Cloned voice active';
-  }, 1500);
+
+  } catch(e) {
+    console.error('Voice cloning failed:', e);
+    cloneStatus.textContent = 'Cloning failed: ' + e.message;
+    cloneBtn.disabled = false;
+  }
 });
 
 $('clearCloneBtn').addEventListener('click', () => {
   state.clonedEmbedding = null;
+  state.cloneFile = null;
   state.useClone = false;
+  if (window.__waveTTS.voiceSnapshots) window.__waveTTS.voiceSnapshots.delete('cloned');
   $('clonedVoiceChip').style.display = 'none';
   cloneStatus.textContent = '';
   clonePreview.classList.remove('show');
@@ -1112,6 +1379,7 @@ async function fetchWithProgress(url, onProgress) {
 
   statusText.textContent = 'Downloading Wave models...';
 
+  // Phase 1: Download all files
   for (let i = 0; i < MODEL_FILES.length; i++) {
     const m = MODEL_FILES[i];
     const row = document.createElement('div');
@@ -1148,6 +1416,75 @@ async function fetchWithProgress(url, onProgress) {
     sizeEl.textContent = formatMB(totalLoaded) + ' / ' + formatMB(TOTAL_BYTES);
   }
 
+  // Phase 2: Initialize ONNX sessions and inference engine
+  status.textContent = 'Initializing inference engine...';
+
+  try {
+    ort.env.wasm.numThreads = navigator.hardwareConcurrency ? Math.min(navigator.hardwareConcurrency, 4) : 2;
+    const sessionOpts = { executionProviders: ['wasm'], graphOptimizationLevel: 'all' };
+
+    // Parse non-ONNX data files
+    const bundleData = JSON.parse(new TextDecoder().decode(new Uint8Array(window.__waveTTS.models.bundle.data)));
+    const bosData = parseNpyF32(window.__waveTTS.models.bos_embedding.data);
+
+    // Load tokenizer vocab from site (not HuggingFace)
+    status.textContent = 'Loading tokenizer...';
+    const vocabResp = await fetch(SPM_VOCAB_URL);
+    if (!vocabResp.ok) throw new Error('Failed to load tokenizer vocabulary');
+    const vocabData = await vocabResp.json();
+
+    // Create ONNX sessions for each model
+    status.textContent = 'Creating ONNX sessions (this may take a moment)...';
+    const onnxModels = MODEL_FILES.filter(m => m.onnx);
+    for (const m of onnxModels) {
+      status.textContent = 'Loading session: ' + m.name + '...';
+      const buf = new Uint8Array(window.__waveTTS.models[m.name].data);
+      window.__waveTTS.sessions[m.name] = await ort.InferenceSession.create(buf, sessionOpts);
+    }
+
+    // Initialize tokenizer
+    window.__waveTTS.tokenizer = new PocketTokenizer(vocabData);
+
+    // Initialize state runners using manifest from bundle.json
+    window.__waveTTS.mainRunner = new StateRunner(
+      window.__waveTTS.sessions.flow_lm_main,
+      bundleData.flow_lm_state_manifest
+    );
+    window.__waveTTS.decoderRunner = new StateRunner(
+      window.__waveTTS.sessions.mimi_decoder,
+      bundleData.mimi_state_manifest
+    );
+
+    // Store BOS embedding and flow session reference
+    window.__waveTTS.bosEmb = bosData; // {shape: [1,1,1024], data: Float32Array}
+    window.__waveTTS.flowSession = window.__waveTTS.sessions.flow_lm_flow;
+    window.__waveTTS.textCondSession = window.__waveTTS.sessions.text_conditioner;
+    window.__waveTTS.encoderSession = window.__waveTTS.sessions.mimi_encoder;
+
+    // Prepare default voice (BOS-only conditioning)
+    status.textContent = 'Preparing default voice...';
+    window.__waveTTS.mainRunner.reset();
+    // Voice conditioning pass: feed BOS embedding through flow_lm_main
+    await window.__waveTTS.mainRunner.run({
+      sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
+      text_embeddings: new ort.Tensor('float32', new Float32Array(bosData.data), bosData.shape),
+    });
+    window.__waveTTS.defaultVoiceSnap = window.__waveTTS.mainRunner.snapshot();
+    window.__waveTTS.voiceSnapshots = new Map();
+    window.__waveTTS.voiceSnapshots.set('default', window.__waveTTS.defaultVoiceSnap);
+
+    // Free raw ArrayBuffers (sessions hold their own copies)
+    for (const m of MODEL_FILES) {
+      if (window.__waveTTS.models[m.name]) delete window.__waveTTS.models[m.name].data;
+    }
+
+  } catch(e) {
+    console.error('Engine init failed:', e);
+    status.textContent = 'Engine initialization failed: ' + e.message;
+    statusText.textContent = 'Initialization failed';
+    return;
+  }
+
   window.__waveTTS.ready = true;
   state.modelLoaded = true;
   status.textContent = 'All models loaded';
@@ -1161,11 +1498,12 @@ async function fetchWithProgress(url, onProgress) {
   $('modelPanel').style.opacity = '.6';
 })();
 
-/* ───────── Generate ───────── */
+/* ───────── Generate (real Pocket-TTS inference) ───────── */
 goBtn.addEventListener('click', async () => {
   const text = textEl.value.trim();
   if (!text) return;
   if (text.length > 5000) { statusText.textContent = 'Text exceeds 5000 character limit'; return; }
+  if (!window.__waveTTS.ready) { statusText.textContent = 'Models not loaded yet'; return; }
 
   state.generating = true;
   goBtn.disabled = true;
@@ -1178,74 +1516,193 @@ goBtn.addEventListener('click', async () => {
   genText.textContent = 'Generating with ' + voiceName + '...';
   statusText.textContent = 'Generating speech...';
 
-  // Simulate generation
-  const steps = 20;
-  for (let i = 0; i <= steps; i++) {
-    progressFill.style.width = (i / steps * 100) + '%';
-    genText.textContent = 'Generating... step ' + i + '/' + steps;
-    await new Promise(r => setTimeout(r, 100));
+  try {
+    const engine = window.__waveTTS;
+    const mainRunner = engine.mainRunner;
+    const decoderRunner = engine.decoderRunner;
+    const flowSess = engine.flowSession;
+    const textCondSess = engine.textCondSession;
+    const tokenizer = engine.tokenizer;
+
+    // Pick voice snapshot
+    const voiceKey = state.useClone ? 'cloned' : 'default';
+    const voiceSnap = engine.voiceSnapshots.get(voiceKey) || engine.defaultVoiceSnap;
+
+    // Split text into sentence chunks
+    const sentences = splitSentences(text);
+    if (!sentences.length) sentences.push(text);
+
+    const allAudio = []; // collect Float32Array chunks
+    let totalFrames = 0;
+    const stddev = Math.sqrt(TTS_TEMPERATURE);
+
+    for (let si = 0; si < sentences.length; si++) {
+      const { text: prepared, eosExtra } = prepareText(sentences[si]);
+      if (!prepared) continue;
+      const lastChunk = si === sentences.length - 1;
+      const terminal = lastChunk || isTerminalBoundary(sentences[si]);
+      const chunkEosExtra = terminal ? eosExtra : 1;
+
+      // 1. Restore voice KV state
+      mainRunner.restore(voiceSnap);
+
+      // 2. Tokenize text and run through text conditioner
+      const ids = tokenizer.encode(prepared);
+      const tokTensor = new ort.Tensor('int64', BigInt64Array.from(ids, v => BigInt(v)), [1, ids.length]);
+      const condOut = await textCondSess.run({ token_ids: tokTensor });
+      const textEmbKey = textCondSess.outputNames[0];
+      let textEmb = condOut[textEmbKey]; // [1, T, 1024]
+      // Reshape to 3D if the model returns 2D
+      let embDims = [...textEmb.dims];
+      if (embDims.length === 2) embDims = [1, embDims[0], embDims[1]];
+
+      // 3. Text conditioning pass through flow_lm_main
+      await mainRunner.run({
+        sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
+        text_embeddings: new ort.Tensor('float32', new Float32Array(textEmb.data), embDims),
+      });
+
+      // 4. Reset decoder for this sentence
+      decoderRunner.reset();
+
+      // 5. AR generation loop
+      const latentSeq = new Float32Array(TTS_LATENT_DIM).fill(NaN); // First input is NaN (BOS marker)
+      const noise = new Float32Array(TTS_LATENT_DIM);
+      let eos = false, extra = 0, frames = 0;
+      let pending = []; // accumulated latent frames for batched decode
+      let chunkTarget = 1;
+
+      genText.textContent = 'Sentence ' + (si+1) + '/' + sentences.length + ' — generating latents...';
+
+      while (frames < TTS_MAX_FRAMES) {
+        // AR step: run flow_lm_main
+        const arOut = await mainRunner.run({
+          sequence: new ort.Tensor('float32', latentSeq.slice(), [1, 1, TTS_LATENT_DIM]),
+          text_embeddings: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_COND_DIM]),
+        });
+
+        const conditioning = arOut.conditioning; // [1, 1024]
+        const eosLogit = arOut.eos_logit.data[0];
+
+        if (!eos && eosLogit > TTS_EOS_THRESHOLD) eos = true;
+        if (eos && ++extra > chunkEosExtra) break;
+
+        // LSD decode: generate latent from noise using flow network
+        // With 1 step: s=0, t=1, latent = noise + flow_dir
+        fillRandn(noise, stddev);
+        const flowOut = await flowSess.run({
+          c: new ort.Tensor('float32', new Float32Array(conditioning.data), [...conditioning.dims]),
+          s: new ort.Tensor('float32', new Float32Array([0.0]), [1, 1]),
+          t: new ort.Tensor('float32', new Float32Array([1.0]), [1, 1]),
+          x: new ort.Tensor('float32', noise.slice(), [1, TTS_LATENT_DIM]),
+        });
+        const flowDir = flowOut.flow_dir.data;
+
+        // latent = noise + flow_dir (single LSD step)
+        const latent = new Float32Array(TTS_LATENT_DIM);
+        for (let k = 0; k < TTS_LATENT_DIM; k++) latent[k] = noise[k] + flowDir[k];
+
+        // Feed back latent for next AR step
+        latentSeq.set(latent);
+        pending.push(Float32Array.from(latent));
+        frames++;
+        totalFrames++;
+
+        // Update progress
+        const estimatedTotal = Math.max(frames, Math.ceil(text.length / 5));
+        progressFill.style.width = Math.min(95, (totalFrames / estimatedTotal * 80)) + '%';
+        genText.textContent = 'Sentence ' + (si+1) + '/' + sentences.length + ' — frame ' + frames;
+
+        // Batched decode: decode accumulated latents
+        const isLast = (eos && extra >= chunkEosExtra) || frames >= TTS_MAX_FRAMES;
+        if (pending.length >= chunkTarget || (isLast && pending.length > 0)) {
+          const T = pending.length;
+          const lat = new Float32Array(T * TTS_LATENT_DIM);
+          pending.forEach((p, i) => lat.set(p, i * TTS_LATENT_DIM));
+          pending = [];
+
+          const decOut = await decoderRunner.run({
+            latent: new ort.Tensor('float32', lat, [1, T, TTS_LATENT_DIM]),
+          });
+          const audioFrame = decOut.audio_frame || decOut[Object.keys(decOut)[0]];
+          allAudio.push(Float32Array.from(audioFrame.data));
+          chunkTarget = Math.min(chunkTarget * 2, 8);
+        }
+
+        // Yield to UI
+        if (frames % 4 === 0) await new Promise(r => setTimeout(r, 0));
+      }
+    }
+
+    // Concatenate all audio chunks
+    progressFill.style.width = '95%';
+    genText.textContent = 'Finalizing audio...';
+
+    const totalSamples = allAudio.reduce((s, a) => s + a.length, 0);
+    if (totalSamples === 0) throw new Error('No audio generated');
+
+    const fullAudio = new Float32Array(totalSamples);
+    let offset = 0;
+    for (const chunk of allAudio) {
+      fullAudio.set(chunk, offset);
+      offset += chunk.length;
+    }
+
+    // Create AudioBuffer
+    const ctx = getAudioCtx();
+    const buf = ctx.createBuffer(1, fullAudio.length, TTS_SAMPLE_RATE);
+    buf.getChannelData(0).set(fullAudio);
+    const duration = fullAudio.length / TTS_SAMPLE_RATE;
+
+    state.audioBuffer = buf;
+    progressFill.style.width = '100%';
+
+    // Show output
+    emptyOutput.style.display = 'none';
+    outputResult.style.display = 'block';
+    waveformBar.classList.add('show');
+    drawWaveform(waveformCanvas, buf);
+
+    // Create audio blob for player
+    const wavBlob = audioBufferToWav(buf);
+    const audioUrl = URL.createObjectURL(wavBlob);
+    player.src = audioUrl;
+    player.style.display = 'block';
+    player.play().catch(() => {});
+
+    resultStats.innerHTML = '<span class="stat">Duration <b>' + duration.toFixed(1) + 's</b></span>' +
+      '<span class="stat">Voice <b>' + voiceName + '</b></span>' +
+      '<span class="stat">Frames <b>' + totalFrames + '</b></span>' +
+      '<span class="stat">Lang <b>' + state.lang.toUpperCase() + '</b></span>';
+
+    statusText.textContent = 'Generation complete — ' + duration.toFixed(1) + 's of speech';
+
+    // Add to history
+    addToHistory({ voice: voiceName, text: text.substring(0, 80), duration: duration, timestamp: Date.now(), audioUrl: audioUrl });
+
+    // Waveform progress tracking
+    player.addEventListener('timeupdate', function handleTime() {
+      if (player.duration) {
+        waveformProgress.style.width = (player.currentTime / player.duration * 100) + '%';
+      }
+    });
+    waveformBar.addEventListener('click', e => {
+      const rect = waveformBar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      if (player.duration) player.currentTime = pct * player.duration;
+    });
+
+  } catch(e) {
+    console.error('Generation failed:', e);
+    statusText.textContent = 'Generation failed: ' + e.message;
   }
 
-  // Generate a simple sine-wave tone as placeholder audio
-  const ctx = getAudioCtx();
-  const sampleRate = 24000;
-  const duration = Math.min(text.length / 15, 30);
-  const buf = ctx.createBuffer(1, sampleRate * duration, sampleRate);
-  const channel = buf.getChannelData(0);
-  const baseFreq = state.useClone ? 180 : ({ aria: 220, luna: 240, nova: 200, stella: 260, orion: 140, atlas: 120, rex: 100, sage: 160 }[state.voice] || 200);
-  for (let i = 0; i < channel.length; i++) {
-    const t = i / sampleRate;
-    const env = Math.min(1, t * 10) * Math.min(1, (duration - t) * 10);
-    channel[i] = env * 0.3 * (
-      Math.sin(2 * Math.PI * baseFreq * t * state.speed) +
-      0.3 * Math.sin(2 * Math.PI * baseFreq * 2 * t * state.speed) +
-      0.1 * Math.sin(2 * Math.PI * baseFreq * 3 * t * state.speed) +
-      (Math.random() - 0.5) * 0.05
-    );
-  }
-
-  state.audioBuffer = buf;
-
-  // Show output
-  emptyOutput.style.display = 'none';
-  outputResult.style.display = 'block';
-  waveformBar.classList.add('show');
-  drawWaveform(waveformCanvas, buf);
-
-  // Create audio blob for player
-  const wavBlob = audioBufferToWav(buf);
-  const audioUrl = URL.createObjectURL(wavBlob);
-  player.src = audioUrl;
-  player.style.display = 'block';
-  player.play().catch(() => {});
-
-  resultStats.innerHTML = '<span class="stat">Duration <b>' + duration.toFixed(1) + 's</b></span>' +
-    '<span class="stat">Voice <b>' + voiceName + '</b></span>' +
-    '<span class="stat">Speed <b>' + state.speed.toFixed(2) + 'x</b></span>' +
-    '<span class="stat">Lang <b>' + state.lang.toUpperCase() + '</b></span>';
-
-  // Reset state
+  // Reset UI state
   state.generating = false;
   goBtn.disabled = false;
   goBtn.classList.remove('generating');
   genOverlay.classList.remove('show');
   progressBar.classList.remove('show');
-  statusText.textContent = 'Generation complete';
-
-  // Add to history
-  addToHistory({ voice: voiceName, text: text.substring(0, 80), duration: duration, timestamp: Date.now(), audioUrl: audioUrl });
-
-  // Waveform progress tracking
-  player.addEventListener('timeupdate', function handleTime() {
-    if (player.duration) {
-      waveformProgress.style.width = (player.currentTime / player.duration * 100) + '%';
-    }
-  });
-  waveformBar.addEventListener('click', e => {
-    const rect = waveformBar.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    if (player.duration) player.currentTime = pct * player.duration;
-  });
 });
 
 /* ───────── WAV encoder ───────── */
