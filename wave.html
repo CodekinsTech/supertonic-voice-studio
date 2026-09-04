@@ -124,6 +124,16 @@ label{font-size:10px;color:var(--ink-soft);font-weight:700;letter-spacing:.06em;
   box-shadow:0 2px 8px rgba(124,58,237,.30);
 }
 .voice-chip .gender{font-size:8px;display:block;opacity:.7;margin-top:1px}
+.voice-chip{position:relative}
+.voice-test-btn{
+  position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--hair);background:rgba(255,255,255,.85);color:var(--ink-soft);
+  font-size:9px;cursor:pointer;display:grid;place-items:center;padding:0;
+  opacity:0;transition:opacity .15s,background .15s;line-height:1;
+}
+.voice-chip:hover .voice-test-btn{opacity:1}
+.voice-test-btn:hover{background:#fff;color:var(--brand)}
+.voice-test-btn.playing{opacity:1;background:var(--brand);color:#fff;border-color:var(--brand)}
 
 /* Generate button */
 button{padding:7px 14px;border:1px solid transparent;border-radius:10px;cursor:pointer;font-weight:700;font-size:11.5px;letter-spacing:.02em;transition:.18s;font-family:inherit}
@@ -445,52 +455,18 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   Wave uses large AI models. For the best experience, use a desktop browser with a stable connection.
 </div>
 
-<!-- ===== VOICE CLONING (star feature) ===== -->
-<div class="panel panel-clone">
-  <h3><span class="swatch"></span> Voice Cloning <small>Upload or record a voice sample</small></h3>
-
-  <div class="clone-drop-zone" id="cloneDropZone">
-    <div class="drop-icon">🎙</div>
-    <div class="drop-text">Drop a voice sample here or click to browse</div>
-    <div class="drop-hint">.wav .mp3 .ogg &middot; 5-15 seconds of clean speech</div>
-    <input type="file" id="cloneFileInput" accept=".wav,.mp3,.ogg,audio/wav,audio/mpeg,audio/ogg" style="display:none">
-  </div>
-
-  <div class="clone-actions">
-    <button class="clone-record-btn" id="cloneRecordBtn">&#9679; Record Sample</button>
-    <button class="clone-btn" id="cloneBtn" disabled>Clone Voice</button>
-    <span class="clone-status" id="cloneStatus"></span>
-  </div>
-
-  <div class="clone-preview" id="clonePreview">
-    <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.10em;text-transform:uppercase;margin-bottom:4px;position:relative;z-index:1">Voice Sample Preview</div>
-    <canvas class="clone-waveform" id="cloneWaveform"></canvas>
-    <audio id="clonePlayer" controls style="width:100%;height:32px;border-radius:8px;margin-top:4px"></audio>
-  </div>
-
-  <div id="clonedVoiceChip" style="display:none;position:relative;z-index:1">
-    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.10),rgba(6,182,212,.08));border:1px solid rgba(124,58,237,.25)">
-      <span style="font-size:16px">🧬</span>
-      <span style="font-size:11px;font-weight:700;color:var(--brand)">Cloned Voice Active</span>
-      <button id="clearCloneBtn" style="margin-left:auto;padding:3px 8px;border-radius:6px;border:1px solid var(--hair);background:rgba(255,255,255,.8);color:var(--ink-soft);font-size:9px;font-weight:700;cursor:pointer">Clear</button>
-    </div>
-  </div>
-
-  <div style="font-size:8.5px;color:var(--muted);line-height:1.4;margin-top:6px;position:relative;z-index:1">By using voice cloning you confirm you have consent from the speaker. You are solely responsible for how you use generated audio.</div>
-</div>
-
 <!-- ===== BUILT-IN VOICES ===== -->
 <div class="panel" style="--g1:#06B6D4;--g2:#0891B2">
   <h3><span class="swatch"></span> Built-in Voices <small>8 voices</small></h3>
   <div class="voice-chip-grid" id="voiceGrid">
-    <div class="voice-chip active" data-voice="aria">Aria<span class="gender">Female</span></div>
-    <div class="voice-chip" data-voice="luna">Luna<span class="gender">Female</span></div>
-    <div class="voice-chip" data-voice="nova">Nova<span class="gender">Female</span></div>
-    <div class="voice-chip" data-voice="stella">Stella<span class="gender">Female</span></div>
-    <div class="voice-chip" data-voice="orion">Orion<span class="gender">Male</span></div>
-    <div class="voice-chip" data-voice="atlas">Atlas<span class="gender">Male</span></div>
-    <div class="voice-chip" data-voice="rex">Rex<span class="gender">Male</span></div>
-    <div class="voice-chip" data-voice="sage">Sage<span class="gender">Neutral</span></div>
+    <div class="voice-chip active" data-voice="aria">Aria<span class="gender">Female</span><button class="voice-test-btn" data-voice="aria" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="luna">Luna<span class="gender">Female</span><button class="voice-test-btn" data-voice="luna" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="nova">Nova<span class="gender">Female</span><button class="voice-test-btn" data-voice="nova" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="stella">Stella<span class="gender">Female</span><button class="voice-test-btn" data-voice="stella" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="orion">Orion<span class="gender">Male</span><button class="voice-test-btn" data-voice="orion" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="atlas">Atlas<span class="gender">Male</span><button class="voice-test-btn" data-voice="atlas" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="rex">Rex<span class="gender">Male</span><button class="voice-test-btn" data-voice="rex" title="Test voice">&#9654;</button></div>
+    <div class="voice-chip" data-voice="sage">Sage<span class="gender">Neutral</span><button class="voice-test-btn" data-voice="sage" title="Test voice">&#9654;</button></div>
   </div>
 </div>
 
@@ -551,9 +527,43 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div class="progress-bar show" id="modelProgressBar" style="height:8px;border-radius:6px;background:rgba(0,0,0,.06);overflow:hidden;margin-bottom:6px">
       <div class="progress-fill" id="modelProgressFill" style="height:100%;width:0%;border-radius:6px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
     </div>
-    <div id="modelFileList" style="display:flex;flex-direction:column;gap:3px"></div>
-    <div style="font-size:9px;color:var(--muted);margin-top:6px">5 ONNX models + tokenizer &middot; INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
+    <div id="modelFileList" style="display:none"></div>
+    <div style="font-size:9px;color:var(--muted);margin-top:6px">INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
   </div>
+</div>
+
+<!-- ===== VOICE CLONING (star feature) ===== -->
+<div class="panel panel-clone">
+  <h3><span class="swatch"></span> Voice Cloning <small>Upload or record a voice sample</small></h3>
+
+  <div class="clone-drop-zone" id="cloneDropZone">
+    <div class="drop-icon">🎙</div>
+    <div class="drop-text">Drop a voice sample here or click to browse</div>
+    <div class="drop-hint">.wav .mp3 .ogg &middot; 5-15 seconds of clean speech</div>
+    <input type="file" id="cloneFileInput" accept=".wav,.mp3,.ogg,audio/wav,audio/mpeg,audio/ogg" style="display:none">
+  </div>
+
+  <div class="clone-actions">
+    <button class="clone-record-btn" id="cloneRecordBtn">&#9679; Record Sample</button>
+    <button class="clone-btn" id="cloneBtn" disabled>Clone Voice</button>
+    <span class="clone-status" id="cloneStatus"></span>
+  </div>
+
+  <div class="clone-preview" id="clonePreview">
+    <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.10em;text-transform:uppercase;margin-bottom:4px;position:relative;z-index:1">Voice Sample Preview</div>
+    <canvas class="clone-waveform" id="cloneWaveform"></canvas>
+    <audio id="clonePlayer" controls style="width:100%;height:32px;border-radius:8px;margin-top:4px"></audio>
+  </div>
+
+  <div id="clonedVoiceChip" style="display:none;position:relative;z-index:1">
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.10),rgba(6,182,212,.08));border:1px solid rgba(124,58,237,.25)">
+      <span style="font-size:16px">🧬</span>
+      <span style="font-size:11px;font-weight:700;color:var(--brand)">Cloned Voice Active</span>
+      <button id="clearCloneBtn" style="margin-left:auto;padding:3px 8px;border-radius:6px;border:1px solid var(--hair);background:rgba(255,255,255,.8);color:var(--ink-soft);font-size:9px;font-weight:700;cursor:pointer">Clear</button>
+    </div>
+  </div>
+
+  <div style="font-size:8.5px;color:var(--muted);line-height:1.4;margin-top:6px;position:relative;z-index:1">By using voice cloning you confirm you have consent from the speaker. You are solely responsible for how you use generated audio.</div>
 </div>
 
 <!-- ===== ADVANCED SETTINGS (collapsed) ===== -->
@@ -1078,6 +1088,108 @@ document.querySelectorAll('#voiceGrid .voice-chip').forEach(chip => {
     state.useClone = false;
     const clonedChip = $('clonedVoiceChip');
     if (clonedChip) clonedChip.style.display = 'none';
+  });
+});
+
+/* ───────── Voice test buttons ───────── */
+let _testAudio = null;
+document.querySelectorAll('.voice-test-btn').forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    if (!window.__waveTTS || !window.__waveTTS.ready) { statusText.textContent = 'Models not loaded yet'; return; }
+
+    // Stop any playing test
+    if (_testAudio) { _testAudio.pause(); _testAudio = null; }
+    document.querySelectorAll('.voice-test-btn.playing').forEach(b => b.classList.remove('playing'));
+
+    const voiceId = btn.dataset.voice;
+    btn.classList.add('playing');
+    statusText.textContent = 'Testing ' + voiceId + '...';
+
+    try {
+      const engine = window.__waveTTS;
+      const voiceSnap = engine.voiceSnapshots.get(voiceId) || engine.defaultVoiceSnap;
+      engine.mainRunner.restore(voiceSnap);
+      engine.decoderRunner.reset();
+
+      const testText = 'Hello, I am ' + voiceId + '. Nice to meet you.';
+      const { text: prepared, eosExtra } = prepareText(testText);
+      const ids = engine.tokenizer.encode(prepared);
+      const tokTensor = new ort.Tensor('int64', BigInt64Array.from(ids, v => BigInt(v)), [1, ids.length]);
+      const condOut = await engine.textCondSession.run({ token_ids: tokTensor });
+      const textEmbKey = engine.textCondSession.outputNames[0];
+      let textEmb = condOut[textEmbKey];
+      let embDims = [...textEmb.dims];
+      if (embDims.length === 2) embDims = [1, embDims[0], embDims[1]];
+
+      await engine.mainRunner.run({
+        sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
+        text_embeddings: new ort.Tensor('float32', new Float32Array(textEmb.data), embDims),
+      });
+
+      const allAudio = [];
+      const latentSeq = new Float32Array(TTS_LATENT_DIM).fill(NaN);
+      const noise = new Float32Array(TTS_LATENT_DIM);
+      const stddev = Math.sqrt(TTS_TEMPERATURE);
+      let eos = false, extra = 0, frames = 0;
+      let pending = [], chunkTarget = 1;
+
+      while (frames < 120) {
+        const arOut = await engine.mainRunner.run({
+          sequence: new ort.Tensor('float32', latentSeq.slice(), [1, 1, TTS_LATENT_DIM]),
+          text_embeddings: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_COND_DIM]),
+        });
+        const eosLogit = arOut.eos_logit.data[0];
+        if (!eos && eosLogit > TTS_EOS_THRESHOLD) eos = true;
+        if (eos && ++extra > eosExtra) break;
+
+        fillRandn(noise, stddev);
+        const flowOut = await engine.flowSession.run({
+          c: new ort.Tensor('float32', new Float32Array(arOut.conditioning.data), [...arOut.conditioning.dims]),
+          s: new ort.Tensor('float32', new Float32Array([0.0]), [1, 1]),
+          t: new ort.Tensor('float32', new Float32Array([1.0]), [1, 1]),
+          x: new ort.Tensor('float32', noise.slice(), [1, TTS_LATENT_DIM]),
+        });
+        const latent = new Float32Array(TTS_LATENT_DIM);
+        for (let k = 0; k < TTS_LATENT_DIM; k++) latent[k] = noise[k] + flowOut.flow_dir.data[k];
+        latentSeq.set(latent);
+        pending.push(Float32Array.from(latent));
+        frames++;
+
+        const isLast = (eos && extra >= eosExtra) || frames >= 120;
+        if (pending.length >= chunkTarget || (isLast && pending.length > 0)) {
+          const T = pending.length;
+          const lat = new Float32Array(T * TTS_LATENT_DIM);
+          pending.forEach((p, i) => lat.set(p, i * TTS_LATENT_DIM));
+          pending = [];
+          const decOut = await engine.decoderRunner.run({
+            latent: new ort.Tensor('float32', lat, [1, T, TTS_LATENT_DIM]),
+          });
+          const audioFrame = decOut.audio_frame || decOut[Object.keys(decOut)[0]];
+          allAudio.push(Float32Array.from(audioFrame.data));
+          chunkTarget = Math.min(chunkTarget * 2, 8);
+        }
+        if (frames % 4 === 0) await new Promise(r => setTimeout(r, 0));
+      }
+
+      const totalSamples = allAudio.reduce((s, a) => s + a.length, 0);
+      if (totalSamples > 0) {
+        const full = new Float32Array(totalSamples);
+        let off = 0; for (const c of allAudio) { full.set(c, off); off += c.length; }
+        const ctx = getAudioCtx();
+        const buf = ctx.createBuffer(1, full.length, TTS_SAMPLE_RATE);
+        buf.getChannelData(0).set(full);
+        const wavBlob = audioBufferToWav(buf);
+        _testAudio = new Audio(URL.createObjectURL(wavBlob));
+        _testAudio.onended = () => { btn.classList.remove('playing'); _testAudio = null; };
+        _testAudio.play();
+        statusText.textContent = 'Playing test for ' + voiceId;
+      }
+    } catch (err) {
+      console.error('Voice test failed:', err);
+      statusText.textContent = 'Test failed: ' + err.message;
+      btn.classList.remove('playing');
+    }
   });
 });
 
