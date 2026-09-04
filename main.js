@@ -374,8 +374,8 @@ const textArea = $('text');
 const charCounter = $('charCounter');
 function updateCounter() {
   const n = textArea.value.length;
-  charCounter.textContent = `${n} / 2000`;
-  charCounter.className = 'char-counter' + (n > 2000 ? ' over' : n > 1200 ? ' warn' : '');
+  charCounter.textContent = `${n} / 5000`;
+  charCounter.className = 'char-counter' + (n > 5000 ? ' over' : n > 4500 ? ' warn' : '');
 }
 textArea.addEventListener('input', updateCounter);
 updateCounter();

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F7F9FD">
-<title>CodeKins · Kokoro Voice Studio — On-device AI voices for the web</title>
-<meta name="description" content="Kokoro Voice Studio by CodeKins Pvt. Ltd. — 50+ studio-grade AI voices, real-time mixing, emotion controls and pro DSP, all running in your browser. No server, no upload, your audio never leaves your device.">
+<title>Wave · Voice Studio — On-device AI voices for the web</title>
+<meta name="description" content="Wave Voice Studio — 50+ studio-grade AI voices, real-time mixing, emotion controls and pro DSP, all running in your browser. No server, no upload, your audio never leaves your device.">
 <link rel="icon" type="image/png" href="./logo-color-trans.png?v=2">
 <link rel="apple-touch-icon" href="./logo-color-trans.png?v=2">
-<link rel="canonical" href="./">
+<link rel="canonical" href="https://wavevoicestudio.com/">
 <style>
 /* ═════════ CodeKins · Kokoro Voice Studio — landing site ═════════
    Visual language mirrors the app: liquid-glass panels, sapphire→aqua
@@ -68,7 +68,45 @@ a:hover{color:var(--brand-deep)}
   box-shadow:0 4px 14px rgba(37,99,255,.32);transition:.15s;
 }
 .nav .cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,255,.42);color:#fff}
-@media (max-width:780px){.nav .links a:not(.cta){display:none}}
+@media (max-width:780px){
+  .nav .links a:not(.cta):not(.hamburger-btn){display:none}
+  .hamburger-btn{display:flex}
+  .mobile-menu.open{display:flex}
+}
+
+/* Hamburger button */
+.hamburger-btn{
+  display:none;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:99px;border:1px solid var(--hair-strong);
+  background:rgba(255,255,255,.78);cursor:pointer;margin-left:auto;
+  font-size:18px;line-height:1;color:var(--ink-soft);transition:.15s;
+}
+.hamburger-btn:hover{background:#fff;color:var(--brand)}
+
+/* Mobile dropdown menu */
+.mobile-menu{
+  display:none;flex-direction:column;gap:4px;
+  position:absolute;top:calc(100% + 8px);right:14px;
+  background:rgba(255,255,255,.96);border:1px solid var(--hair);
+  border-radius:14px;padding:8px;min-width:180px;z-index:60;
+  box-shadow:var(--shadow-md);
+  -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
+}
+.mobile-menu a{
+  display:block;padding:10px 14px;border-radius:10px;
+  font-size:13.5px;font-weight:600;color:var(--ink-soft);text-decoration:none;
+  transition:.15s;
+}
+.mobile-menu a:hover{background:rgba(37,99,255,.08);color:var(--brand)}
+
+/* Skip-to-content link */
+.skip-link{
+  position:absolute;top:-999px;left:16px;z-index:100;
+  padding:10px 18px;border-radius:8px;
+  background:var(--brand);color:#fff;font-weight:700;font-size:14px;
+  text-decoration:none;
+}
+.skip-link:focus{top:16px}
 
 /* ───── shared layout ───── */
 .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
@@ -356,9 +394,11 @@ footer{
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to content</a>
+
 <!-- ═════════ NAV ═════════ -->
 <div class="nav-wrap">
-  <nav class="nav">
+  <nav class="nav" style="position:relative">
     <a href="#top" class="brand">
       <div class="glyph"><img src="./logo-color-trans.png?v=2" alt="Wave"></div>
       <div class="name"><b>Wave</b></div>
@@ -369,10 +409,21 @@ footer{
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       <a href="./studio.html" class="cta">Launch Studio &rarr;</a>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="./studio.html">Launch Studio &rarr;</a>
     </div>
   </nav>
 </div>
+
+<main id="main-content">
 
 <!-- ═════════ HERO ═════════ -->
 <section class="hero" id="top">
@@ -381,7 +432,7 @@ footer{
     <div class="badge"><span class="dot"></span> Now in public preview &middot; v1.1</div>
     <h1>Studio-grade AI voices, <span class="grad">running entirely in your browser.</span></h1>
     <p class="sub">
-      Kokoro Voice Studio gives you 50+ natural voices, a real-time voice mixer,
+      Wave Voice Studio gives you 50+ natural voices, a real-time voice mixer,
       one-click emotion presets and pro audio post-processing &mdash; with zero servers
       and zero uploads. Your text and audio never leave your device.
     </p>
@@ -455,7 +506,7 @@ footer{
     <div class="section-head">
       <span class="section-cap">What you get</span>
       <h2>Everything a voice producer actually needs.</h2>
-      <p class="lead">From quick voiceovers to long-form audiobooks &mdash; Kokoro Voice Studio packs a full production chain into one focused interface.</p>
+      <p class="lead">From quick voiceovers to long-form audiobooks &mdash; Wave Voice Studio packs a full production chain into one focused interface.</p>
     </div>
     <div class="features-grid">
 
@@ -610,7 +661,7 @@ footer{
           or cloud uploads to be useful.
         </p>
         <p style="font-size:15.5px;color:var(--ink-soft)">
-          Kokoro Voice Studio is our flagship product &mdash; a love-letter to the open-source
+          Wave Voice Studio is our flagship product &mdash; a love-letter to the open-source
           Kokoro 82M speech model, wrapped in a producer-grade interface that runs entirely
           inside your browser.
         </p>
@@ -626,7 +677,7 @@ footer{
         <div class="row"><span>Legal name</span><b>CodeKins Pvt. Ltd.</b></div>
         <div class="row"><span>Registered office</span><b>Ahmedabad, Gujarat, India</b></div>
         <div class="row"><span>Founded</span><b>2022</b></div>
-        <div class="row"><span>Product</span><b>Kokoro Voice Studio</b></div>
+        <div class="row"><span>Product</span><b>Wave Voice Studio</b></div>
         <div class="row"><span>Status</span><b>Public preview &middot; v1.1</b></div>
         <div class="row"><span>Website</span><b><a href="https://codekins.tech">codekins.tech &rarr;</a></b></div>
       </div>
@@ -644,11 +695,11 @@ footer{
     <div class="faq">
       <details open>
         <summary>Does any audio or text leave my computer?</summary>
-        <p>No. Kokoro Voice Studio runs entirely in your browser using ONNX Runtime Web. The model and voice files are downloaded once from a public CDN and cached locally. After that, every generation, mix and effect happens on your device &mdash; no requests are made to our servers.</p>
+        <p>No. Wave Voice Studio runs entirely in your browser using ONNX Runtime Web. The model and voice files are downloaded once from a public CDN and cached locally. After that, every generation, mix and effect happens on your device &mdash; no requests are made to our servers.</p>
       </details>
       <details>
         <summary>Can I use the generated audio commercially?</summary>
-        <p>Yes. Audio you generate with Kokoro Voice Studio is royalty-free for both personal and commercial use, including ads, podcasts, games, films and audiobooks. You don't need to credit us, but a mention is always appreciated.</p>
+        <p>Yes. Audio you generate with Wave Voice Studio is royalty-free for both personal and commercial use, including ads, podcasts, games, films and audiobooks. You don't need to credit us, but a mention is always appreciated.</p>
       </details>
       <details>
         <summary>What browsers are supported?</summary>
@@ -664,7 +715,7 @@ footer{
       </details>
       <details>
         <summary>Can I install it like a real app?</summary>
-        <p>Yes &mdash; Kokoro Voice Studio is a Progressive Web App. In Chrome, click the install icon in the address bar; in Safari on iOS/iPadOS, use Share &rarr; Add to Home Screen. It then runs in its own window, fully offline.</p>
+        <p>Yes &mdash; Wave Voice Studio is a Progressive Web App. In Chrome, click the install icon in the address bar; in Safari on iOS/iPadOS, use Share &rarr; Add to Home Screen. It then runs in its own window, fully offline.</p>
       </details>
     </div>
   </div>
@@ -677,7 +728,7 @@ footer{
       <h2>Hear the difference yourself.</h2>
       <p>The Studio loads in under three seconds &mdash; type a sentence, pick a voice, hit generate. No sign-up.</p>
       <a href="./studio.html" class="btn btn-primary">
-        Launch Kokoro Voice Studio
+        Launch Wave Voice Studio
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
     </div>
@@ -726,6 +777,8 @@ footer{
   </div>
 </section>
 
+</main>
+
 <!-- ═════════ FOOTER ═════════ -->
 <footer>
   <div class="wrap">
@@ -734,7 +787,7 @@ footer{
         <a href="#top" class="brand" style="margin-bottom:14px;display:inline-flex">
           <div class="glyph"><img src="./logo-color-trans.png?v=2" alt=""></div>
           <div class="name">
-            <b>Kokoro Voice Studio</b>
+            <b>Wave Voice Studio</b>
             <span>by CodeKins Pvt. Ltd.</span>
           </div>
         </a>
@@ -776,5 +829,28 @@ footer{
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn=document.getElementById('hamburgerBtn');
+  var menu=document.getElementById('mobileMenu');
+  if(!btn||!menu)return;
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.nav')){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+</script>
 </body>
 </html>
