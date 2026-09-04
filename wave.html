@@ -804,7 +804,8 @@ const MODEL_FILES = [
   { name: 'mimi_encoder', file: 'mimi_encoder_int8.onnx', bytes: 21800000, onnx: true },
   { name: 'text_conditioner', file: 'text_conditioner_int8.onnx', bytes: 17200000, onnx: true },
   { name: 'bundle', file: 'bundle.json', bytes: 15000 },
-  { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 }
+  { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 },
+  { name: 'voices', file: 'voices.bin', bytes: 8000000 }
 ];
 const SPM_VOCAB_URL = '/spm_vocab.json';
 const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
@@ -822,6 +823,18 @@ const VOICES = [
   { id: 'sage', name: 'Sage', gender: 'X' }
 ];
 
+// Map UI voice names to actual model predefined voices from voices.bin
+const VOICE_MAP = {
+  aria: 'alba',
+  luna: 'cosette',
+  nova: 'eponine',
+  stella: 'fantine',
+  orion: 'javert',
+  atlas: 'jean',
+  rex: 'marius',
+  sage: 'azelma'
+};
+
 /* ───────── Inference Engine ───────── */
 
 // NPY parser (float32 only)
@@ -831,6 +844,131 @@ function parseNpyF32(buf) {
   const header = new TextDecoder().decode(new Uint8Array(buf, 10, headerLen));
   const shape = header.match(/\(([^)]*)\)/)[1].split(',').map(s => parseInt(s)).filter(n => !isNaN(n));
   return { shape, data: new Float32Array(buf, 10 + headerLen) };
+}
+
+// Parse voices.bin binary format (PTVB1)
+function parseVoiceStatesBin(buffer) {
+  const view = new DataView(buffer);
+  let offset = 0;
+  const magic = new TextDecoder().decode(new Uint8Array(buffer, offset, 5));
+  offset += 5;
+  if (magic !== 'PTVB1') throw new Error('Invalid voices.bin header');
+  const voices = {};
+  const voiceCount = view.getUint32(offset, true); offset += 4;
+  for (let vi = 0; vi < voiceCount; vi++) {
+    const nameLen = view.getUint16(offset, true); offset += 2;
+    const name = new TextDecoder().decode(new Uint8Array(buffer, offset, nameLen)); offset += nameLen;
+    const tensorCount = view.getUint16(offset, true); offset += 2;
+    const tensors = {};
+    for (let ti = 0; ti < tensorCount; ti++) {
+      const keyLen = view.getUint16(offset, true); offset += 2;
+      const key = new TextDecoder().decode(new Uint8Array(buffer, offset, keyLen)); offset += keyLen;
+      const dtypeCode = view.getUint8(offset); offset += 1;
+      const rank = view.getUint8(offset); offset += 1;
+      const shape = [];
+      for (let d = 0; d < rank; d++) { shape.push(view.getUint32(offset, true)); offset += 4; }
+      const byteLength = view.getUint32(offset, true); offset += 4;
+      let data;
+      if (dtypeCode === 0) data = new Float32Array(buffer.slice(offset, offset + byteLength));
+      else if (dtypeCode === 1) data = new BigInt64Array(buffer.slice(offset, offset + byteLength));
+      else data = new Uint8Array(buffer.slice(offset, offset + byteLength));
+      offset += byteLength;
+      tensors[key] = { data, shape, dtype: dtypeCode === 0 ? 'float32' : dtypeCode === 1 ? 'int64' : 'bool' };
+    }
+    voices[name] = tensors;
+  }
+  return voices;
+}
+
+// Convert a voice record from voices.bin into a StateRunner-compatible snapshot (Map<string, ort.Tensor>)
+function voiceRecordToSnapshot(record, manifest) {
+  // Group tensors by module name
+  const grouped = {};
+  for (const [key, value] of Object.entries(record)) {
+    const slash = key.indexOf('/');
+    if (slash === -1) continue;
+    const mod = key.slice(0, slash), tk = key.slice(slash + 1);
+    if (!grouped[mod]) grouped[mod] = {};
+    grouped[mod][tk] = value;
+  }
+
+  const snap = new Map();
+  for (const entry of manifest) {
+    const moduleState = grouped[entry.module] || {};
+    let source = moduleState[entry.key];
+    // Derive step from offset or current_end if missing
+    if (!source && entry.key === 'step') {
+      if (moduleState.step) source = { data: BigInt64Array.from([BigInt(moduleState.step.data[0])]), shape: [1] };
+      else if (moduleState.offset) source = { data: BigInt64Array.from([BigInt(moduleState.offset.data[0])]), shape: [1] };
+      else if (moduleState.current_end) source = { data: BigInt64Array.from([BigInt(moduleState.current_end.shape[0])]), shape: [1] };
+      else source = { data: BigInt64Array.from([0n]), shape: [1] };
+    }
+
+    const targetShape = entry.shape.slice();
+    const targetSize = targetShape.reduce((a, b) => a * b, 1);
+
+    if (!source || targetSize === 0) {
+      // Use default fill for this state entry
+      if (entry.dtype === 'int64') {
+        snap.set(entry.input_name, new ort.Tensor('int64', new BigInt64Array(targetSize > 0 ? targetSize : 0), targetShape));
+      } else if (entry.dtype === 'bool') {
+        const d = new Uint8Array(targetSize > 0 ? targetSize : 0);
+        if (entry.fill === 'ones') d.fill(1);
+        snap.set(entry.input_name, new ort.Tensor('bool', d, targetShape));
+      } else {
+        const d = new Float32Array(targetSize > 0 ? targetSize : 0);
+        if (entry.fill === 'nan') for (let i = 0; i < d.length; i++) d[i] = NaN;
+        snap.set(entry.input_name, new ort.Tensor('float32', d, targetShape));
+      }
+      continue;
+    }
+
+    // Adapt source data to target shape
+    let data;
+    if (entry.dtype === 'int64') {
+      data = new BigInt64Array(targetSize);
+      const src = source.data instanceof BigInt64Array ? source.data : BigInt64Array.from(Array.from(source.data).map(v => BigInt(v)));
+      data.set(src.subarray(0, Math.min(src.length, targetSize)));
+    } else if (entry.dtype === 'bool') {
+      data = new Uint8Array(targetSize);
+      if (entry.fill === 'ones') data.fill(1);
+      const src = source.data instanceof Uint8Array ? source.data : new Uint8Array(source.data);
+      data.set(src.subarray(0, Math.min(src.length, targetSize)));
+    } else {
+      data = new Float32Array(targetSize);
+      if (entry.fill === 'nan') for (let i = 0; i < data.length; i++) data[i] = NaN;
+      const src = source.data instanceof Float32Array ? source.data : new Float32Array(source.data);
+      // Copy source data respecting potentially smaller source dimensions
+      if (source.shape.length === targetShape.length && source.shape.every((d, i) => d === targetShape[i])) {
+        data.set(src);
+      } else if (source.shape.length === targetShape.length) {
+        // Partial copy: source may have fewer items in some dimensions
+        copyPartial(src, source.shape, data, targetShape);
+      } else {
+        data.set(src.subarray(0, Math.min(src.length, targetSize)));
+      }
+    }
+    snap.set(entry.input_name, new ort.Tensor(entry.dtype === 'int64' ? 'int64' : entry.dtype === 'bool' ? 'bool' : 'float32', data, targetShape));
+  }
+  return snap;
+}
+
+// Copy partial tensor data when source is smaller than target in some dims
+function copyPartial(src, srcShape, dst, dstShape) {
+  if (srcShape.length <= 1) {
+    const n = Math.min(src.length, dst.length);
+    for (let i = 0; i < n; i++) dst[i] = src[i];
+    return;
+  }
+  const srcStride = srcShape.slice(1).reduce((a, b) => a * b, 1);
+  const dstStride = dstShape.slice(1).reduce((a, b) => a * b, 1);
+  const n = Math.min(srcShape[0], dstShape[0]);
+  for (let i = 0; i < n; i++) {
+    copyPartial(
+      src.subarray(i * srcStride, (i + 1) * srcStride), srcShape.slice(1),
+      dst.subarray(i * dstStride, (i + 1) * dstStride), dstShape.slice(1)
+    );
+  }
 }
 
 // Box-Muller gaussian noise
@@ -1584,6 +1722,23 @@ async function fetchWithProgress(url, onProgress) {
     window.__waveTTS.defaultVoiceSnap = window.__waveTTS.mainRunner.snapshot();
     window.__waveTTS.voiceSnapshots = new Map();
     window.__waveTTS.voiceSnapshots.set('default', window.__waveTTS.defaultVoiceSnap);
+
+    // Parse voices.bin and create per-voice snapshots
+    if (window.__waveTTS.models.voices && window.__waveTTS.models.voices.data) {
+      status.textContent = 'Loading predefined voices...';
+      try {
+        const voiceRecords = parseVoiceStatesBin(window.__waveTTS.models.voices.data);
+        for (const [uiName, modelName] of Object.entries(VOICE_MAP)) {
+          if (voiceRecords[modelName]) {
+            const snap = voiceRecordToSnapshot(voiceRecords[modelName], bundleData.flow_lm_state_manifest);
+            window.__waveTTS.voiceSnapshots.set(uiName, snap);
+          }
+        }
+        console.log('Loaded voice snapshots:', [...window.__waveTTS.voiceSnapshots.keys()]);
+      } catch (e) {
+        console.warn('Failed to parse voices.bin, using BOS-only voices:', e);
+      }
+    }
 
     // Free raw ArrayBuffers (sessions hold their own copies)
     for (const m of MODEL_FILES) {
