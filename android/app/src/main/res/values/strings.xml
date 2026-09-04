@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Supertonic Voice Studio</string>
-    <string name="title_activity_main">Supertonic Voice Studio</string>
-    <string name="package_name">com.supertonic.voicestudio</string>
-    <string name="custom_url_scheme">com.supertonic.voicestudio</string>
+    <string name="app_name">Wave Voice Studio</string>
+    <string name="title_activity_main">Wave Voice Studio</string>
+    <string name="package_name">com.wavevoicestudio.app</string>
+    <string name="custom_url_scheme">com.wavevoicestudio.app</string>
 </resources>

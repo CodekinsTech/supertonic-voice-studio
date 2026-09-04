@@ -328,7 +328,54 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 
 /* Mobile warning */
 .mobile-warning{display:none;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(255,160,0,.1),rgba(255,107,92,.1));border:1px solid rgba(255,160,0,.25);margin-bottom:12px;font-size:11px;font-weight:600;color:#B45309;line-height:1.5;text-align:center}
-@media(max-width:768px){.mobile-warning{display:block}}
+/* ───── tablet (768px) ───── */
+@media(max-width:768px){
+  .mobile-warning{display:block}
+  body{padding:10px}
+  header{gap:8px}
+  .brand-mark h1{font-size:22px}
+  .voice-chip-grid{grid-template-columns:repeat(3,1fr)}
+  #fxStrip{grid-template-columns:repeat(3,1fr)!important}
+  #dspStrip{grid-template-columns:repeat(2,1fr)!important}
+  .panel{padding:14px 14px;border-radius:14px}
+  .dl-row{flex-wrap:wrap}
+  .preset-grid{grid-template-columns:1fr 1fr!important}
+  .mode-tabs{flex-wrap:wrap}
+  textarea{min-height:100px}
+  .import-bar{flex-wrap:wrap}
+  .custom-voice-actions{flex-wrap:wrap}
+  .project-bar{flex-wrap:wrap}
+}
+/* ───── mobile (480px) ───── */
+@media(max-width:480px){
+  body{padding:8px}
+  header{flex-direction:column;align-items:flex-start}
+  .brand-mark h1{font-size:18px}
+  .brand-mark .tag{font-size:9px}
+  .crumbs{width:100%;overflow-x:auto;flex-wrap:nowrap;gap:4px;padding-bottom:2px}
+  .crumb{font-size:9px;padding:4px 8px;white-space:nowrap;flex-shrink:0}
+  .voice-chip-grid{grid-template-columns:repeat(2,1fr)}
+  #fxStrip{grid-template-columns:repeat(2,1fr)!important}
+  #dspStrip{grid-template-columns:repeat(2,1fr)!important}
+  .voice-chip{padding:10px 4px;font-size:10px;min-height:44px}
+  #voiceGrid .voice-chip{padding-bottom:24px}
+  .panel{padding:12px 10px;border-radius:12px;margin-bottom:10px}
+  h3{font-size:10px;gap:6px}
+  .status-bar{font-size:10px;padding:8px 10px}
+  .btn-go{padding:14px 12px;font-size:13px;min-height:48px}
+  .section-toggle{padding:12px 14px;font-size:10px;min-height:44px}
+  .dl-btn{min-height:44px;padding:10px}
+  .mode-tab{min-height:44px;font-size:11px;padding:8px}
+  .lang-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr))}
+  textarea{min-height:90px;font-size:12px}
+  .preset-grid{grid-template-columns:1fr!important}
+  .upload-btn{min-height:44px}
+  .clone-link{min-height:44px}
+  .import-btn{min-height:44px}
+  .project-btn{min-height:44px}
+  .history-item .h-play{min-width:32px;min-height:32px;width:32px;height:32px}
+  .history-item .h-dl{min-width:32px;min-height:32px;width:32px;height:32px}
+}
 
 .ab-progress{font-size:10px;font-weight:600;color:var(--brand);margin-top:6px}
 </style>

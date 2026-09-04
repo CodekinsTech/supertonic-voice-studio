@@ -1,9 +1,14 @@
 {
-  "appId": "com.supertonic.voicestudio",
-  "appName": "Supertonic Voice Studio",
+  "appId": "com.wavevoicestudio.app",
+  "appName": "Wave Voice Studio",
   "webDir": "dist",
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "allowNavigation": [
+      "huggingface.co",
+      "*.huggingface.co",
+      "cdn.jsdelivr.net"
+    ]
   },
   "plugins": {
     "Filesystem": {

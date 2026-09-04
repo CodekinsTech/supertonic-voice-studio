@@ -68,6 +68,26 @@ body{
   transition:.18s;font-family:inherit;background:transparent;
 }
 .home-link:hover{background:rgba(37,99,255,.08)}
+
+/* ───── responsive ───── */
+@media (max-width:768px){
+  .tab-bar{
+    padding:4px;border-radius:14px;
+    width:calc(100% - 16px);margin:8px auto 0;
+    flex-wrap:wrap;justify-content:center;gap:2px;
+  }
+  .tab-btn{padding:8px 14px;font-size:12px}
+  .home-link{padding:8px 12px;font-size:12px}
+  .frame-wrap{margin:6px;border-radius:10px}
+}
+@media (max-width:480px){
+  .tab-bar{padding:3px;border-radius:12px;margin:6px auto 0}
+  .tab-btn{padding:7px 10px;font-size:11px;gap:5px}
+  .tab-btn .tab-ico{font-size:14px}
+  .tab-btn img{width:22px;height:22px}
+  .home-link{padding:7px 10px;font-size:11px}
+  .frame-wrap{margin:4px;border-radius:8px}
+}
 </style>
 </head>
 <body>

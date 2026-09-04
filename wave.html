@@ -373,7 +373,49 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 
 /* Mobile warning */
 .mobile-warning{display:none;padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(0,184,212,.08));border:1px solid rgba(124,58,237,.20);margin-bottom:12px;font-size:11px;font-weight:600;color:var(--ink-soft);line-height:1.5;text-align:center}
-@media(max-width:768px){.mobile-warning{display:block}.voice-chip-grid{grid-template-columns:repeat(3,1fr)}.emotion-grid{grid-template-columns:repeat(3,1fr)}}
+/* ───── tablet (768px) ───── */
+@media(max-width:768px){
+  .mobile-warning{display:block}
+  body{padding:10px}
+  header{gap:8px}
+  .brand-mark .glyph{width:56px;height:56px}
+  .brand-mark h1{font-size:24px}
+  .voice-chip-grid{grid-template-columns:repeat(3,1fr)}
+  .emotion-grid{grid-template-columns:repeat(3,1fr)}
+  .dsp-grid{grid-template-columns:1fr}
+  .panel{padding:14px 14px;border-radius:14px}
+  .dl-row{flex-wrap:wrap}
+  .clone-actions{flex-wrap:wrap}
+  .row label{min-width:50px}
+  textarea{min-height:100px}
+}
+/* ───── mobile (480px) ───── */
+@media(max-width:480px){
+  body{padding:8px}
+  header{flex-direction:column;align-items:flex-start}
+  .brand-mark .glyph{width:48px;height:48px}
+  .brand-mark h1{font-size:20px}
+  .brand-mark .tag{font-size:9px}
+  .crumbs{width:100%;overflow-x:auto;flex-wrap:nowrap;gap:4px;padding-bottom:2px}
+  .crumb{font-size:9px;padding:4px 8px;white-space:nowrap;flex-shrink:0}
+  .voice-chip-grid{grid-template-columns:repeat(2,1fr)}
+  .emotion-grid{grid-template-columns:repeat(2,1fr)}
+  .voice-chip{padding:10px 4px;font-size:10px;min-height:44px}
+  .panel{padding:12px 10px;border-radius:12px;margin-bottom:10px}
+  h3{font-size:10px;gap:6px}
+  .status-bar{font-size:10px;padding:8px 10px}
+  .btn-go{padding:14px 12px;font-size:13px;min-height:48px}
+  .section-toggle{padding:12px 14px;font-size:10px;min-height:44px}
+  .clone-drop-zone{padding:18px 12px}
+  .clone-drop-zone .drop-text{font-size:10px}
+  .clone-record-btn{min-height:44px;padding:10px 16px}
+  .clone-btn{min-height:44px;padding:10px 18px}
+  .dl-btn{min-height:44px;padding:10px 0}
+  .toggle{min-height:44px}
+  .lang-grid{grid-template-columns:repeat(auto-fill,minmax(75px,1fr))}
+  textarea{min-height:90px;font-size:12px}
+  .ms-script{min-height:80px;font-size:11px}
+}
 </style>
 </head>
 <body>
