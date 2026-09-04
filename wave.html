@@ -498,16 +498,19 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   </div>
 </div>
 
-<!-- ===== MODEL LOADER ===== -->
-<div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C">
+<!-- ===== MODEL LOADER (auto) ===== -->
+<div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C" id="modelPanel">
   <h3><span class="swatch"></span> Model</h3>
   <div style="position:relative;z-index:1">
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-      <button id="loadModelBtn" style="padding:7px 16px;border-radius:9px;border:none;cursor:pointer;font-size:11px;font-weight:700;background:linear-gradient(135deg,#E89A2B,#FF6B5C);color:#fff;box-shadow:0 3px 10px rgba(232,154,43,.30);transition:.18s">Load Model</button>
-      <span id="modelStatus" style="font-size:10px;font-weight:600;color:var(--muted)">Not loaded</span>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
+      <span id="modelStatus" style="font-size:11px;font-weight:700;color:var(--ink-soft)">Preparing to download...</span>
+      <span id="modelSize" style="font-size:10px;font-weight:600;color:var(--muted);margin-left:auto">0 / ~146 MB</span>
     </div>
-    <div class="progress-bar" id="modelProgressBar"><div class="progress-fill" id="modelProgressFill"></div></div>
-    <div style="font-size:9px;color:var(--muted);margin-top:4px">5 ONNX models &middot; ~100MB total &middot; runs locally in your browser via ONNX Runtime Web</div>
+    <div class="progress-bar show" id="modelProgressBar" style="height:8px;border-radius:6px;background:rgba(0,0,0,.06);overflow:hidden;margin-bottom:6px">
+      <div class="progress-fill" id="modelProgressFill" style="height:100%;width:0%;border-radius:6px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
+    </div>
+    <div id="modelFileList" style="display:flex;flex-direction:column;gap:3px"></div>
+    <div style="font-size:9px;color:var(--muted);margin-top:6px">5 ONNX models &middot; INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
   </div>
 </div>
 
@@ -740,14 +743,15 @@ const state = {
 };
 
 /* ───────── Model config ───────── */
-const MODEL_BASE = 'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/';
+const MODEL_BASE = 'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/en/int8/';
 const MODEL_FILES = [
-  { name: 'flow_lm_main', file: 'flow_lm_main.onnx', size: '~30MB' },
-  { name: 'flow_lm_flow', file: 'flow_lm_flow.onnx', size: '~25MB' },
-  { name: 'mimi_decoder', file: 'mimi_decoder.onnx', size: '~20MB' },
-  { name: 'mimi_encoder', file: 'mimi_encoder.onnx', size: '~15MB' },
-  { name: 'text_conditioner', file: 'text_conditioner.onnx', size: '~10MB' }
+  { name: 'flow_lm_main', file: 'flow_lm_main_int8.onnx', bytes: 80000000 },
+  { name: 'flow_lm_flow', file: 'flow_lm_flow_int8.onnx', bytes: 10440000 },
+  { name: 'mimi_decoder', file: 'mimi_decoder_int8.onnx', bytes: 23800000 },
+  { name: 'mimi_encoder', file: 'mimi_encoder.onnx', bytes: 41700000 },
+  { name: 'text_conditioner', file: 'text_conditioner.onnx', bytes: 17200000 }
 ];
+const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
 
 window.__waveTTS = { models: {}, ready: false };
 
@@ -1035,51 +1039,85 @@ $('clearCloneBtn').addEventListener('click', () => {
   statusText.textContent = 'Ready';
 });
 
-/* ───────── Model Loading ───────── */
-$('loadModelBtn').addEventListener('click', async () => {
-  const btn = $('loadModelBtn');
-  const status = $('modelStatus');
-  const bar = $('modelProgressBar');
-  const fill = $('modelProgressFill');
+/* ───────── Auto Model Loading ───────── */
+function formatMB(b) { return (b / 1048576).toFixed(1) + ' MB'; }
 
-  btn.disabled = true;
-  bar.classList.add('show');
-  status.textContent = 'Loading models...';
-  statusText.textContent = 'Loading Wave models...';
+async function fetchWithProgress(url, onProgress) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const reader = resp.body.getReader();
+  const chunks = [];
+  let loaded = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    loaded += value.length;
+    onProgress(loaded);
+  }
+  const buf = new Uint8Array(loaded);
+  let off = 0;
+  for (const c of chunks) { buf.set(c, off); off += c.length; }
+  return buf.buffer;
+}
+
+(async function autoLoadModels() {
+  const status = $('modelStatus');
+  const sizeEl = $('modelSize');
+  const fill = $('modelProgressFill');
+  const fileList = $('modelFileList');
+  let totalLoaded = 0;
+
+  statusText.textContent = 'Downloading Wave models...';
 
   for (let i = 0; i < MODEL_FILES.length; i++) {
     const m = MODEL_FILES[i];
-    status.textContent = 'Loading ' + m.name + ' (' + m.size + ')...';
-    fill.style.width = ((i + 0.5) / MODEL_FILES.length * 100) + '%';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--ink-soft)';
+    row.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:#E89A2B;flex-shrink:0"></span>' +
+      '<span style="flex:1">' + m.name + '</span>' +
+      '<span class="dl-size" style="color:var(--muted)">0 / ' + formatMB(m.bytes) + '</span>';
+    fileList.appendChild(row);
 
-    // Simulate model loading (actual loading would fetch from HuggingFace)
-    await new Promise(r => setTimeout(r, 600));
+    status.textContent = 'Downloading ' + m.name + '...';
 
     try {
-      // In production, this would be:
-      // window.__waveTTS.models[m.name] = await ort.InferenceSession.create(MODEL_BASE + m.file);
-      window.__waveTTS.models[m.name] = { name: m.name, loaded: true };
+      const data = await fetchWithProgress(MODEL_BASE + m.file, (loaded) => {
+        const fileLoaded = Math.min(loaded, m.bytes);
+        const pct = ((totalLoaded + fileLoaded) / TOTAL_BYTES * 100);
+        fill.style.width = pct + '%';
+        sizeEl.textContent = formatMB(totalLoaded + fileLoaded) + ' / ' + formatMB(TOTAL_BYTES);
+        row.querySelector('.dl-size').textContent = formatMB(fileLoaded) + ' / ' + formatMB(m.bytes);
+      });
+
+      totalLoaded += m.bytes;
+      row.querySelector('span').style.background = '#4CAF50';
+      row.querySelector('.dl-size').textContent = formatMB(m.bytes);
+      window.__waveTTS.models[m.name] = { name: m.name, loaded: true, data: data };
     } catch(e) {
-      status.textContent = 'Failed to load ' + m.name;
-      statusText.textContent = 'Model loading failed';
-      btn.disabled = false;
-      bar.classList.remove('show');
+      row.querySelector('span').style.background = '#E0457B';
+      row.querySelector('.dl-size').textContent = 'Failed';
+      status.textContent = 'Failed to load ' + m.name + ' — check connection';
+      statusText.textContent = 'Model download failed';
       return;
     }
-    fill.style.width = ((i + 1) / MODEL_FILES.length * 100) + '%';
+
+    fill.style.width = ((totalLoaded) / TOTAL_BYTES * 100) + '%';
+    sizeEl.textContent = formatMB(totalLoaded) + ' / ' + formatMB(TOTAL_BYTES);
   }
 
   window.__waveTTS.ready = true;
   state.modelLoaded = true;
   status.textContent = 'All models loaded';
+  sizeEl.textContent = formatMB(TOTAL_BYTES);
   statusText.textContent = 'Ready to generate';
   runtimeBadge.style.display = '';
   runtimeBadge.classList.add('ok');
   runtimeBadge.textContent = 'ONNX';
-  btn.textContent = 'Models Loaded';
-  bar.classList.remove('show');
+  fill.style.background = 'linear-gradient(90deg,#4CAF50,#10D9A0)';
   goBtn.disabled = false;
-});
+  $('modelPanel').style.opacity = '.6';
+})();
 
 /* ───────── Generate ───────── */
 goBtn.addEventListener('click', async () => {
