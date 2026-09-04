@@ -743,13 +743,13 @@ const state = {
 };
 
 /* ───────── Model config ───────── */
-const MODEL_BASE = 'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/en/int8/';
+const MODEL_BASE = 'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/';
 const MODEL_FILES = [
   { name: 'flow_lm_main', file: 'flow_lm_main_int8.onnx', bytes: 80000000 },
   { name: 'flow_lm_flow', file: 'flow_lm_flow_int8.onnx', bytes: 10440000 },
   { name: 'mimi_decoder', file: 'mimi_decoder_int8.onnx', bytes: 23800000 },
-  { name: 'mimi_encoder', file: 'mimi_encoder.onnx', bytes: 41700000 },
-  { name: 'text_conditioner', file: 'text_conditioner.onnx', bytes: 17200000 }
+  { name: 'mimi_encoder', file: 'mimi_encoder_int8.onnx', bytes: 21800000 },
+  { name: 'text_conditioner', file: 'text_conditioner_int8.onnx', bytes: 17200000 }
 ];
 const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
 
