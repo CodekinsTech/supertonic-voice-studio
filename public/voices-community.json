@@ -1,0 +1,6086 @@
+[
+  {
+    "name": "0a67.wav",
+    "pretty": "0a67",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "0a67.json"
+  },
+  {
+    "name": "0a67_enhanced.wav",
+    "pretty": "0a67 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 134,
+    "snapFile": "0a67_enhanced.json"
+  },
+  {
+    "name": "1410.wav",
+    "pretty": "1410",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "1410.json"
+  },
+  {
+    "name": "1410_enhanced.wav",
+    "pretty": "1410 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 120,
+    "snapFile": "1410_enhanced.json"
+  },
+  {
+    "name": "1dd0.wav",
+    "pretty": "1dd0",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 148,
+    "snapFile": "1dd0.json"
+  },
+  {
+    "name": "1dd0_enhanced.wav",
+    "pretty": "1dd0 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 148,
+    "snapFile": "1dd0_enhanced.json"
+  },
+  {
+    "name": "2181.wav",
+    "pretty": "2181",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "2181.json"
+  },
+  {
+    "name": "2181_enhanced.wav",
+    "pretty": "2181 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "2181_enhanced.json"
+  },
+  {
+    "name": "245e.wav",
+    "pretty": "245e",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "245e.json"
+  },
+  {
+    "name": "245e_enhanced.wav",
+    "pretty": "245e Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "245e_enhanced.json"
+  },
+  {
+    "name": "29da.wav",
+    "pretty": "29da",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "29da.json"
+  },
+  {
+    "name": "29da_enhanced.wav",
+    "pretty": "29da Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "29da_enhanced.json"
+  },
+  {
+    "name": "30c5.wav",
+    "pretty": "30c5",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "30c5.json"
+  },
+  {
+    "name": "30c5_enhanced.wav",
+    "pretty": "30c5 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "30c5_enhanced.json"
+  },
+  {
+    "name": "3973.wav",
+    "pretty": "3973",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 63,
+    "snapFile": "3973.json"
+  },
+  {
+    "name": "3973_enhanced.wav",
+    "pretty": "3973 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 60,
+    "snapFile": "3973_enhanced.json"
+  },
+  {
+    "name": "4189.wav",
+    "pretty": "4189",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "4189.json"
+  },
+  {
+    "name": "4189_enhanced.wav",
+    "pretty": "4189 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "4189_enhanced.json"
+  },
+  {
+    "name": "468c.wav",
+    "pretty": "468c",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "468c.json"
+  },
+  {
+    "name": "468c_enhanced.wav",
+    "pretty": "468c Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "468c_enhanced.json"
+  },
+  {
+    "name": "4b13.wav",
+    "pretty": "4b13",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "4b13.json"
+  },
+  {
+    "name": "4b13_enhanced.wav",
+    "pretty": "4b13 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "4b13_enhanced.json"
+  },
+  {
+    "name": "4b70.wav",
+    "pretty": "4b70",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 192,
+    "snapFile": "4b70.json"
+  },
+  {
+    "name": "4b70_enhanced.wav",
+    "pretty": "4b70 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 192,
+    "snapFile": "4b70_enhanced.json"
+  },
+  {
+    "name": "5b55.wav",
+    "pretty": "5b55",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "5b55.json"
+  },
+  {
+    "name": "5b55_enhanced.wav",
+    "pretty": "5b55 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 129,
+    "snapFile": "5b55_enhanced.json"
+  },
+  {
+    "name": "6148.wav",
+    "pretty": "6148",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "6148.json"
+  },
+  {
+    "name": "6148_enhanced.wav",
+    "pretty": "6148 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "6148_enhanced.json"
+  },
+  {
+    "name": "617b.wav",
+    "pretty": "617b",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "617b.json"
+  },
+  {
+    "name": "617b_enhanced.wav",
+    "pretty": "617b Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "617b_enhanced.json"
+  },
+  {
+    "name": "7020.wav",
+    "pretty": "7020",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "7020.json"
+  },
+  {
+    "name": "7020_enhanced.wav",
+    "pretty": "7020 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 86,
+    "snapFile": "7020_enhanced.json"
+  },
+  {
+    "name": "7909.wav",
+    "pretty": "7909",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "7909.json"
+  },
+  {
+    "name": "7909_enhanced.wav",
+    "pretty": "7909 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 97,
+    "snapFile": "7909_enhanced.json"
+  },
+  {
+    "name": "7b2b.wav",
+    "pretty": "7b2b",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 85,
+    "snapFile": "7b2b.json"
+  },
+  {
+    "name": "7b2b_enhanced.wav",
+    "pretty": "7b2b Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 75,
+    "snapFile": "7b2b_enhanced.json"
+  },
+  {
+    "name": "8935.wav",
+    "pretty": "8935",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 112,
+    "snapFile": "8935.json"
+  },
+  {
+    "name": "8935_enhanced.wav",
+    "pretty": "8935 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "8935_enhanced.json"
+  },
+  {
+    "name": "8dc9.wav",
+    "pretty": "8dc9",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 167,
+    "snapFile": "8dc9.json"
+  },
+  {
+    "name": "8dc9_enhanced.wav",
+    "pretty": "8dc9 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 167,
+    "snapFile": "8dc9_enhanced.json"
+  },
+  {
+    "name": "8f15.wav",
+    "pretty": "8f15",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 141,
+    "snapFile": "8f15.json"
+  },
+  {
+    "name": "8f15_enhanced.wav",
+    "pretty": "8f15 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "8f15_enhanced.json"
+  },
+  {
+    "name": "92f0.wav",
+    "pretty": "92f0",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 105,
+    "snapFile": "92f0.json"
+  },
+  {
+    "name": "92f0_enhanced.wav",
+    "pretty": "92f0 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 106,
+    "snapFile": "92f0_enhanced.json"
+  },
+  {
+    "name": "9a2e.wav",
+    "pretty": "9a2e",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 115,
+    "snapFile": "9a2e.json"
+  },
+  {
+    "name": "9a2e_enhanced.wav",
+    "pretty": "9a2e Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "9a2e_enhanced.json"
+  },
+  {
+    "name": "9a66.wav",
+    "pretty": "9a66",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 203,
+    "snapFile": "9a66.json"
+  },
+  {
+    "name": "9a66_enhanced.wav",
+    "pretty": "9a66 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 209,
+    "snapFile": "9a66_enhanced.json"
+  },
+  {
+    "name": "AHmad.wav",
+    "pretty": "AHmad",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "AHmad.json"
+  },
+  {
+    "name": "AHmad_enhanced.wav",
+    "pretty": "AHmad Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "AHmad_enhanced.json"
+  },
+  {
+    "name": "ASEN.wav",
+    "pretty": "ASEN",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "ASEN.json"
+  },
+  {
+    "name": "ASEN_enhanced.wav",
+    "pretty": "ASEN Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "ASEN_enhanced.json"
+  },
+  {
+    "name": "Aadi.wav",
+    "pretty": "Aadi",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 135,
+    "snapFile": "Aadi.json"
+  },
+  {
+    "name": "Aadi_enhanced.wav",
+    "pretty": "Aadi Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 134,
+    "snapFile": "Aadi_enhanced.json"
+  },
+  {
+    "name": "AbD.wav",
+    "pretty": "AbD",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "AbD.json"
+  },
+  {
+    "name": "AbD_enhanced.wav",
+    "pretty": "AbD Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "AbD_enhanced.json"
+  },
+  {
+    "name": "Abhinox.wav",
+    "pretty": "Abhinox",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 146,
+    "snapFile": "Abhinox.json"
+  },
+  {
+    "name": "Abhinox_enhanced.wav",
+    "pretty": "Abhinox Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "Abhinox_enhanced.json"
+  },
+  {
+    "name": "Abo_Ayman.wav",
+    "pretty": "Abo Ayman",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 111,
+    "snapFile": "Abo_Ayman.json"
+  },
+  {
+    "name": "Abo_Ayman_enhanced.wav",
+    "pretty": "Abo Ayman Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 111,
+    "snapFile": "Abo_Ayman_enhanced.json"
+  },
+  {
+    "name": "Abob_Malay.wav",
+    "pretty": "Abob Malay",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Abob_Malay.json"
+  },
+  {
+    "name": "Abob_Malay_enhanced.wav",
+    "pretty": "Abob Malay Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 63,
+    "snapFile": "Abob_Malay_enhanced.json"
+  },
+  {
+    "name": "Adarsh_Bulla.wav",
+    "pretty": "Adarsh Bulla",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 135,
+    "snapFile": "Adarsh_Bulla.json"
+  },
+  {
+    "name": "Adarsh_Bulla_enhanced.wav",
+    "pretty": "Adarsh Bulla Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "Adarsh_Bulla_enhanced.json"
+  },
+  {
+    "name": "AgentCobra.wav",
+    "pretty": "AgentCobra",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 147,
+    "snapFile": "AgentCobra.json"
+  },
+  {
+    "name": "AgentCobra_enhanced.wav",
+    "pretty": "AgentCobra Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 146,
+    "snapFile": "AgentCobra_enhanced.json"
+  },
+  {
+    "name": "Ajith.wav",
+    "pretty": "Ajith",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "Ajith.json"
+  },
+  {
+    "name": "Ajith_enhanced.wav",
+    "pretty": "Ajith Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 109,
+    "snapFile": "Ajith_enhanced.json"
+  },
+  {
+    "name": "Alejandro_espanol_latino.wav",
+    "pretty": "Alejandro Espanol Latino",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 142,
+    "snapFile": "Alejandro_espanol_latino.json"
+  },
+  {
+    "name": "Alejandro_espanol_latino_enhanced.wav",
+    "pretty": "Alejandro Espanol Latino Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 143,
+    "snapFile": "Alejandro_espanol_latino_enhanced.json"
+  },
+  {
+    "name": "Allen.wav",
+    "pretty": "Allen",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 99,
+    "snapFile": "Allen.json"
+  },
+  {
+    "name": "Allen_enhanced.wav",
+    "pretty": "Allen Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "Allen_enhanced.json"
+  },
+  {
+    "name": "AmitNag.wav",
+    "pretty": "AmitNag",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "AmitNag.json"
+  },
+  {
+    "name": "AmitNag_enhanced.wav",
+    "pretty": "AmitNag Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "AmitNag_enhanced.json"
+  },
+  {
+    "name": "Andrea.wav",
+    "pretty": "Andrea",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 153,
+    "snapFile": "Andrea.json"
+  },
+  {
+    "name": "Andrea_(Spanish).wav",
+    "pretty": "Andrea (Spanish)",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 175,
+    "snapFile": "Andrea_(Spanish).json"
+  },
+  {
+    "name": "Andrea_(Spanish)_enhanced.wav",
+    "pretty": "Andrea (Spanish) Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 179,
+    "snapFile": "Andrea_(Spanish)_enhanced.json"
+  },
+  {
+    "name": "Andrea_enhanced.wav",
+    "pretty": "Andrea Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 77,
+    "snapFile": "Andrea_enhanced.json"
+  },
+  {
+    "name": "Antoine_Vala.wav",
+    "pretty": "Antoine Vala",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Antoine_Vala.json"
+  },
+  {
+    "name": "Antoine_Vala_enhanced.wav",
+    "pretty": "Antoine Vala Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Antoine_Vala_enhanced.json"
+  },
+  {
+    "name": "Antoni.wav",
+    "pretty": "Antoni",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Antoni.json"
+  },
+  {
+    "name": "Antoni_enhanced.wav",
+    "pretty": "Antoni Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Antoni_enhanced.json"
+  },
+  {
+    "name": "Aon.wav",
+    "pretty": "Aon",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Aon.json"
+  },
+  {
+    "name": "Aon_enhanced.wav",
+    "pretty": "Aon Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Aon_enhanced.json"
+  },
+  {
+    "name": "Arjun_Z.wav",
+    "pretty": "Arjun Z",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "Arjun_Z.json"
+  },
+  {
+    "name": "Arjun_Z_enhanced.wav",
+    "pretty": "Arjun Z Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "Arjun_Z_enhanced.json"
+  },
+  {
+    "name": "Aryobe.wav",
+    "pretty": "Aryobe",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Aryobe.json"
+  },
+  {
+    "name": "Aryobe_enhanced.wav",
+    "pretty": "Aryobe Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Aryobe_enhanced.json"
+  },
+  {
+    "name": "BLUE.wav",
+    "pretty": "BLUE",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 144,
+    "snapFile": "BLUE.json"
+  },
+  {
+    "name": "BLUE_enhanced.wav",
+    "pretty": "BLUE Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 140,
+    "snapFile": "BLUE_enhanced.json"
+  },
+  {
+    "name": "Bijay.wav",
+    "pretty": "Bijay",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Bijay.json"
+  },
+  {
+    "name": "Bijay_enhanced.wav",
+    "pretty": "Bijay Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Bijay_enhanced.json"
+  },
+  {
+    "name": "Blake.wav",
+    "pretty": "Blake",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Blake.json"
+  },
+  {
+    "name": "Blake_enhanced.wav",
+    "pretty": "Blake Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 185,
+    "snapFile": "Blake_enhanced.json"
+  },
+  {
+    "name": "Bobby_McFern.wav",
+    "pretty": "Bobby McFern",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "Bobby_McFern.json"
+  },
+  {
+    "name": "Bobby_McFern_enhanced.wav",
+    "pretty": "Bobby McFern Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "Bobby_McFern_enhanced.json"
+  },
+  {
+    "name": "Breaking_1.wav",
+    "pretty": "Breaking 1",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 238,
+    "snapFile": "Breaking_1.json"
+  },
+  {
+    "name": "Breaking_1_enhanced.wav",
+    "pretty": "Breaking 1 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 141,
+    "snapFile": "Breaking_1_enhanced.json"
+  },
+  {
+    "name": "BrokenHypocrite.wav",
+    "pretty": "BrokenHypocrite",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "BrokenHypocrite.json"
+  },
+  {
+    "name": "BrokenHypocrite_enhanced.wav",
+    "pretty": "BrokenHypocrite Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "BrokenHypocrite_enhanced.json"
+  },
+  {
+    "name": "Butter.wav",
+    "pretty": "Butter",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Butter.json"
+  },
+  {
+    "name": "Butter_enhanced.wav",
+    "pretty": "Butter Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Butter_enhanced.json"
+  },
+  {
+    "name": "CPS_001.wav",
+    "pretty": "CPS 001",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 140,
+    "snapFile": "CPS_001.json"
+  },
+  {
+    "name": "CPS_001_enhanced.wav",
+    "pretty": "CPS 001 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 140,
+    "snapFile": "CPS_001_enhanced.json"
+  },
+  {
+    "name": "Chujus.wav",
+    "pretty": "Chujus",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Chujus.json"
+  },
+  {
+    "name": "Chujus_enhanced.wav",
+    "pretty": "Chujus Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Chujus_enhanced.json"
+  },
+  {
+    "name": "Cicada.wav",
+    "pretty": "Cicada",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "Cicada.json"
+  },
+  {
+    "name": "Cicada_enhanced.wav",
+    "pretty": "Cicada Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "Cicada_enhanced.json"
+  },
+  {
+    "name": "ClassicWizard.wav",
+    "pretty": "ClassicWizard",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "ClassicWizard.json"
+  },
+  {
+    "name": "ClassicWizard_enhanced.wav",
+    "pretty": "ClassicWizard Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "ClassicWizard_enhanced.json"
+  },
+  {
+    "name": "Curlinvictus.wav",
+    "pretty": "Curlinvictus",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Curlinvictus.json"
+  },
+  {
+    "name": "Curlinvictus_enhanced.wav",
+    "pretty": "Curlinvictus Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Curlinvictus_enhanced.json"
+  },
+  {
+    "name": "Darius.wav",
+    "pretty": "Darius",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Darius.json"
+  },
+  {
+    "name": "Darius_enhanced.wav",
+    "pretty": "Darius Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "Darius_enhanced.json"
+  },
+  {
+    "name": "Darya_khan.wav",
+    "pretty": "Darya Khan",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "Darya_khan.json"
+  },
+  {
+    "name": "Darya_khan_enhanced.wav",
+    "pretty": "Darya Khan Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "Darya_khan_enhanced.json"
+  },
+  {
+    "name": "Deepak.wav",
+    "pretty": "Deepak",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Deepak.json"
+  },
+  {
+    "name": "Deepak_enhanced.wav",
+    "pretty": "Deepak Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Deepak_enhanced.json"
+  },
+  {
+    "name": "Dhruv_Rao.wav",
+    "pretty": "Dhruv Rao",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "Dhruv_Rao.json"
+  },
+  {
+    "name": "Dhruv_Rao_enhanced.wav",
+    "pretty": "Dhruv Rao Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "Dhruv_Rao_enhanced.json"
+  },
+  {
+    "name": "Dil.wav",
+    "pretty": "Dil",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 175,
+    "snapFile": "Dil.json"
+  },
+  {
+    "name": "Dil_enhanced.wav",
+    "pretty": "Dil Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 175,
+    "snapFile": "Dil_enhanced.json"
+  },
+  {
+    "name": "Enrique.wav",
+    "pretty": "Enrique",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 109,
+    "snapFile": "Enrique.json"
+  },
+  {
+    "name": "Enrique_(Spanish).wav",
+    "pretty": "Enrique (Spanish)",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 115,
+    "snapFile": "Enrique_(Spanish).json"
+  },
+  {
+    "name": "Enrique_(Spanish)_enhanced.wav",
+    "pretty": "Enrique (Spanish) Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "Enrique_(Spanish)_enhanced.json"
+  },
+  {
+    "name": "Enrique_enhanced.wav",
+    "pretty": "Enrique Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 109,
+    "snapFile": "Enrique_enhanced.json"
+  },
+  {
+    "name": "Erick.wav",
+    "pretty": "Erick",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "Erick.json"
+  },
+  {
+    "name": "Erick_enhanced.wav",
+    "pretty": "Erick Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "Erick_enhanced.json"
+  },
+  {
+    "name": "Ernesto_Y.wav",
+    "pretty": "Ernesto Y",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 147,
+    "snapFile": "Ernesto_Y.json"
+  },
+  {
+    "name": "Ernesto_Y_enhanced.wav",
+    "pretty": "Ernesto Y Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 146,
+    "snapFile": "Ernesto_Y_enhanced.json"
+  },
+  {
+    "name": "Eshan.wav",
+    "pretty": "Eshan",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 202,
+    "snapFile": "Eshan.json"
+  },
+  {
+    "name": "Eshan_enhanced.wav",
+    "pretty": "Eshan Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 202,
+    "snapFile": "Eshan_enhanced.json"
+  },
+  {
+    "name": "Esteban_Aguirre_Arias.wav",
+    "pretty": "Esteban Aguirre Arias",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "Esteban_Aguirre_Arias.json"
+  },
+  {
+    "name": "Esteban_Aguirre_Arias_enhanced.wav",
+    "pretty": "Esteban Aguirre Arias Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "Esteban_Aguirre_Arias_enhanced.json"
+  },
+  {
+    "name": "Ferdinand.wav",
+    "pretty": "Ferdinand",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 90,
+    "snapFile": "Ferdinand.json"
+  },
+  {
+    "name": "Ferdinand_enhanced.wav",
+    "pretty": "Ferdinand Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 90,
+    "snapFile": "Ferdinand_enhanced.json"
+  },
+  {
+    "name": "FlorDaddy.wav",
+    "pretty": "FlorDaddy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "FlorDaddy.json"
+  },
+  {
+    "name": "FlorDaddy_enhanced.wav",
+    "pretty": "FlorDaddy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "FlorDaddy_enhanced.json"
+  },
+  {
+    "name": "Fred_Mara.wav",
+    "pretty": "Fred Mara",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "Fred_Mara.json"
+  },
+  {
+    "name": "Fred_Mara_enhanced.wav",
+    "pretty": "Fred Mara Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "Fred_Mara_enhanced.json"
+  },
+  {
+    "name": "Giovanne.wav",
+    "pretty": "Giovanne",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "Giovanne.json"
+  },
+  {
+    "name": "Giovanne_enhanced.wav",
+    "pretty": "Giovanne Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "Giovanne_enhanced.json"
+  },
+  {
+    "name": "Glenn.wav",
+    "pretty": "Glenn",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 444,
+    "snapFile": "Glenn.json"
+  },
+  {
+    "name": "Glenn_enhanced.wav",
+    "pretty": "Glenn Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 436,
+    "snapFile": "Glenn_enhanced.json"
+  },
+  {
+    "name": "Goku.wav",
+    "pretty": "Goku",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "Goku.json"
+  },
+  {
+    "name": "Goku_enhanced.wav",
+    "pretty": "Goku Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "Goku_enhanced.json"
+  },
+  {
+    "name": "Gonzalo-1.wav",
+    "pretty": "Gonzalo 1",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 93,
+    "snapFile": "Gonzalo-1.json"
+  },
+  {
+    "name": "Gonzalo-1_enhanced.wav",
+    "pretty": "Gonzalo 1 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 94,
+    "snapFile": "Gonzalo-1_enhanced.json"
+  },
+  {
+    "name": "Gonzalo.wav",
+    "pretty": "Gonzalo",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 147,
+    "snapFile": "Gonzalo.json"
+  },
+  {
+    "name": "Gonzalo_enhanced.wav",
+    "pretty": "Gonzalo Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 146,
+    "snapFile": "Gonzalo_enhanced.json"
+  },
+  {
+    "name": "Greggy.wav",
+    "pretty": "Greggy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 99,
+    "snapFile": "Greggy.json"
+  },
+  {
+    "name": "Greggy_enhanced.wav",
+    "pretty": "Greggy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 99,
+    "snapFile": "Greggy_enhanced.json"
+  },
+  {
+    "name": "Haku.wav",
+    "pretty": "Haku",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Haku.json"
+  },
+  {
+    "name": "Haku_enhanced.wav",
+    "pretty": "Haku Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Haku_enhanced.json"
+  },
+  {
+    "name": "Hannah.wav",
+    "pretty": "Hannah",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "Hannah.json"
+  },
+  {
+    "name": "Hannah_enhanced.wav",
+    "pretty": "Hannah Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 198,
+    "snapFile": "Hannah_enhanced.json"
+  },
+  {
+    "name": "Hardik_Clone.wav",
+    "pretty": "Hardik Clone",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 175,
+    "snapFile": "Hardik_Clone.json"
+  },
+  {
+    "name": "Hardik_Clone_enhanced.wav",
+    "pretty": "Hardik Clone Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 175,
+    "snapFile": "Hardik_Clone_enhanced.json"
+  },
+  {
+    "name": "Hillbilly_Jim.wav",
+    "pretty": "Hillbilly Jim",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 123,
+    "snapFile": "Hillbilly_Jim.json"
+  },
+  {
+    "name": "Hillbilly_Jim_enhanced.wav",
+    "pretty": "Hillbilly Jim Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 122,
+    "snapFile": "Hillbilly_Jim_enhanced.json"
+  },
+  {
+    "name": "Hkl.wav",
+    "pretty": "Hkl",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 207,
+    "snapFile": "Hkl.json"
+  },
+  {
+    "name": "Hkl_enhanced.wav",
+    "pretty": "Hkl Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 207,
+    "snapFile": "Hkl_enhanced.json"
+  },
+  {
+    "name": "Hugo_the_frenchie.wav",
+    "pretty": "Hugo The Frenchie",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 81,
+    "snapFile": "Hugo_the_frenchie.json"
+  },
+  {
+    "name": "Hugo_the_frenchie_enhanced.wav",
+    "pretty": "Hugo The Frenchie Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 81,
+    "snapFile": "Hugo_the_frenchie_enhanced.json"
+  },
+  {
+    "name": "Ilyass_yea.wav",
+    "pretty": "Ilyass Yea",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 106,
+    "snapFile": "Ilyass_yea.json"
+  },
+  {
+    "name": "Ilyass_yea_enhanced.wav",
+    "pretty": "Ilyass Yea Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 106,
+    "snapFile": "Ilyass_yea_enhanced.json"
+  },
+  {
+    "name": "Imran_475.wav",
+    "pretty": "Imran 475",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 176,
+    "snapFile": "Imran_475.json"
+  },
+  {
+    "name": "Imran_475_enhanced.wav",
+    "pretty": "Imran 475 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 176,
+    "snapFile": "Imran_475_enhanced.json"
+  },
+  {
+    "name": "Imran_from_I_India.wav",
+    "pretty": "Imran From I India",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 170,
+    "snapFile": "Imran_from_I_India.json"
+  },
+  {
+    "name": "Imran_from_I_India_enhanced.wav",
+    "pretty": "Imran From I India Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 171,
+    "snapFile": "Imran_from_I_India_enhanced.json"
+  },
+  {
+    "name": "Indian_guy.wav",
+    "pretty": "Indian Guy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "Indian_guy.json"
+  },
+  {
+    "name": "Indian_guy_enhanced.wav",
+    "pretty": "Indian Guy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "Indian_guy_enhanced.json"
+  },
+  {
+    "name": "Ineedthisnow.wav",
+    "pretty": "Ineedthisnow",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "Ineedthisnow.json"
+  },
+  {
+    "name": "Ineedthisnow_enhanced.wav",
+    "pretty": "Ineedthisnow Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "Ineedthisnow_enhanced.json"
+  },
+  {
+    "name": "JJis2123.wav",
+    "pretty": "JJis2123",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 137,
+    "snapFile": "JJis2123.json"
+  },
+  {
+    "name": "JJis2123_enhanced.wav",
+    "pretty": "JJis2123 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "JJis2123_enhanced.json"
+  },
+  {
+    "name": "JOSHE.wav",
+    "pretty": "JOSHE",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "JOSHE.json"
+  },
+  {
+    "name": "JOSHE_enhanced.wav",
+    "pretty": "JOSHE Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "JOSHE_enhanced.json"
+  },
+  {
+    "name": "James.wav",
+    "pretty": "James",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "James.json"
+  },
+  {
+    "name": "James_enhanced.wav",
+    "pretty": "James Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "James_enhanced.json"
+  },
+  {
+    "name": "Jaspino.wav",
+    "pretty": "Jaspino",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 74,
+    "snapFile": "Jaspino.json"
+  },
+  {
+    "name": "Jaspino_enhanced.wav",
+    "pretty": "Jaspino Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 74,
+    "snapFile": "Jaspino_enhanced.json"
+  },
+  {
+    "name": "Jaw.wav",
+    "pretty": "Jaw",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Jaw.json"
+  },
+  {
+    "name": "Jaw_enhanced.wav",
+    "pretty": "Jaw Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Jaw_enhanced.json"
+  },
+  {
+    "name": "Jay.wav",
+    "pretty": "Jay",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "Jay.json"
+  },
+  {
+    "name": "Jay_enhanced.wav",
+    "pretty": "Jay Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "Jay_enhanced.json"
+  },
+  {
+    "name": "Jeff_Andrew.wav",
+    "pretty": "Jeff Andrew",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "Jeff_Andrew.json"
+  },
+  {
+    "name": "Jeff_Andrew_enhanced.wav",
+    "pretty": "Jeff Andrew Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "Jeff_Andrew_enhanced.json"
+  },
+  {
+    "name": "Jeffrey.wav",
+    "pretty": "Jeffrey",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 141,
+    "snapFile": "Jeffrey.json"
+  },
+  {
+    "name": "Jeffrey_enhanced.wav",
+    "pretty": "Jeffrey Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 140,
+    "snapFile": "Jeffrey_enhanced.json"
+  },
+  {
+    "name": "Jeremy_Q.wav",
+    "pretty": "Jeremy Q",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 60,
+    "snapFile": "Jeremy_Q.json"
+  },
+  {
+    "name": "Jeremy_Q_enhanced.wav",
+    "pretty": "Jeremy Q Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Jeremy_Q_enhanced.json"
+  },
+  {
+    "name": "Jimmy.wav",
+    "pretty": "Jimmy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 123,
+    "snapFile": "Jimmy.json"
+  },
+  {
+    "name": "Jimmy_enhanced.wav",
+    "pretty": "Jimmy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 122,
+    "snapFile": "Jimmy_enhanced.json"
+  },
+  {
+    "name": "Joaopedrobil1.wav",
+    "pretty": "Joaopedrobil1",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "Joaopedrobil1.json"
+  },
+  {
+    "name": "Joaopedrobil1_enhanced.wav",
+    "pretty": "Joaopedrobil1 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "Joaopedrobil1_enhanced.json"
+  },
+  {
+    "name": "John_Triguero.wav",
+    "pretty": "John Triguero",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 324,
+    "snapFile": "John_Triguero.json"
+  },
+  {
+    "name": "John_Triguero_enhanced.wav",
+    "pretty": "John Triguero Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 324,
+    "snapFile": "John_Triguero_enhanced.json"
+  },
+  {
+    "name": "Juanrestrepo177777.wav",
+    "pretty": "Juanrestrepo177777",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 229,
+    "snapFile": "Juanrestrepo177777.json"
+  },
+  {
+    "name": "Juanrestrepo177777_enhanced.wav",
+    "pretty": "Juanrestrepo177777 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Juanrestrepo177777_enhanced.json"
+  },
+  {
+    "name": "Karti.wav",
+    "pretty": "Karti",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "Karti.json"
+  },
+  {
+    "name": "Karti_enhanced.wav",
+    "pretty": "Karti Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "Karti_enhanced.json"
+  },
+  {
+    "name": "Kditz.wav",
+    "pretty": "Kditz",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "Kditz.json"
+  },
+  {
+    "name": "Kditz_enhanced.wav",
+    "pretty": "Kditz Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 105,
+    "snapFile": "Kditz_enhanced.json"
+  },
+  {
+    "name": "Koorosh.wav",
+    "pretty": "Koorosh",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Koorosh.json"
+  },
+  {
+    "name": "Koorosh_enhanced.wav",
+    "pretty": "Koorosh Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 421,
+    "snapFile": "Koorosh_enhanced.json"
+  },
+  {
+    "name": "LC.wav",
+    "pretty": "LC",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "LC.json"
+  },
+  {
+    "name": "LC_enhanced.wav",
+    "pretty": "LC Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "LC_enhanced.json"
+  },
+  {
+    "name": "L_Roy.wav",
+    "pretty": "L Roy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 162,
+    "snapFile": "L_Roy.json"
+  },
+  {
+    "name": "L_Roy_enhanced.wav",
+    "pretty": "L Roy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 163,
+    "snapFile": "L_Roy_enhanced.json"
+  },
+  {
+    "name": "Lake.wav",
+    "pretty": "Lake",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "Lake.json"
+  },
+  {
+    "name": "Lake_enhanced.wav",
+    "pretty": "Lake Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 125,
+    "snapFile": "Lake_enhanced.json"
+  },
+  {
+    "name": "Lammy.wav",
+    "pretty": "Lammy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Lammy.json"
+  },
+  {
+    "name": "Lammy_enhanced.wav",
+    "pretty": "Lammy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Lammy_enhanced.json"
+  },
+  {
+    "name": "Lara.wav",
+    "pretty": "Lara",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 87,
+    "snapFile": "Lara.json"
+  },
+  {
+    "name": "Lara_enhanced.wav",
+    "pretty": "Lara Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 87,
+    "snapFile": "Lara_enhanced.json"
+  },
+  {
+    "name": "Latin_Accent.wav",
+    "pretty": "Latin Accent",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 197,
+    "snapFile": "Latin_Accent.json"
+  },
+  {
+    "name": "Latin_Accent_enhanced.wav",
+    "pretty": "Latin Accent Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 198,
+    "snapFile": "Latin_Accent_enhanced.json"
+  },
+  {
+    "name": "Liquescent.wav",
+    "pretty": "Liquescent",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 202,
+    "snapFile": "Liquescent.json"
+  },
+  {
+    "name": "Liquescent_enhanced.wav",
+    "pretty": "Liquescent Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 202,
+    "snapFile": "Liquescent_enhanced.json"
+  },
+  {
+    "name": "Louis.wav",
+    "pretty": "Louis",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Louis.json"
+  },
+  {
+    "name": "Louis_enhanced.wav",
+    "pretty": "Louis Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 100,
+    "snapFile": "Louis_enhanced.json"
+  },
+  {
+    "name": "Lucas.wav",
+    "pretty": "Lucas",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "Lucas.json"
+  },
+  {
+    "name": "Lucas_enhanced.wav",
+    "pretty": "Lucas Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "Lucas_enhanced.json"
+  },
+  {
+    "name": "MJDePedro.wav",
+    "pretty": "MJDePedro",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "MJDePedro.json"
+  },
+  {
+    "name": "MJDePedro_enhanced.wav",
+    "pretty": "MJDePedro Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "MJDePedro_enhanced.json"
+  },
+  {
+    "name": "Maisako.wav",
+    "pretty": "Maisako",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Maisako.json"
+  },
+  {
+    "name": "Maisako_enhanced.wav",
+    "pretty": "Maisako Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Maisako_enhanced.json"
+  },
+  {
+    "name": "Manahen.wav",
+    "pretty": "Manahen",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 108,
+    "snapFile": "Manahen.json"
+  },
+  {
+    "name": "Manahen_enhanced.wav",
+    "pretty": "Manahen Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Manahen_enhanced.json"
+  },
+  {
+    "name": "Marshal_Indian.wav",
+    "pretty": "Marshal Indian",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Marshal_Indian.json"
+  },
+  {
+    "name": "Marshal_Indian_enhanced.wav",
+    "pretty": "Marshal Indian Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 60,
+    "snapFile": "Marshal_Indian_enhanced.json"
+  },
+  {
+    "name": "Midlands_Bedfordshire_Dialect.wav",
+    "pretty": "Midlands Bedfordshire Dialect",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "Midlands_Bedfordshire_Dialect.json"
+  },
+  {
+    "name": "Midlands_Bedfordshire_Dialect_enhanced.wav",
+    "pretty": "Midlands Bedfordshire Dialect Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 95,
+    "snapFile": "Midlands_Bedfordshire_Dialect_enhanced.json"
+  },
+  {
+    "name": "Moses.wav",
+    "pretty": "Moses",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "Moses.json"
+  },
+  {
+    "name": "Moses_enhanced.wav",
+    "pretty": "Moses Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "Moses_enhanced.json"
+  },
+  {
+    "name": "MrHat.wav",
+    "pretty": "MrHat",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "MrHat.json"
+  },
+  {
+    "name": "MrHat_enhanced.wav",
+    "pretty": "MrHat Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 137,
+    "snapFile": "MrHat_enhanced.json"
+  },
+  {
+    "name": "Mr_captain.wav",
+    "pretty": "Mr Captain",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 106,
+    "snapFile": "Mr_captain.json"
+  },
+  {
+    "name": "Mr_captain_enhanced.wav",
+    "pretty": "Mr Captain Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 106,
+    "snapFile": "Mr_captain_enhanced.json"
+  },
+  {
+    "name": "Muhtasim's_Voice.wav",
+    "pretty": "Muhtasim'S Voice",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "Muhtasim's_Voice.json"
+  },
+  {
+    "name": "Muhtasim's_Voice_enhanced.wav",
+    "pretty": "Muhtasim'S Voice Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "Muhtasim's_Voice_enhanced.json"
+  },
+  {
+    "name": "Mystery_Sir.wav",
+    "pretty": "Mystery Sir",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 101,
+    "snapFile": "Mystery_Sir.json"
+  },
+  {
+    "name": "Mystery_Sir_enhanced.wav",
+    "pretty": "Mystery Sir Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 101,
+    "snapFile": "Mystery_Sir_enhanced.json"
+  },
+  {
+    "name": "Narrum.wav",
+    "pretty": "Narrum",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 462,
+    "snapFile": "Narrum.json"
+  },
+  {
+    "name": "Narrum_enhanced.wav",
+    "pretty": "Narrum Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Narrum_enhanced.json"
+  },
+  {
+    "name": "Nick.wav",
+    "pretty": "Nick",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Nick.json"
+  },
+  {
+    "name": "Nick_enhanced.wav",
+    "pretty": "Nick Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Nick_enhanced.json"
+  },
+  {
+    "name": "P0LFR.wav",
+    "pretty": "P0LFR",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 152,
+    "snapFile": "P0LFR.json"
+  },
+  {
+    "name": "P0LFR_enhanced.wav",
+    "pretty": "P0LFR Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 152,
+    "snapFile": "P0LFR_enhanced.json"
+  },
+  {
+    "name": "Pai_ve.wav",
+    "pretty": "Pai Ve",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "Pai_ve.json"
+  },
+  {
+    "name": "Pai_ve_enhanced.wav",
+    "pretty": "Pai Ve Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "Pai_ve_enhanced.json"
+  },
+  {
+    "name": "Parthiban.wav",
+    "pretty": "Parthiban",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 156,
+    "snapFile": "Parthiban.json"
+  },
+  {
+    "name": "Parthiban_enhanced.wav",
+    "pretty": "Parthiban Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 156,
+    "snapFile": "Parthiban_enhanced.json"
+  },
+  {
+    "name": "Prakash369.wav",
+    "pretty": "Prakash369",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "Prakash369.json"
+  },
+  {
+    "name": "Prakash369_enhanced.wav",
+    "pretty": "Prakash369 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "Prakash369_enhanced.json"
+  },
+  {
+    "name": "Puzzle.wav",
+    "pretty": "Puzzle",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "Puzzle.json"
+  },
+  {
+    "name": "Puzzle_enhanced.wav",
+    "pretty": "Puzzle Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 129,
+    "snapFile": "Puzzle_enhanced.json"
+  },
+  {
+    "name": "Qasim_Wali_Khan.wav",
+    "pretty": "Qasim Wali Khan",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 261,
+    "snapFile": "Qasim_Wali_Khan.json"
+  },
+  {
+    "name": "Qasim_Wali_Khan_enhanced.wav",
+    "pretty": "Qasim Wali Khan Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 261,
+    "snapFile": "Qasim_Wali_Khan_enhanced.json"
+  },
+  {
+    "name": "RAJ.wav",
+    "pretty": "RAJ",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 154,
+    "snapFile": "RAJ.json"
+  },
+  {
+    "name": "RAJ_enhanced.wav",
+    "pretty": "RAJ Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 157,
+    "snapFile": "RAJ_enhanced.json"
+  },
+  {
+    "name": "Rafaelpazv.wav",
+    "pretty": "Rafaelpazv",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Rafaelpazv.json"
+  },
+  {
+    "name": "Rafaelpazv_enhanced.wav",
+    "pretty": "Rafaelpazv Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Rafaelpazv_enhanced.json"
+  },
+  {
+    "name": "Rahul.wav",
+    "pretty": "Rahul",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 375,
+    "snapFile": "Rahul.json"
+  },
+  {
+    "name": "Rahul_enhanced.wav",
+    "pretty": "Rahul Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 62,
+    "snapFile": "Rahul_enhanced.json"
+  },
+  {
+    "name": "Raj25.wav",
+    "pretty": "Raj25",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "Raj25.json"
+  },
+  {
+    "name": "Raj25_enhanced.wav",
+    "pretty": "Raj25 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "Raj25_enhanced.json"
+  },
+  {
+    "name": "Ramu.wav",
+    "pretty": "Ramu",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "Ramu.json"
+  },
+  {
+    "name": "Ramu_enhanced.wav",
+    "pretty": "Ramu Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "Ramu_enhanced.json"
+  },
+  {
+    "name": "Ranjith.wav",
+    "pretty": "Ranjith",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Ranjith.json"
+  },
+  {
+    "name": "Ranjith_enhanced.wav",
+    "pretty": "Ranjith Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Ranjith_enhanced.json"
+  },
+  {
+    "name": "Richard_cuban.wav",
+    "pretty": "Richard Cuban",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Richard_cuban.json"
+  },
+  {
+    "name": "Richard_cuban_enhanced.wav",
+    "pretty": "Richard Cuban Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Richard_cuban_enhanced.json"
+  },
+  {
+    "name": "Rony.wav",
+    "pretty": "Rony",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "Rony.json"
+  },
+  {
+    "name": "Rony_enhanced.wav",
+    "pretty": "Rony Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "Rony_enhanced.json"
+  },
+  {
+    "name": "Roscoe.wav",
+    "pretty": "Roscoe",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "Roscoe.json"
+  },
+  {
+    "name": "Roscoe_enhanced.wav",
+    "pretty": "Roscoe Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "Roscoe_enhanced.json"
+  },
+  {
+    "name": "Rs.wav",
+    "pretty": "Rs",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "Rs.json"
+  },
+  {
+    "name": "Rs_enhanced.wav",
+    "pretty": "Rs Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "Rs_enhanced.json"
+  },
+  {
+    "name": "Rup.wav",
+    "pretty": "Rup",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 216,
+    "snapFile": "Rup.json"
+  },
+  {
+    "name": "Rup_enhanced.wav",
+    "pretty": "Rup Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 216,
+    "snapFile": "Rup_enhanced.json"
+  },
+  {
+    "name": "SSA150803.wav",
+    "pretty": "SSA150803",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "SSA150803.json"
+  },
+  {
+    "name": "SSA150803_enhanced.wav",
+    "pretty": "SSA150803 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "SSA150803_enhanced.json"
+  },
+  {
+    "name": "SS_1684.wav",
+    "pretty": "SS 1684",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "SS_1684.json"
+  },
+  {
+    "name": "SS_1684_enhanced.wav",
+    "pretty": "SS 1684 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "SS_1684_enhanced.json"
+  },
+  {
+    "name": "STONE.wav",
+    "pretty": "STONE",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 144,
+    "snapFile": "STONE.json"
+  },
+  {
+    "name": "STONE_enhanced.wav",
+    "pretty": "STONE Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "STONE_enhanced.json"
+  },
+  {
+    "name": "Samsewak.wav",
+    "pretty": "Samsewak",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Samsewak.json"
+  },
+  {
+    "name": "Samsewak_enhanced.wav",
+    "pretty": "Samsewak Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Samsewak_enhanced.json"
+  },
+  {
+    "name": "Selfie.wav",
+    "pretty": "Selfie",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Selfie.json"
+  },
+  {
+    "name": "Selfie_enhanced.wav",
+    "pretty": "Selfie Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Selfie_enhanced.json"
+  },
+  {
+    "name": "Sheddy.wav",
+    "pretty": "Sheddy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Sheddy.json"
+  },
+  {
+    "name": "Sheddy_enhanced.wav",
+    "pretty": "Sheddy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "Sheddy_enhanced.json"
+  },
+  {
+    "name": "Siddh_Indian.wav",
+    "pretty": "Siddh Indian",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Siddh_Indian.json"
+  },
+  {
+    "name": "Siddh_Indian_enhanced.wav",
+    "pretty": "Siddh Indian Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Siddh_Indian_enhanced.json"
+  },
+  {
+    "name": "Sir_TJ.wav",
+    "pretty": "Sir TJ",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 166,
+    "snapFile": "Sir_TJ.json"
+  },
+  {
+    "name": "Sir_TJ_enhanced.wav",
+    "pretty": "Sir TJ Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 166,
+    "snapFile": "Sir_TJ_enhanced.json"
+  },
+  {
+    "name": "Sirajo_x.wav",
+    "pretty": "Sirajo X",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Sirajo_x.json"
+  },
+  {
+    "name": "Sirajo_x_enhanced.wav",
+    "pretty": "Sirajo X Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Sirajo_x_enhanced.json"
+  },
+  {
+    "name": "Sp46.wav",
+    "pretty": "Sp46",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 150,
+    "snapFile": "Sp46.json"
+  },
+  {
+    "name": "Sp46_enhanced.wav",
+    "pretty": "Sp46 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 195,
+    "snapFile": "Sp46_enhanced.json"
+  },
+  {
+    "name": "Sr_Erick.wav",
+    "pretty": "Sr Erick",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "Sr_Erick.json"
+  },
+  {
+    "name": "Sr_Erick_enhanced.wav",
+    "pretty": "Sr Erick Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "Sr_Erick_enhanced.json"
+  },
+  {
+    "name": "Standollars.wav",
+    "pretty": "Standollars",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Standollars.json"
+  },
+  {
+    "name": "Standollars_enhanced.wav",
+    "pretty": "Standollars Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Standollars_enhanced.json"
+  },
+  {
+    "name": "TESLLA.wav",
+    "pretty": "TESLLA",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 142,
+    "snapFile": "TESLLA.json"
+  },
+  {
+    "name": "TESLLA_enhanced.wav",
+    "pretty": "TESLLA Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 142,
+    "snapFile": "TESLLA_enhanced.json"
+  },
+  {
+    "name": "Tahii.wav",
+    "pretty": "Tahii",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "Tahii.json"
+  },
+  {
+    "name": "Tahii_enhanced.wav",
+    "pretty": "Tahii Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "Tahii_enhanced.json"
+  },
+  {
+    "name": "TheFin.wav",
+    "pretty": "TheFin",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "TheFin.json"
+  },
+  {
+    "name": "TheFin_enhanced.wav",
+    "pretty": "TheFin Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 102,
+    "snapFile": "TheFin_enhanced.json"
+  },
+  {
+    "name": "The_Sustainabler.wav",
+    "pretty": "The Sustainabler",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 67,
+    "snapFile": "The_Sustainabler.json"
+  },
+  {
+    "name": "The_Sustainabler_enhanced.wav",
+    "pretty": "The Sustainabler Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 67,
+    "snapFile": "The_Sustainabler_enhanced.json"
+  },
+  {
+    "name": "The_other_brother.wav",
+    "pretty": "The Other Brother",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "The_other_brother.json"
+  },
+  {
+    "name": "The_other_brother_enhanced.wav",
+    "pretty": "The Other Brother Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "The_other_brother_enhanced.json"
+  },
+  {
+    "name": "Titorium.wav",
+    "pretty": "Titorium",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Titorium.json"
+  },
+  {
+    "name": "Titorium_enhanced.wav",
+    "pretty": "Titorium Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Titorium_enhanced.json"
+  },
+  {
+    "name": "Tonmoy.wav",
+    "pretty": "Tonmoy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "Tonmoy.json"
+  },
+  {
+    "name": "Tonmoy_enhanced.wav",
+    "pretty": "Tonmoy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 132,
+    "snapFile": "Tonmoy_enhanced.json"
+  },
+  {
+    "name": "Umair.wav",
+    "pretty": "Umair",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "Umair.json"
+  },
+  {
+    "name": "Umair_enhanced.wav",
+    "pretty": "Umair Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "Umair_enhanced.json"
+  },
+  {
+    "name": "Vexat.wav",
+    "pretty": "Vexat",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Vexat.json"
+  },
+  {
+    "name": "Vexat_enhanced.wav",
+    "pretty": "Vexat Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "Vexat_enhanced.json"
+  },
+  {
+    "name": "Victor_Garcia.wav",
+    "pretty": "Victor Garcia",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 480,
+    "snapFile": "Victor_Garcia.json"
+  },
+  {
+    "name": "Victor_Garcia_enhanced.wav",
+    "pretty": "Victor Garcia Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 471,
+    "snapFile": "Victor_Garcia_enhanced.json"
+  },
+  {
+    "name": "Vinith___English_India.wav",
+    "pretty": "Vinith   English India",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Vinith___English_India.json"
+  },
+  {
+    "name": "Vinith___English_India_enhanced.wav",
+    "pretty": "Vinith   English India Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Vinith___English_India_enhanced.json"
+  },
+  {
+    "name": "Vitch.wav",
+    "pretty": "Vitch",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "Vitch.json"
+  },
+  {
+    "name": "Vitch_enhanced.wav",
+    "pretty": "Vitch Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "Vitch_enhanced.json"
+  },
+  {
+    "name": "Vivaldi.wav",
+    "pretty": "Vivaldi",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "Vivaldi.json"
+  },
+  {
+    "name": "Vivaldi_enhanced.wav",
+    "pretty": "Vivaldi Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "Vivaldi_enhanced.json"
+  },
+  {
+    "name": "W_A_H.wav",
+    "pretty": "W A H",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "W_A_H.json"
+  },
+  {
+    "name": "W_A_H_enhanced.wav",
+    "pretty": "W A H Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "W_A_H_enhanced.json"
+  },
+  {
+    "name": "Wealthiest.wav",
+    "pretty": "Wealthiest",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 98,
+    "snapFile": "Wealthiest.json"
+  },
+  {
+    "name": "Wealthiest_enhanced.wav",
+    "pretty": "Wealthiest Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 98,
+    "snapFile": "Wealthiest_enhanced.json"
+  },
+  {
+    "name": "WhisperInEar.wav",
+    "pretty": "WhisperInEar",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 279,
+    "snapFile": "WhisperInEar.json"
+  },
+  {
+    "name": "WhisperInEar_enhanced.wav",
+    "pretty": "WhisperInEar Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 160,
+    "snapFile": "WhisperInEar_enhanced.json"
+  },
+  {
+    "name": "Yesid.wav",
+    "pretty": "Yesid",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Yesid.json"
+  },
+  {
+    "name": "Yesid_enhanced.wav",
+    "pretty": "Yesid Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "Yesid_enhanced.json"
+  },
+  {
+    "name": "Youfied.wav",
+    "pretty": "Youfied",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 152,
+    "snapFile": "Youfied.json"
+  },
+  {
+    "name": "Youfied_enhanced.wav",
+    "pretty": "Youfied Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 152,
+    "snapFile": "Youfied_enhanced.json"
+  },
+  {
+    "name": "Yuush.wav",
+    "pretty": "Yuush",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 125,
+    "snapFile": "Yuush.json"
+  },
+  {
+    "name": "Yuush_enhanced.wav",
+    "pretty": "Yuush Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "Yuush_enhanced.json"
+  },
+  {
+    "name": "a59a.wav",
+    "pretty": "A59a",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "a59a.json"
+  },
+  {
+    "name": "a59a_enhanced.wav",
+    "pretty": "A59a Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "a59a_enhanced.json"
+  },
+  {
+    "name": "a6f9.wav",
+    "pretty": "A6f9",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "a6f9.json"
+  },
+  {
+    "name": "a6f9_enhanced.wav",
+    "pretty": "A6f9 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "a6f9_enhanced.json"
+  },
+  {
+    "name": "a96a.wav",
+    "pretty": "A96a",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "a96a.json"
+  },
+  {
+    "name": "a96a_enhanced.wav",
+    "pretty": "A96a Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "a96a_enhanced.json"
+  },
+  {
+    "name": "aepeak.wav",
+    "pretty": "Aepeak",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 72,
+    "snapFile": "aepeak.json"
+  },
+  {
+    "name": "aepeak_enhanced.wav",
+    "pretty": "Aepeak Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 72,
+    "snapFile": "aepeak_enhanced.json"
+  },
+  {
+    "name": "albertoforofo007.wav",
+    "pretty": "Albertoforofo007",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 102,
+    "snapFile": "albertoforofo007.json"
+  },
+  {
+    "name": "albertoforofo007_enhanced.wav",
+    "pretty": "Albertoforofo007 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 102,
+    "snapFile": "albertoforofo007_enhanced.json"
+  },
+  {
+    "name": "amazon_box.wav",
+    "pretty": "Amazon Box",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "amazon_box.json"
+  },
+  {
+    "name": "amazon_box_enhanced.wav",
+    "pretty": "Amazon Box Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "amazon_box_enhanced.json"
+  },
+  {
+    "name": "awais_shah.wav",
+    "pretty": "Awais Shah",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 194,
+    "snapFile": "awais_shah.json"
+  },
+  {
+    "name": "awais_shah_enhanced.wav",
+    "pretty": "Awais Shah Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 192,
+    "snapFile": "awais_shah_enhanced.json"
+  },
+  {
+    "name": "bathri.wav",
+    "pretty": "Bathri",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 238,
+    "snapFile": "bathri.json"
+  },
+  {
+    "name": "bathri_enhanced.wav",
+    "pretty": "Bathri Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "bathri_enhanced.json"
+  },
+  {
+    "name": "bbe4.wav",
+    "pretty": "Bbe4",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 146,
+    "snapFile": "bbe4.json"
+  },
+  {
+    "name": "bbe4_enhanced.wav",
+    "pretty": "Bbe4 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "bbe4_enhanced.json"
+  },
+  {
+    "name": "bc98.wav",
+    "pretty": "Bc98",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 162,
+    "snapFile": "bc98.json"
+  },
+  {
+    "name": "bc98_enhanced.wav",
+    "pretty": "Bc98 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 164,
+    "snapFile": "bc98_enhanced.json"
+  },
+  {
+    "name": "bevi.wav",
+    "pretty": "Bevi",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "bevi.json"
+  },
+  {
+    "name": "bevi_enhanced.wav",
+    "pretty": "Bevi Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 103,
+    "snapFile": "bevi_enhanced.json"
+  },
+  {
+    "name": "boom.wav",
+    "pretty": "Boom",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "boom.json"
+  },
+  {
+    "name": "boom_enhanced.wav",
+    "pretty": "Boom Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "boom_enhanced.json"
+  },
+  {
+    "name": "c0a0.wav",
+    "pretty": "C0a0",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 168,
+    "snapFile": "c0a0.json"
+  },
+  {
+    "name": "c0a0_enhanced.wav",
+    "pretty": "C0a0 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 168,
+    "snapFile": "c0a0_enhanced.json"
+  },
+  {
+    "name": "cybina.wav",
+    "pretty": "Cybina",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "cybina.json"
+  },
+  {
+    "name": "cybina_enhanced.wav",
+    "pretty": "Cybina Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "cybina_enhanced.json"
+  },
+  {
+    "name": "d4a9.wav",
+    "pretty": "D4a9",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 98,
+    "snapFile": "d4a9.json"
+  },
+  {
+    "name": "d4a9_enhanced.wav",
+    "pretty": "D4a9 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "d4a9_enhanced.json"
+  },
+  {
+    "name": "dce6.wav",
+    "pretty": "Dce6",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "dce6.json"
+  },
+  {
+    "name": "dce6_enhanced.wav",
+    "pretty": "Dce6 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "dce6_enhanced.json"
+  },
+  {
+    "name": "dwp.wav",
+    "pretty": "Dwp",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 94,
+    "snapFile": "dwp.json"
+  },
+  {
+    "name": "dwp_enhanced.wav",
+    "pretty": "Dwp Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 94,
+    "snapFile": "dwp_enhanced.json"
+  },
+  {
+    "name": "e819.wav",
+    "pretty": "E819",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "e819.json"
+  },
+  {
+    "name": "e819_enhanced.wav",
+    "pretty": "E819 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "e819_enhanced.json"
+  },
+  {
+    "name": "edd4.wav",
+    "pretty": "Edd4",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "edd4.json"
+  },
+  {
+    "name": "edd4_enhanced.wav",
+    "pretty": "Edd4 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "edd4_enhanced.json"
+  },
+  {
+    "name": "efeb.wav",
+    "pretty": "Efeb",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "efeb.json"
+  },
+  {
+    "name": "efeb_enhanced.wav",
+    "pretty": "Efeb Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "efeb_enhanced.json"
+  },
+  {
+    "name": "english_with_german_accent.wav",
+    "pretty": "English With German Accent",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 111,
+    "snapFile": "english_with_german_accent.json"
+  },
+  {
+    "name": "english_with_german_accent_enhanced.wav",
+    "pretty": "English With German Accent Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "english_with_german_accent_enhanced.json"
+  },
+  {
+    "name": "erihppas.wav",
+    "pretty": "Erihppas",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 158,
+    "snapFile": "erihppas.json"
+  },
+  {
+    "name": "erihppas_enhanced.wav",
+    "pretty": "Erihppas Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 158,
+    "snapFile": "erihppas_enhanced.json"
+  },
+  {
+    "name": "f179.wav",
+    "pretty": "F179",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "f179.json"
+  },
+  {
+    "name": "f179_enhanced.wav",
+    "pretty": "F179 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "f179_enhanced.json"
+  },
+  {
+    "name": "f9cf.wav",
+    "pretty": "F9cf",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 73,
+    "snapFile": "f9cf.json"
+  },
+  {
+    "name": "f9cf_enhanced.wav",
+    "pretty": "F9cf Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 73,
+    "snapFile": "f9cf_enhanced.json"
+  },
+  {
+    "name": "fa52.wav",
+    "pretty": "Fa52",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 176,
+    "snapFile": "fa52.json"
+  },
+  {
+    "name": "fa52_enhanced.wav",
+    "pretty": "Fa52 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 178,
+    "snapFile": "fa52_enhanced.json"
+  },
+  {
+    "name": "fc96.wav",
+    "pretty": "Fc96",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 101,
+    "snapFile": "fc96.json"
+  },
+  {
+    "name": "fc96_enhanced.wav",
+    "pretty": "Fc96 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 195,
+    "snapFile": "fc96_enhanced.json"
+  },
+  {
+    "name": "floyd2026.wav",
+    "pretty": "Floyd2026",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 159,
+    "snapFile": "floyd2026.json"
+  },
+  {
+    "name": "floyd2026_enhanced.wav",
+    "pretty": "Floyd2026 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 160,
+    "snapFile": "floyd2026_enhanced.json"
+  },
+  {
+    "name": "gmaskell92.wav",
+    "pretty": "Gmaskell92",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "gmaskell92.json"
+  },
+  {
+    "name": "gmaskell92_enhanced.wav",
+    "pretty": "Gmaskell92 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "gmaskell92_enhanced.json"
+  },
+  {
+    "name": "gyroo.wav",
+    "pretty": "Gyroo",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "gyroo.json"
+  },
+  {
+    "name": "gyroo_enhanced.wav",
+    "pretty": "Gyroo Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "gyroo_enhanced.json"
+  },
+  {
+    "name": "hielos_1.wav",
+    "pretty": "Hielos 1",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "hielos_1.json"
+  },
+  {
+    "name": "hielos_1_enhanced.wav",
+    "pretty": "Hielos 1 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 393,
+    "snapFile": "hielos_1_enhanced.json"
+  },
+  {
+    "name": "hielos_2.wav",
+    "pretty": "Hielos 2",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "hielos_2.json"
+  },
+  {
+    "name": "hielos_2_enhanced.wav",
+    "pretty": "Hielos 2 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 135,
+    "snapFile": "hielos_2_enhanced.json"
+  },
+  {
+    "name": "injul.wav",
+    "pretty": "Injul",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 130,
+    "snapFile": "injul.json"
+  },
+  {
+    "name": "injul_enhanced.wav",
+    "pretty": "Injul Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "injul_enhanced.json"
+  },
+  {
+    "name": "kbrn1.wav",
+    "pretty": "Kbrn1",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "kbrn1.json"
+  },
+  {
+    "name": "kbrn1_enhanced.wav",
+    "pretty": "Kbrn1 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "kbrn1_enhanced.json"
+  },
+  {
+    "name": "oldNerd.wav",
+    "pretty": "OldNerd",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "oldNerd.json"
+  },
+  {
+    "name": "oldNerd2.wav",
+    "pretty": "OldNerd2",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 462,
+    "snapFile": "oldNerd2.json"
+  },
+  {
+    "name": "oldNerd2_enhanced.wav",
+    "pretty": "OldNerd2 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 115,
+    "snapFile": "oldNerd2_enhanced.json"
+  },
+  {
+    "name": "oldNerd3.wav",
+    "pretty": "OldNerd3",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 139,
+    "snapFile": "oldNerd3.json"
+  },
+  {
+    "name": "oldNerd3_enhanced.wav",
+    "pretty": "OldNerd3 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 140,
+    "snapFile": "oldNerd3_enhanced.json"
+  },
+  {
+    "name": "oldNerd_enhanced.wav",
+    "pretty": "OldNerd Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 107,
+    "snapFile": "oldNerd_enhanced.json"
+  },
+  {
+    "name": "ra_XOr.wav",
+    "pretty": "Ra XOr",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 250,
+    "snapFile": "ra_XOr.json"
+  },
+  {
+    "name": "ra_XOr_enhanced.wav",
+    "pretty": "Ra XOr Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 250,
+    "snapFile": "ra_XOr_enhanced.json"
+  },
+  {
+    "name": "rewi.wav",
+    "pretty": "Rewi",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 151,
+    "snapFile": "rewi.json"
+  },
+  {
+    "name": "rewi_enhanced.wav",
+    "pretty": "Rewi Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 150,
+    "snapFile": "rewi_enhanced.json"
+  },
+  {
+    "name": "robert.wav",
+    "pretty": "Robert",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 480,
+    "snapFile": "robert.json"
+  },
+  {
+    "name": "robert_enhanced.wav",
+    "pretty": "Robert Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "robert_enhanced.json"
+  },
+  {
+    "name": "rshah_1_0.wav",
+    "pretty": "Rshah 1 0",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "rshah_1_0.json"
+  },
+  {
+    "name": "rshah_1_0_enhanced.wav",
+    "pretty": "Rshah 1 0 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "rshah_1_0_enhanced.json"
+  },
+  {
+    "name": "sanjay.wav",
+    "pretty": "Sanjay",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "sanjay.json"
+  },
+  {
+    "name": "sanjay_enhanced.wav",
+    "pretty": "Sanjay Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "sanjay_enhanced.json"
+  },
+  {
+    "name": "siddharth_khanna.wav",
+    "pretty": "Siddharth Khanna",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "siddharth_khanna.json"
+  },
+  {
+    "name": "siddharth_khanna_enhanced.wav",
+    "pretty": "Siddharth Khanna Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 104,
+    "snapFile": "siddharth_khanna_enhanced.json"
+  },
+  {
+    "name": "solace.wav",
+    "pretty": "Solace",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "solace.json"
+  },
+  {
+    "name": "solace_enhanced.wav",
+    "pretty": "Solace Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "solace_enhanced.json"
+  },
+  {
+    "name": "spanish-limaperu.wav",
+    "pretty": "Spanish Limaperu",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "spanish-limaperu.json"
+  },
+  {
+    "name": "spanish-limaperu_enhanced.wav",
+    "pretty": "Spanish Limaperu Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 480,
+    "snapFile": "spanish-limaperu_enhanced.json"
+  },
+  {
+    "name": "stein.wav",
+    "pretty": "Stein",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "stein.json"
+  },
+  {
+    "name": "stein_enhanced.wav",
+    "pretty": "Stein Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "stein_enhanced.json"
+  },
+  {
+    "name": "sujan_daikoawaj.wav",
+    "pretty": "Sujan Daikoawaj",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "sujan_daikoawaj.json"
+  },
+  {
+    "name": "sujan_daikoawaj_enhanced.wav",
+    "pretty": "Sujan Daikoawaj Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "sujan_daikoawaj_enhanced.json"
+  },
+  {
+    "name": "surazy.wav",
+    "pretty": "Surazy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "surazy.json"
+  },
+  {
+    "name": "surazy_enhanced.wav",
+    "pretty": "Surazy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 178,
+    "snapFile": "surazy_enhanced.json"
+  },
+  {
+    "name": "taiyo.wav",
+    "pretty": "Taiyo",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 60,
+    "snapFile": "taiyo.json"
+  },
+  {
+    "name": "taiyo_enhanced.wav",
+    "pretty": "Taiyo Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "taiyo_enhanced.json"
+  },
+  {
+    "name": "temp-007.wav",
+    "pretty": "Temp 007",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "temp-007.json"
+  },
+  {
+    "name": "temp-007_enhanced.wav",
+    "pretty": "Temp 007 Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "temp-007_enhanced.json"
+  },
+  {
+    "name": "thepolishdane.wav",
+    "pretty": "Thepolishdane",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "thepolishdane.json"
+  },
+  {
+    "name": "thepolishdane_enhanced.wav",
+    "pretty": "Thepolishdane Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "thepolishdane_enhanced.json"
+  },
+  {
+    "name": "utk.wav",
+    "pretty": "Utk",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 141,
+    "snapFile": "utk.json"
+  },
+  {
+    "name": "utk_enhanced.wav",
+    "pretty": "Utk Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 144,
+    "snapFile": "utk_enhanced.json"
+  },
+  {
+    "name": "vinayak.wav",
+    "pretty": "Vinayak",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "vinayak.json"
+  },
+  {
+    "name": "vinayak_enhanced.wav",
+    "pretty": "Vinayak Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "vinayak_enhanced.json"
+  },
+  {
+    "name": "virtu.wav",
+    "pretty": "Virtu",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "virtu.json"
+  },
+  {
+    "name": "virtu_enhanced.wav",
+    "pretty": "Virtu Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "virtu_enhanced.json"
+  },
+  {
+    "name": "willbas.wav",
+    "pretty": "Willbas",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "willbas.json"
+  },
+  {
+    "name": "willbas_enhanced.wav",
+    "pretty": "Willbas Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "willbas_enhanced.json"
+  },
+  {
+    "name": "yaemdluffy.wav",
+    "pretty": "Yaemdluffy",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "yaemdluffy.json"
+  },
+  {
+    "name": "yaemdluffy_enhanced.wav",
+    "pretty": "Yaemdluffy Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 119,
+    "snapFile": "yaemdluffy_enhanced.json"
+  },
+  {
+    "name": "zerocool.wav",
+    "pretty": "Zerocool",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "zerocool.json"
+  },
+  {
+    "name": "zerocool_enhanced.wav",
+    "pretty": "Zerocool Enhanced",
+    "dir": "voice-donations",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 114,
+    "snapFile": "zerocool_enhanced.json"
+  },
+  {
+    "name": "p225_023.wav",
+    "pretty": "P225 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 212,
+    "snapFile": "p225_023.json"
+  },
+  {
+    "name": "p225_023_enhanced.wav",
+    "pretty": "P225 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 211,
+    "snapFile": "p225_023_enhanced.json"
+  },
+  {
+    "name": "p226_023.wav",
+    "pretty": "P226 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "p226_023.json"
+  },
+  {
+    "name": "p226_023_enhanced.wav",
+    "pretty": "P226 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "p226_023_enhanced.json"
+  },
+  {
+    "name": "p227_023.wav",
+    "pretty": "P227 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 316,
+    "snapFile": "p227_023.json"
+  },
+  {
+    "name": "p227_023_enhanced.wav",
+    "pretty": "P227 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p227_023_enhanced.json"
+  },
+  {
+    "name": "p228_023.wav",
+    "pretty": "P228 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p228_023.json"
+  },
+  {
+    "name": "p228_023_enhanced.wav",
+    "pretty": "P228 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p228_023_enhanced.json"
+  },
+  {
+    "name": "p229_023.wav",
+    "pretty": "P229 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 68,
+    "snapFile": "p229_023.json"
+  },
+  {
+    "name": "p229_023_enhanced.wav",
+    "pretty": "P229 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 68,
+    "snapFile": "p229_023_enhanced.json"
+  },
+  {
+    "name": "p230_023.wav",
+    "pretty": "P230 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 224,
+    "snapFile": "p230_023.json"
+  },
+  {
+    "name": "p230_023_enhanced.wav",
+    "pretty": "P230 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 224,
+    "snapFile": "p230_023_enhanced.json"
+  },
+  {
+    "name": "p231_023.wav",
+    "pretty": "P231 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 216,
+    "snapFile": "p231_023.json"
+  },
+  {
+    "name": "p231_023_enhanced.wav",
+    "pretty": "P231 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 216,
+    "snapFile": "p231_023_enhanced.json"
+  },
+  {
+    "name": "p232_023.wav",
+    "pretty": "P232 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "p232_023.json"
+  },
+  {
+    "name": "p232_023_enhanced.wav",
+    "pretty": "P232 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "p232_023_enhanced.json"
+  },
+  {
+    "name": "p233_023.wav",
+    "pretty": "P233 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 218,
+    "snapFile": "p233_023.json"
+  },
+  {
+    "name": "p233_023_enhanced.wav",
+    "pretty": "P233 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p233_023_enhanced.json"
+  },
+  {
+    "name": "p234_023.wav",
+    "pretty": "P234 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "p234_023.json"
+  },
+  {
+    "name": "p234_023_enhanced.wav",
+    "pretty": "P234 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p234_023_enhanced.json"
+  },
+  {
+    "name": "p236_023.wav",
+    "pretty": "P236 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 338,
+    "snapFile": "p236_023.json"
+  },
+  {
+    "name": "p236_023_enhanced.wav",
+    "pretty": "P236 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 324,
+    "snapFile": "p236_023_enhanced.json"
+  },
+  {
+    "name": "p237_023.wav",
+    "pretty": "P237 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p237_023.json"
+  },
+  {
+    "name": "p237_023_enhanced.wav",
+    "pretty": "P237 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 96,
+    "snapFile": "p237_023_enhanced.json"
+  },
+  {
+    "name": "p238_023.wav",
+    "pretty": "P238 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "p238_023.json"
+  },
+  {
+    "name": "p238_023_enhanced.wav",
+    "pretty": "P238 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 118,
+    "snapFile": "p238_023_enhanced.json"
+  },
+  {
+    "name": "p239_023.wav",
+    "pretty": "P239 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 110,
+    "snapFile": "p239_023.json"
+  },
+  {
+    "name": "p239_023_enhanced.wav",
+    "pretty": "P239 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 224,
+    "snapFile": "p239_023_enhanced.json"
+  },
+  {
+    "name": "p240_023.wav",
+    "pretty": "P240 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 273,
+    "snapFile": "p240_023.json"
+  },
+  {
+    "name": "p240_023_enhanced.wav",
+    "pretty": "P240 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 273,
+    "snapFile": "p240_023_enhanced.json"
+  },
+  {
+    "name": "p241_023.wav",
+    "pretty": "P241 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p241_023.json"
+  },
+  {
+    "name": "p241_023_enhanced.wav",
+    "pretty": "P241 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "p241_023_enhanced.json"
+  },
+  {
+    "name": "p243_023.wav",
+    "pretty": "P243 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 66,
+    "snapFile": "p243_023.json"
+  },
+  {
+    "name": "p243_023_enhanced.wav",
+    "pretty": "P243 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 66,
+    "snapFile": "p243_023_enhanced.json"
+  },
+  {
+    "name": "p244_023.wav",
+    "pretty": "P244 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 233,
+    "snapFile": "p244_023.json"
+  },
+  {
+    "name": "p244_023_enhanced.wav",
+    "pretty": "P244 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 233,
+    "snapFile": "p244_023_enhanced.json"
+  },
+  {
+    "name": "p245_023.wav",
+    "pretty": "P245 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p245_023.json"
+  },
+  {
+    "name": "p245_023_enhanced.wav",
+    "pretty": "P245 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p245_023_enhanced.json"
+  },
+  {
+    "name": "p246_023.wav",
+    "pretty": "P246 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "p246_023.json"
+  },
+  {
+    "name": "p246_023_enhanced.wav",
+    "pretty": "P246 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "p246_023_enhanced.json"
+  },
+  {
+    "name": "p247_023.wav",
+    "pretty": "P247 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 304,
+    "snapFile": "p247_023.json"
+  },
+  {
+    "name": "p247_023_enhanced.wav",
+    "pretty": "P247 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 200,
+    "snapFile": "p247_023_enhanced.json"
+  },
+  {
+    "name": "p248_023.wav",
+    "pretty": "P248 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 282,
+    "snapFile": "p248_023.json"
+  },
+  {
+    "name": "p248_023_enhanced.wav",
+    "pretty": "P248 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 282,
+    "snapFile": "p248_023_enhanced.json"
+  },
+  {
+    "name": "p249_023.wav",
+    "pretty": "P249 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p249_023.json"
+  },
+  {
+    "name": "p249_023_enhanced.wav",
+    "pretty": "P249 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 316,
+    "snapFile": "p249_023_enhanced.json"
+  },
+  {
+    "name": "p250_023.wav",
+    "pretty": "P250 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p250_023.json"
+  },
+  {
+    "name": "p250_023_enhanced.wav",
+    "pretty": "P250 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 338,
+    "snapFile": "p250_023_enhanced.json"
+  },
+  {
+    "name": "p251_023.wav",
+    "pretty": "P251 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 480,
+    "snapFile": "p251_023.json"
+  },
+  {
+    "name": "p251_023_enhanced.wav",
+    "pretty": "P251 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 154,
+    "snapFile": "p251_023_enhanced.json"
+  },
+  {
+    "name": "p252_023.wav",
+    "pretty": "P252 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p252_023.json"
+  },
+  {
+    "name": "p252_023_enhanced.wav",
+    "pretty": "P252 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p252_023_enhanced.json"
+  },
+  {
+    "name": "p253_023.wav",
+    "pretty": "P253 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 247,
+    "snapFile": "p253_023.json"
+  },
+  {
+    "name": "p253_023_enhanced.wav",
+    "pretty": "P253 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 250,
+    "snapFile": "p253_023_enhanced.json"
+  },
+  {
+    "name": "p254_023.wav",
+    "pretty": "P254 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 436,
+    "snapFile": "p254_023.json"
+  },
+  {
+    "name": "p254_023_enhanced.wav",
+    "pretty": "P254 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 88,
+    "snapFile": "p254_023_enhanced.json"
+  },
+  {
+    "name": "p255_023.wav",
+    "pretty": "P255 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p255_023.json"
+  },
+  {
+    "name": "p255_023_enhanced.wav",
+    "pretty": "P255 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 276,
+    "snapFile": "p255_023_enhanced.json"
+  },
+  {
+    "name": "p256_023.wav",
+    "pretty": "P256 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p256_023.json"
+  },
+  {
+    "name": "p256_023_enhanced.wav",
+    "pretty": "P256 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p256_023_enhanced.json"
+  },
+  {
+    "name": "p257_023.wav",
+    "pretty": "P257 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 333,
+    "snapFile": "p257_023.json"
+  },
+  {
+    "name": "p257_023_enhanced.wav",
+    "pretty": "P257 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p257_023_enhanced.json"
+  },
+  {
+    "name": "p258_023.wav",
+    "pretty": "P258 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 126,
+    "snapFile": "p258_023.json"
+  },
+  {
+    "name": "p258_023_enhanced.wav",
+    "pretty": "P258 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "p258_023_enhanced.json"
+  },
+  {
+    "name": "p259_023.wav",
+    "pretty": "P259 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "p259_023.json"
+  },
+  {
+    "name": "p259_023_enhanced.wav",
+    "pretty": "P259 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 71,
+    "snapFile": "p259_023_enhanced.json"
+  },
+  {
+    "name": "p260_023.wav",
+    "pretty": "P260 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "p260_023.json"
+  },
+  {
+    "name": "p260_023_enhanced.wav",
+    "pretty": "P260 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "p260_023_enhanced.json"
+  },
+  {
+    "name": "p261_023.wav",
+    "pretty": "P261 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p261_023.json"
+  },
+  {
+    "name": "p261_023_enhanced.wav",
+    "pretty": "P261 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 240,
+    "snapFile": "p261_023_enhanced.json"
+  },
+  {
+    "name": "p262_023.wav",
+    "pretty": "P262 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p262_023.json"
+  },
+  {
+    "name": "p262_023_enhanced.wav",
+    "pretty": "P262 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p262_023_enhanced.json"
+  },
+  {
+    "name": "p263_023.wav",
+    "pretty": "P263 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 164,
+    "snapFile": "p263_023.json"
+  },
+  {
+    "name": "p263_023_enhanced.wav",
+    "pretty": "P263 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 158,
+    "snapFile": "p263_023_enhanced.json"
+  },
+  {
+    "name": "p264_023.wav",
+    "pretty": "P264 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 329,
+    "snapFile": "p264_023.json"
+  },
+  {
+    "name": "p264_023_enhanced.wav",
+    "pretty": "P264 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 329,
+    "snapFile": "p264_023_enhanced.json"
+  },
+  {
+    "name": "p265_023.wav",
+    "pretty": "P265 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 192,
+    "snapFile": "p265_023.json"
+  },
+  {
+    "name": "p265_023_enhanced.wav",
+    "pretty": "P265 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 192,
+    "snapFile": "p265_023_enhanced.json"
+  },
+  {
+    "name": "p266_023.wav",
+    "pretty": "P266 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 316,
+    "snapFile": "p266_023.json"
+  },
+  {
+    "name": "p266_023_enhanced.wav",
+    "pretty": "P266 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 286,
+    "snapFile": "p266_023_enhanced.json"
+  },
+  {
+    "name": "p267_023.wav",
+    "pretty": "P267 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 235,
+    "snapFile": "p267_023.json"
+  },
+  {
+    "name": "p267_023_enhanced.wav",
+    "pretty": "P267 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 220,
+    "snapFile": "p267_023_enhanced.json"
+  },
+  {
+    "name": "p269_023.wav",
+    "pretty": "P269 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p269_023.json"
+  },
+  {
+    "name": "p269_023_enhanced.wav",
+    "pretty": "P269 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 276,
+    "snapFile": "p269_023_enhanced.json"
+  },
+  {
+    "name": "p270_023.wav",
+    "pretty": "P270 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 444,
+    "snapFile": "p270_023.json"
+  },
+  {
+    "name": "p270_023_enhanced.wav",
+    "pretty": "P270 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p270_023_enhanced.json"
+  },
+  {
+    "name": "p271_023.wav",
+    "pretty": "P271 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "p271_023.json"
+  },
+  {
+    "name": "p271_023_enhanced.wav",
+    "pretty": "P271 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 133,
+    "snapFile": "p271_023_enhanced.json"
+  },
+  {
+    "name": "p272_023.wav",
+    "pretty": "P272 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "p272_023.json"
+  },
+  {
+    "name": "p272_023_enhanced.wav",
+    "pretty": "P272 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "p272_023_enhanced.json"
+  },
+  {
+    "name": "p273_023.wav",
+    "pretty": "P273 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 233,
+    "snapFile": "p273_023.json"
+  },
+  {
+    "name": "p273_023_enhanced.wav",
+    "pretty": "P273 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 231,
+    "snapFile": "p273_023_enhanced.json"
+  },
+  {
+    "name": "p274_023.wav",
+    "pretty": "P274 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "p274_023.json"
+  },
+  {
+    "name": "p274_023_enhanced.wav",
+    "pretty": "P274 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 137,
+    "snapFile": "p274_023_enhanced.json"
+  },
+  {
+    "name": "p275_023.wav",
+    "pretty": "P275 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 138,
+    "snapFile": "p275_023.json"
+  },
+  {
+    "name": "p275_023_enhanced.wav",
+    "pretty": "P275 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 136,
+    "snapFile": "p275_023_enhanced.json"
+  },
+  {
+    "name": "p276_023.wav",
+    "pretty": "P276 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p276_023.json"
+  },
+  {
+    "name": "p276_023_enhanced.wav",
+    "pretty": "P276 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p276_023_enhanced.json"
+  },
+  {
+    "name": "p277_023.wav",
+    "pretty": "P277 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 238,
+    "snapFile": "p277_023.json"
+  },
+  {
+    "name": "p277_023_enhanced.wav",
+    "pretty": "P277 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 235,
+    "snapFile": "p277_023_enhanced.json"
+  },
+  {
+    "name": "p278_023.wav",
+    "pretty": "P278 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "p278_023.json"
+  },
+  {
+    "name": "p278_023_enhanced.wav",
+    "pretty": "P278 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 117,
+    "snapFile": "p278_023_enhanced.json"
+  },
+  {
+    "name": "p279_023.wav",
+    "pretty": "P279 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "p279_023.json"
+  },
+  {
+    "name": "p279_023_enhanced.wav",
+    "pretty": "P279 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 145,
+    "snapFile": "p279_023_enhanced.json"
+  },
+  {
+    "name": "p280_023.wav",
+    "pretty": "P280 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 421,
+    "snapFile": "p280_023.json"
+  },
+  {
+    "name": "p280_023_enhanced.wav",
+    "pretty": "P280 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p280_023_enhanced.json"
+  },
+  {
+    "name": "p281_023.wav",
+    "pretty": "P281 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p281_023.json"
+  },
+  {
+    "name": "p281_023_enhanced.wav",
+    "pretty": "P281 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p281_023_enhanced.json"
+  },
+  {
+    "name": "p282_023.wav",
+    "pretty": "P282 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 231,
+    "snapFile": "p282_023.json"
+  },
+  {
+    "name": "p282_023_enhanced.wav",
+    "pretty": "P282 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 231,
+    "snapFile": "p282_023_enhanced.json"
+  },
+  {
+    "name": "p283_023.wav",
+    "pretty": "P283 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p283_023.json"
+  },
+  {
+    "name": "p283_023_enhanced.wav",
+    "pretty": "P283 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p283_023_enhanced.json"
+  },
+  {
+    "name": "p284_023.wav",
+    "pretty": "P284 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p284_023.json"
+  },
+  {
+    "name": "p284_023_enhanced.wav",
+    "pretty": "P284 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p284_023_enhanced.json"
+  },
+  {
+    "name": "p285_023.wav",
+    "pretty": "P285 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "p285_023.json"
+  },
+  {
+    "name": "p285_023_enhanced.wav",
+    "pretty": "P285 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 66,
+    "snapFile": "p285_023_enhanced.json"
+  },
+  {
+    "name": "p286_023.wav",
+    "pretty": "P286 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 158,
+    "snapFile": "p286_023.json"
+  },
+  {
+    "name": "p286_023_enhanced.wav",
+    "pretty": "P286 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 159,
+    "snapFile": "p286_023_enhanced.json"
+  },
+  {
+    "name": "p287_023.wav",
+    "pretty": "P287 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 176,
+    "snapFile": "p287_023.json"
+  },
+  {
+    "name": "p287_023_enhanced.wav",
+    "pretty": "P287 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 131,
+    "snapFile": "p287_023_enhanced.json"
+  },
+  {
+    "name": "p288_023.wav",
+    "pretty": "P288 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p288_023.json"
+  },
+  {
+    "name": "p288_023_enhanced.wav",
+    "pretty": "P288 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 240,
+    "snapFile": "p288_023_enhanced.json"
+  },
+  {
+    "name": "p292_023.wav",
+    "pretty": "P292 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 115,
+    "snapFile": "p292_023.json"
+  },
+  {
+    "name": "p292_023_enhanced.wav",
+    "pretty": "P292 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 115,
+    "snapFile": "p292_023_enhanced.json"
+  },
+  {
+    "name": "p293_023.wav",
+    "pretty": "P293 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 218,
+    "snapFile": "p293_023.json"
+  },
+  {
+    "name": "p293_023_enhanced.wav",
+    "pretty": "P293 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 218,
+    "snapFile": "p293_023_enhanced.json"
+  },
+  {
+    "name": "p294_023.wav",
+    "pretty": "P294 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 279,
+    "snapFile": "p294_023.json"
+  },
+  {
+    "name": "p294_023_enhanced.wav",
+    "pretty": "P294 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 279,
+    "snapFile": "p294_023_enhanced.json"
+  },
+  {
+    "name": "p297_023.wav",
+    "pretty": "P297 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 462,
+    "snapFile": "p297_023.json"
+  },
+  {
+    "name": "p297_023_enhanced.wav",
+    "pretty": "P297 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 186,
+    "snapFile": "p297_023_enhanced.json"
+  },
+  {
+    "name": "p298_023.wav",
+    "pretty": "P298 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 144,
+    "snapFile": "p298_023.json"
+  },
+  {
+    "name": "p298_023_enhanced.wav",
+    "pretty": "P298 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 134,
+    "snapFile": "p298_023_enhanced.json"
+  },
+  {
+    "name": "p299_023.wav",
+    "pretty": "P299 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p299_023.json"
+  },
+  {
+    "name": "p299_023_enhanced.wav",
+    "pretty": "P299 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 94,
+    "snapFile": "p299_023_enhanced.json"
+  },
+  {
+    "name": "p300_023.wav",
+    "pretty": "P300 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 333,
+    "snapFile": "p300_023.json"
+  },
+  {
+    "name": "p300_023_enhanced.wav",
+    "pretty": "P300 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 343,
+    "snapFile": "p300_023_enhanced.json"
+  },
+  {
+    "name": "p301_023.wav",
+    "pretty": "P301 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p301_023.json"
+  },
+  {
+    "name": "p301_023_enhanced.wav",
+    "pretty": "P301 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p301_023_enhanced.json"
+  },
+  {
+    "name": "p302_023.wav",
+    "pretty": "P302 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 286,
+    "snapFile": "p302_023.json"
+  },
+  {
+    "name": "p302_023_enhanced.wav",
+    "pretty": "P302 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 99,
+    "snapFile": "p302_023_enhanced.json"
+  },
+  {
+    "name": "p303_023.wav",
+    "pretty": "P303 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 490,
+    "snapFile": "p303_023.json"
+  },
+  {
+    "name": "p303_023_enhanced.wav",
+    "pretty": "P303 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p303_023_enhanced.json"
+  },
+  {
+    "name": "p304_023.wav",
+    "pretty": "P304 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 137,
+    "snapFile": "p304_023.json"
+  },
+  {
+    "name": "p304_023_enhanced.wav",
+    "pretty": "P304 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 137,
+    "snapFile": "p304_023_enhanced.json"
+  },
+  {
+    "name": "p305_023.wav",
+    "pretty": "P305 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 270,
+    "snapFile": "p305_023.json"
+  },
+  {
+    "name": "p305_023_enhanced.wav",
+    "pretty": "P305 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 270,
+    "snapFile": "p305_023_enhanced.json"
+  },
+  {
+    "name": "p306_023.wav",
+    "pretty": "P306 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 229,
+    "snapFile": "p306_023.json"
+  },
+  {
+    "name": "p306_023_enhanced.wav",
+    "pretty": "P306 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 116,
+    "snapFile": "p306_023_enhanced.json"
+  },
+  {
+    "name": "p307_023.wav",
+    "pretty": "P307 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 387,
+    "snapFile": "p307_023.json"
+  },
+  {
+    "name": "p307_023_enhanced.wav",
+    "pretty": "P307 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 329,
+    "snapFile": "p307_023_enhanced.json"
+  },
+  {
+    "name": "p308_023.wav",
+    "pretty": "P308 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p308_023.json"
+  },
+  {
+    "name": "p308_023_enhanced.wav",
+    "pretty": "P308 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p308_023_enhanced.json"
+  },
+  {
+    "name": "p310_023.wav",
+    "pretty": "P310 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 270,
+    "snapFile": "p310_023.json"
+  },
+  {
+    "name": "p310_023_enhanced.wav",
+    "pretty": "P310 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 270,
+    "snapFile": "p310_023_enhanced.json"
+  },
+  {
+    "name": "p311_023.wav",
+    "pretty": "P311 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p311_023.json"
+  },
+  {
+    "name": "p311_023_enhanced.wav",
+    "pretty": "P311 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p311_023_enhanced.json"
+  },
+  {
+    "name": "p312_023.wav",
+    "pretty": "P312 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p312_023.json"
+  },
+  {
+    "name": "p312_023_enhanced.wav",
+    "pretty": "P312 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p312_023_enhanced.json"
+  },
+  {
+    "name": "p313_023.wav",
+    "pretty": "P313 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 197,
+    "snapFile": "p313_023.json"
+  },
+  {
+    "name": "p313_023_enhanced.wav",
+    "pretty": "P313 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 197,
+    "snapFile": "p313_023_enhanced.json"
+  },
+  {
+    "name": "p314_023.wav",
+    "pretty": "P314 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 226,
+    "snapFile": "p314_023.json"
+  },
+  {
+    "name": "p314_023_enhanced.wav",
+    "pretty": "P314 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 226,
+    "snapFile": "p314_023_enhanced.json"
+  },
+  {
+    "name": "p315_023.wav",
+    "pretty": "P315 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 120,
+    "snapFile": "p315_023.json"
+  },
+  {
+    "name": "p315_023_enhanced.wav",
+    "pretty": "P315 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "p315_023_enhanced.json"
+  },
+  {
+    "name": "p316_023.wav",
+    "pretty": "P316 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 471,
+    "snapFile": "p316_023.json"
+  },
+  {
+    "name": "p316_023_enhanced.wav",
+    "pretty": "P316 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p316_023_enhanced.json"
+  },
+  {
+    "name": "p317_023.wav",
+    "pretty": "P317 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 312,
+    "snapFile": "p317_023.json"
+  },
+  {
+    "name": "p317_023_enhanced.wav",
+    "pretty": "P317 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 312,
+    "snapFile": "p317_023_enhanced.json"
+  },
+  {
+    "name": "p318_023.wav",
+    "pretty": "P318 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 226,
+    "snapFile": "p318_023.json"
+  },
+  {
+    "name": "p318_023_enhanced.wav",
+    "pretty": "P318 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 224,
+    "snapFile": "p318_023_enhanced.json"
+  },
+  {
+    "name": "p323_023.wav",
+    "pretty": "P323 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p323_023.json"
+  },
+  {
+    "name": "p323_023_enhanced.wav",
+    "pretty": "P323 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p323_023_enhanced.json"
+  },
+  {
+    "name": "p326_023.wav",
+    "pretty": "P326 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 429,
+    "snapFile": "p326_023.json"
+  },
+  {
+    "name": "p326_023_enhanced.wav",
+    "pretty": "P326 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 79,
+    "snapFile": "p326_023_enhanced.json"
+  },
+  {
+    "name": "p329_023.wav",
+    "pretty": "P329 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "p329_023.json"
+  },
+  {
+    "name": "p329_023_enhanced.wav",
+    "pretty": "P329 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "p329_023_enhanced.json"
+  },
+  {
+    "name": "p330_023.wav",
+    "pretty": "P330 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 245,
+    "snapFile": "p330_023.json"
+  },
+  {
+    "name": "p330_023_enhanced.wav",
+    "pretty": "P330 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 242,
+    "snapFile": "p330_023_enhanced.json"
+  },
+  {
+    "name": "p333_023.wav",
+    "pretty": "P333 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 200,
+    "snapFile": "p333_023.json"
+  },
+  {
+    "name": "p333_023_enhanced.wav",
+    "pretty": "P333 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 202,
+    "snapFile": "p333_023_enhanced.json"
+  },
+  {
+    "name": "p334_023.wav",
+    "pretty": "P334 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "p334_023.json"
+  },
+  {
+    "name": "p334_023_enhanced.wav",
+    "pretty": "P334 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 113,
+    "snapFile": "p334_023_enhanced.json"
+  },
+  {
+    "name": "p335_023.wav",
+    "pretty": "P335 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 293,
+    "snapFile": "p335_023.json"
+  },
+  {
+    "name": "p335_023_enhanced.wav",
+    "pretty": "P335 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 286,
+    "snapFile": "p335_023_enhanced.json"
+  },
+  {
+    "name": "p336_023.wav",
+    "pretty": "P336 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 235,
+    "snapFile": "p336_023.json"
+  },
+  {
+    "name": "p336_023_enhanced.wav",
+    "pretty": "P336 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 226,
+    "snapFile": "p336_023_enhanced.json"
+  },
+  {
+    "name": "p339_023.wav",
+    "pretty": "P339 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 480,
+    "snapFile": "p339_023.json"
+  },
+  {
+    "name": "p339_023_enhanced.wav",
+    "pretty": "P339 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 79,
+    "snapFile": "p339_023_enhanced.json"
+  },
+  {
+    "name": "p341_023.wav",
+    "pretty": "P341 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p341_023.json"
+  },
+  {
+    "name": "p341_023_enhanced.wav",
+    "pretty": "P341 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 127,
+    "snapFile": "p341_023_enhanced.json"
+  },
+  {
+    "name": "p343_023.wav",
+    "pretty": "P343 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 203,
+    "snapFile": "p343_023.json"
+  },
+  {
+    "name": "p343_023_enhanced.wav",
+    "pretty": "P343 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 189,
+    "snapFile": "p343_023_enhanced.json"
+  },
+  {
+    "name": "p345_023.wav",
+    "pretty": "P345 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "p345_023.json"
+  },
+  {
+    "name": "p345_023_enhanced.wav",
+    "pretty": "P345 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 121,
+    "snapFile": "p345_023_enhanced.json"
+  },
+  {
+    "name": "p347_023.wav",
+    "pretty": "P347 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 436,
+    "snapFile": "p347_023.json"
+  },
+  {
+    "name": "p347_023_enhanced.wav",
+    "pretty": "P347 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 128,
+    "snapFile": "p347_023_enhanced.json"
+  },
+  {
+    "name": "p351_023.wav",
+    "pretty": "P351 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p351_023.json"
+  },
+  {
+    "name": "p351_023_enhanced.wav",
+    "pretty": "P351 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p351_023_enhanced.json"
+  },
+  {
+    "name": "p360_023.wav",
+    "pretty": "P360 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 471,
+    "snapFile": "p360_023.json"
+  },
+  {
+    "name": "p360_023_enhanced.wav",
+    "pretty": "P360 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 462,
+    "snapFile": "p360_023_enhanced.json"
+  },
+  {
+    "name": "p361_023.wav",
+    "pretty": "P361 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 216,
+    "snapFile": "p361_023.json"
+  },
+  {
+    "name": "p361_023_enhanced.wav",
+    "pretty": "P361 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 66,
+    "snapFile": "p361_023_enhanced.json"
+  },
+  {
+    "name": "p363_023.wav",
+    "pretty": "P363 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p363_023.json"
+  },
+  {
+    "name": "p363_023_enhanced.wav",
+    "pretty": "P363 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p363_023_enhanced.json"
+  },
+  {
+    "name": "p364_023.wav",
+    "pretty": "P364 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p364_023.json"
+  },
+  {
+    "name": "p364_023_enhanced.wav",
+    "pretty": "P364 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "p364_023_enhanced.json"
+  },
+  {
+    "name": "p374_023.wav",
+    "pretty": "P374 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 500,
+    "snapFile": "p374_023.json"
+  },
+  {
+    "name": "p374_023_enhanced.wav",
+    "pretty": "P374 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 157,
+    "snapFile": "p374_023_enhanced.json"
+  },
+  {
+    "name": "p376_023.wav",
+    "pretty": "P376 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 233,
+    "snapFile": "p376_023.json"
+  },
+  {
+    "name": "p376_023_enhanced.wav",
+    "pretty": "P376 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 92,
+    "snapFile": "p376_023_enhanced.json"
+  },
+  {
+    "name": "s5_023.wav",
+    "pretty": "S5 023",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 453,
+    "snapFile": "s5_023.json"
+  },
+  {
+    "name": "s5_023_enhanced.wav",
+    "pretty": "S5 023 Enhanced",
+    "dir": "vctk",
+    "license": "CC-BY-4.0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "s5_023_enhanced.json"
+  },
+  {
+    "name": "a-moment-by.wav",
+    "pretty": "A Moment By",
+    "dir": "alba-mackenna",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 124,
+    "snapFile": "a-moment-by.json"
+  },
+  {
+    "name": "announcer.wav",
+    "pretty": "Announcer",
+    "dir": "alba-mackenna",
+    "license": "CC-BY-4.0",
+    "gender": "female",
+    "f0": 258,
+    "snapFile": "announcer.json"
+  },
+  {
+    "name": "casual.wav",
+    "pretty": "Casual",
+    "dir": "alba-mackenna",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 141,
+    "snapFile": "casual.json"
+  },
+  {
+    "name": "merchant.wav",
+    "pretty": "Merchant",
+    "dir": "alba-mackenna",
+    "license": "CC-BY-4.0",
+    "gender": "male",
+    "f0": 75,
+    "snapFile": "merchant.json"
+  },
+  {
+    "name": "bill_boerst.wav",
+    "pretty": "Bill Boerst",
+    "dir": "voice-zero",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 164,
+    "snapFile": "bill_boerst.json"
+  },
+  {
+    "name": "caro_davy.wav",
+    "pretty": "Caro Davy",
+    "dir": "voice-zero",
+    "license": "CC0",
+    "gender": "female",
+    "f0": 253,
+    "snapFile": "caro_davy.json"
+  },
+  {
+    "name": "peter_yearsley.wav",
+    "pretty": "Peter Yearsley",
+    "dir": "voice-zero",
+    "license": "CC0",
+    "gender": "unknown",
+    "f0": 0,
+    "snapFile": "peter_yearsley.json"
+  },
+  {
+    "name": "stuart_bell.wav",
+    "pretty": "Stuart Bell",
+    "dir": "voice-zero",
+    "license": "CC0",
+    "gender": "male",
+    "f0": 63,
+    "snapFile": "stuart_bell.json"
+  }
+]

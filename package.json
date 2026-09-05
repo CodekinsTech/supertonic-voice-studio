@@ -19,6 +19,7 @@
     "@capacitor/ios": "^8.5.1",
     "@capacitor/preferences": "^8.0.1",
     "lamejs": "^1.2.1",
+    "onnxruntime-node": "^1.29.0",
     "onnxruntime-web": "^1.17.0"
   },
   "devDependencies": {

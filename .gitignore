@@ -3,3 +3,6 @@ dist/
 .vite/
 *.log
 .DS_Store
+.voice-cache/
+public/voice-snapshots/
+public/voice-snapshots-bin/
