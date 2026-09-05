@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#F7F9FD" />
 <title>Wave Voice Studio</title>
 <style>
+@font-face{font-family:'Aicon';src:url('./aicon-semibold.otf') format('opentype');font-weight:600;font-display:swap}
 :root{
   --bg-0:#F7F9FD; --bg-1:#EDF2F9; --bg-2:#E1E8F4;
   --ink:#1E2A52; --ink-mid:#2C3E80; --ink-soft:#4D5DA8; --muted:#8A92BE;
@@ -20,7 +21,7 @@
 html,body{margin:0;color:var(--ink-mid)}
 body{
   font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
-  min-height:100vh;padding:14px;
+  min-height:100vh;padding:14px;padding-top:calc(24px + env(safe-area-inset-top));
   background:
     radial-gradient(900px 600px at 12% -10%, rgba(124,58,237,.10), transparent 60%),
     radial-gradient(700px 500px at 110% 5%, rgba(0,184,212,.10), transparent 65%),
@@ -33,6 +34,10 @@ body{
 
 /* Header */
 header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+.page-nav{display:flex;gap:6px;padding:0 6px 8px;flex-wrap:wrap}
+.page-nav a{font-size:12px;font-weight:600;padding:4px 12px;border-radius:8px;background:var(--bg-2);color:var(--ink-soft);text-decoration:none;transition:all .2s}
+.page-nav a:hover{background:var(--brand);color:#fff}
+.page-nav a.active{background:var(--brand);color:#fff;pointer-events:none}
 .brand-mark{display:flex;align-items:center;gap:14px}
 .brand-mark .glyph{
   width:72px;height:72px;border-radius:16px;
@@ -44,7 +49,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:2px
   filter:drop-shadow(0 4px 12px rgba(124,58,237,.22)) drop-shadow(0 0 8px rgba(0,184,212,.28));
 }
 .brand-mark h1{
-  margin:0;font-size:30px;font-weight:800;letter-spacing:-.02em;
+  margin:0;font-family:'Aicon',sans-serif;font-size:30px;font-weight:600;letter-spacing:-.02em;
   color:transparent;
   background:linear-gradient(135deg,#7C3AED 0%,#06B6D4 100%);
   -webkit-background-clip:text;background-clip:text;
@@ -244,6 +249,54 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .lang-chip:hover{background:#fff;border-color:var(--hair-strong)}
 .lang-chip.active{background:linear-gradient(135deg,#7C3AED,var(--aqua));color:#fff;border-color:transparent}
 
+/* Voice Library */
+.vlib-search{
+  display:flex;gap:6px;margin-bottom:10px;position:relative;z-index:1;
+}
+.vlib-search input{
+  flex:1;padding:8px 12px 8px 32px;border-radius:10px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);color:var(--ink-mid);font-size:12px;font-weight:500;
+  font-family:inherit;outline:none;transition:.15s;
+}
+.vlib-search input:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.13)}
+.vlib-search .search-icon{
+  position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;color:var(--muted);pointer-events:none;
+}
+.vlib-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
+  max-height:280px;overflow-y:auto;overflow-x:hidden;
+  position:relative;z-index:1;padding-right:2px;
+  scrollbar-width:thin;scrollbar-color:rgba(124,58,237,.2) transparent;
+}
+.vlib-grid::-webkit-scrollbar{width:4px}
+.vlib-grid::-webkit-scrollbar-thumb{background:rgba(124,58,237,.2);border-radius:99px}
+.vlib-card{
+  padding:10px 8px;border-radius:10px;border:1px solid var(--hair);
+  background:rgba(255,255,255,.85);cursor:pointer;transition:.18s;
+  text-align:center;position:relative;
+}
+.vlib-card:hover{background:#fff;border-color:var(--hair-strong);transform:translateY(-1px)}
+.vlib-card.active{
+  background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(6,182,212,.10));
+  border-color:rgba(124,58,237,.35);
+}
+.vlib-card.cloning{opacity:.7;pointer-events:none}
+.vlib-card .vlib-name{font-size:11px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vlib-card .vlib-tag{font-size:8px;font-weight:600;color:var(--muted);margin-top:2px}
+.vlib-card .vlib-cached{
+  position:absolute;top:4px;right:4px;width:8px;height:8px;
+  border-radius:50%;background:var(--mint);
+  box-shadow:0 0 0 2px rgba(255,255,255,.9);
+}
+.vlib-card .vlib-spinner{
+  position:absolute;top:4px;right:4px;width:12px;height:12px;
+  border:2px solid rgba(124,58,237,.15);border-top-color:var(--brand);
+  border-radius:50%;animation:spin .6s linear infinite;
+}
+.vlib-status{font-size:10px;font-weight:600;color:var(--muted);margin-top:6px;min-height:16px;position:relative;z-index:1}
+.vlib-count{font-size:9px;font-weight:600;color:var(--muted);position:relative;z-index:1;margin-bottom:6px}
+
 /* Clone panel special */
 .panel-clone{--g1:#7C3AED;--g2:#06B6D4}
 .clone-drop-zone{
@@ -392,6 +445,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   .brand-mark h1{font-size:24px}
   .voice-chip-grid{grid-template-columns:repeat(3,1fr)}
   .emotion-grid{grid-template-columns:repeat(3,1fr)}
+  .vlib-grid{grid-template-columns:repeat(3,1fr);max-height:240px}
   .dsp-grid{grid-template-columns:1fr}
   .panel{padding:14px 14px;border-radius:14px}
   .dl-row{flex-wrap:wrap}
@@ -410,6 +464,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   .crumb{font-size:9px;padding:4px 8px;white-space:nowrap;flex-shrink:0}
   .voice-chip-grid{grid-template-columns:repeat(2,1fr)}
   .emotion-grid{grid-template-columns:repeat(2,1fr)}
+  .vlib-grid{grid-template-columns:repeat(2,1fr);max-height:220px}
   .voice-chip{padding:10px 4px;font-size:10px;min-height:44px}
   .panel{padding:12px 10px;border-radius:12px;margin-bottom:10px}
   h3{font-size:10px;gap:6px}
@@ -445,6 +500,13 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   </div>
 </header>
 
+<nav class="page-nav">
+  <a href="./">Home</a>
+  <a href="./wave.html" class="active">Wave</a>
+  <a href="./supertonic.html">Supertonic</a>
+  <a href="./kokoro/">Kokoro</a>
+</nav>
+
 <!-- Status -->
 <div class="status-bar" id="statusBar">
   <span id="statusText">Ready &mdash; load model to begin</span>
@@ -467,6 +529,25 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div class="voice-chip" data-voice="atlas">Atlas<span class="gender">Male</span><button class="voice-test-btn" data-voice="atlas" title="Test voice">&#9654;</button></div>
     <div class="voice-chip" data-voice="rex">Rex<span class="gender">Male</span><button class="voice-test-btn" data-voice="rex" title="Test voice">&#9654;</button></div>
     <div class="voice-chip" data-voice="sage">Sage<span class="gender">Neutral</span><button class="voice-test-btn" data-voice="sage" title="Test voice">&#9654;</button></div>
+  </div>
+</div>
+
+<!-- ===== COMMUNITY VOICE LIBRARY ===== -->
+<button class="section-toggle" id="toggleVoiceLib">
+  &#127908; Community Voice Library
+  <span class="badge-count" id="vlibBadge">voices</span>
+  <span class="arrow">&#9660;</span>
+</button>
+<div class="collapsible" id="voicelibSection">
+  <div class="panel" style="--g1:#A855F7;--g2:#06B6D4">
+    <h3><span class="swatch"></span> Voice Library <small>Auto-clone on select</small></h3>
+    <div class="vlib-search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="vlibSearch" placeholder="Search voices...">
+    </div>
+    <div class="vlib-count" id="vlibCount">Loading voice catalog...</div>
+    <div class="vlib-grid" id="vlibGrid"></div>
+    <div class="vlib-status" id="vlibStatus"></div>
   </div>
 </div>
 
@@ -806,9 +887,7 @@ const MODEL_FILES = [
   { name: 'bundle', file: 'bundle.json', bytes: 15000 },
   { name: 'bos_embedding', file: 'bos_before_voice.npy', bytes: 5000 }
 ];
-// voices.bin URL — not yet publicly available from HuggingFace model repo
-// When available, this enables distinct predefined voices; otherwise BOS-only conditioning is used
-const VOICES_BIN_URL = MODEL_BASE + 'voices.bin';
+const VOICES_BIN_URL = 'https://huggingface.co/spaces/KevinAHM/pocket-tts-web/resolve/main/onnx/english_2026-04/voices.bin';
 const SPM_VOCAB_URL = '/spm_vocab.json';
 const TOTAL_BYTES = MODEL_FILES.reduce((s, m) => s + m.bytes, 0);
 
@@ -825,7 +904,6 @@ const VOICES = [
   { id: 'sage', name: 'Sage', gender: 'X' }
 ];
 
-// Map UI voice names to actual model predefined voices from voices.bin
 const VOICE_MAP = {
   aria: 'alba',
   luna: 'cosette',
@@ -1228,8 +1306,10 @@ document.querySelectorAll('#voiceGrid .voice-chip').forEach(chip => {
     state.useClone = false;
     const clonedChip = $('clonedVoiceChip');
     if (clonedChip) clonedChip.style.display = 'none';
+    document.querySelectorAll('.vlib-card.active').forEach(c => c.classList.remove('active'));
   });
 });
+
 
 /* ───────── Voice test buttons ───────── */
 let _testAudio = null;
@@ -1600,6 +1680,248 @@ $('clearCloneBtn').addEventListener('click', () => {
   statusText.textContent = 'Ready';
 });
 
+/* ───────── Community Voice Library ───────── */
+const VLIB_BASE = 'https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/';
+const VLIB_API = 'https://huggingface.co/api/models/kyutai/tts-voices/tree/main/voice-donations';
+const VLIB_CACHE_DB = 'wave-voice-library';
+const VLIB_STORE = 'snapshots';
+
+let vlibVoices = [];
+let vlibCachedSet = new Set();
+
+function openVlibDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(VLIB_CACHE_DB, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(VLIB_STORE);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function vlibGetCached(name) {
+  try {
+    const db = await openVlibDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction(VLIB_STORE, 'readonly');
+      const req = tx.objectStore(VLIB_STORE).get(name);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch { return null; }
+}
+
+async function vlibSaveSnapshot(name, snapData) {
+  try {
+    const db = await openVlibDB();
+    const serialized = {};
+    for (const [key, tensor] of snapData.entries()) {
+      serialized[key] = {
+        data: Array.from(tensor.data instanceof BigInt64Array ? Array.from(tensor.data, v => v.toString()) : tensor.data),
+        dims: [...tensor.dims],
+        type: tensor.type
+      };
+    }
+    return new Promise((resolve) => {
+      const tx = db.transaction(VLIB_STORE, 'readwrite');
+      tx.objectStore(VLIB_STORE).put(serialized, name);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => resolve();
+    });
+  } catch {}
+}
+
+async function vlibLoadSnapshot(name) {
+  const data = await vlibGetCached(name);
+  if (!data) return null;
+  const snap = new Map();
+  for (const [key, val] of Object.entries(data)) {
+    let typedData;
+    if (val.type === 'int64') {
+      typedData = BigInt64Array.from(val.data, v => BigInt(v));
+    } else if (val.type === 'bool') {
+      typedData = new Uint8Array(val.data);
+    } else {
+      typedData = new Float32Array(val.data);
+    }
+    snap.set(key, new ort.Tensor(val.type, typedData, val.dims));
+  }
+  return snap;
+}
+
+async function vlibListCached() {
+  try {
+    const db = await openVlibDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction(VLIB_STORE, 'readonly');
+      const req = tx.objectStore(VLIB_STORE).getAllKeys();
+      req.onsuccess = () => resolve(new Set(req.result));
+      req.onerror = () => resolve(new Set());
+    });
+  } catch { return new Set(); }
+}
+
+function vlibPrettyName(filename) {
+  return filename.replace(/\.wav$/i, '').replace(/[_-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function vlibRenderGrid(filter) {
+  const grid = $('vlibGrid');
+  const q = (filter || '').toLowerCase().trim();
+  const filtered = q ? vlibVoices.filter(v => v.pretty.toLowerCase().includes(q)) : vlibVoices;
+  $('vlibCount').textContent = filtered.length + ' of ' + vlibVoices.length + ' voices';
+
+  grid.innerHTML = filtered.map(v => {
+    const cached = vlibCachedSet.has(v.name);
+    const active = state.voice === 'vlib:' + v.name && state.useClone;
+    return '<div class="vlib-card' + (active ? ' active' : '') + '" data-vlib="' + v.name + '">' +
+      (cached ? '<div class="vlib-cached" title="Cached"></div>' : '') +
+      '<div class="vlib-name">' + v.pretty + '</div>' +
+      '<div class="vlib-tag">' + (cached ? 'Ready' : 'Click to activate') + '</div>' +
+      '</div>';
+  }).join('');
+
+  grid.querySelectorAll('.vlib-card').forEach(card => {
+    card.addEventListener('click', () => vlibSelectVoice(card.dataset.vlib));
+  });
+}
+
+async function vlibSelectVoice(name) {
+  if (!window.__waveTTS || !window.__waveTTS.ready) {
+    $('vlibStatus').textContent = 'Models not loaded yet';
+    return;
+  }
+
+  const card = document.querySelector('.vlib-card[data-vlib="' + name + '"]');
+  if (card) {
+    card.classList.add('cloning');
+    const existing = card.querySelector('.vlib-cached');
+    if (existing) existing.remove();
+    card.insertAdjacentHTML('afterbegin', '<div class="vlib-spinner"></div>');
+  }
+
+  $('vlibStatus').textContent = 'Loading ' + vlibPrettyName(name) + '...';
+
+  try {
+    const engine = window.__waveTTS;
+    const snapKey = 'vlib:' + name;
+
+    // Check IndexedDB cache first
+    const cachedSnap = await vlibLoadSnapshot(name);
+    if (cachedSnap) {
+      engine.voiceSnapshots.set(snapKey, cachedSnap);
+      vlibCachedSet.add(name);
+      activateVlibVoice(name);
+      $('vlibStatus').textContent = vlibPrettyName(name) + ' ready (cached)';
+      vlibRenderGrid($('vlibSearch').value);
+      return;
+    }
+
+    // Download WAV from HuggingFace
+    $('vlibStatus').textContent = 'Downloading ' + vlibPrettyName(name) + '...';
+    const wavUrl = VLIB_BASE + encodeURIComponent(name);
+    const resp = await fetch(wavUrl);
+    if (!resp.ok) throw new Error('Download failed (' + resp.status + ')');
+    const wavBuffer = await resp.arrayBuffer();
+
+    // Decode and resample to 24kHz mono
+    $('vlibStatus').textContent = 'Processing audio...';
+    const audioCtx = getAudioCtx();
+    const decoded = await audioCtx.decodeAudioData(wavBuffer);
+    const offlineCtx = new OfflineAudioContext(1, Math.ceil(decoded.duration * TTS_SAMPLE_RATE), TTS_SAMPLE_RATE);
+    const source = offlineCtx.createBufferSource();
+    source.buffer = decoded;
+    source.connect(offlineCtx.destination);
+    source.start(0);
+    const resampled = await offlineCtx.startRendering();
+    let audio24k = resampled.getChannelData(0);
+    if (audio24k.length > 30 * TTS_SAMPLE_RATE) audio24k = audio24k.subarray(0, 30 * TTS_SAMPLE_RATE);
+
+    // Run mimi_encoder
+    $('vlibStatus').textContent = 'Encoding voice identity...';
+    const audioTensor = new ort.Tensor('float32', new Float32Array(audio24k), [1, 1, audio24k.length]);
+    const encOut = await engine.encoderSession.run({ audio: audioTensor });
+    const emb = encOut[engine.encoderSession.outputNames[0]];
+
+    // Prepend BOS embedding
+    const bosData = engine.bosEmb;
+    const embData = new Float32Array(bosData.data.length + emb.data.length);
+    embData.set(bosData.data);
+    embData.set(emb.data, bosData.data.length);
+    const T = (emb.dims.length === 3 ? emb.dims[1] : emb.dims[0]) + 1;
+    const voiceEmb = { data: embData, dims: [1, T, TTS_COND_DIM] };
+
+    // Run conditioning pass and snapshot
+    $('vlibStatus').textContent = 'Conditioning voice...';
+    engine.mainRunner.reset();
+    await engine.mainRunner.run({
+      sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
+      text_embeddings: new ort.Tensor('float32', voiceEmb.data, voiceEmb.dims),
+    });
+    const snap = engine.mainRunner.snapshot();
+    engine.voiceSnapshots.set(snapKey, snap);
+
+    // Cache to IndexedDB
+    await vlibSaveSnapshot(name, snap);
+    vlibCachedSet.add(name);
+
+    activateVlibVoice(name);
+    $('vlibStatus').textContent = vlibPrettyName(name) + ' cloned and cached!';
+    vlibRenderGrid($('vlibSearch').value);
+
+  } catch (e) {
+    console.error('Voice library clone failed:', e);
+    $('vlibStatus').textContent = 'Failed: ' + e.message;
+    if (card) {
+      card.classList.remove('cloning');
+      const spinner = card.querySelector('.vlib-spinner');
+      if (spinner) spinner.remove();
+    }
+  }
+}
+
+function activateVlibVoice(name) {
+  state.voice = 'vlib:' + name;
+  state.useClone = true;
+  document.querySelectorAll('#voiceGrid .voice-chip').forEach(c => c.classList.remove('active'));
+  const clonedChip = $('clonedVoiceChip');
+  if (clonedChip) clonedChip.style.display = 'none';
+  statusText.textContent = vlibPrettyName(name) + ' voice active';
+}
+
+async function vlibInit() {
+  vlibCachedSet = await vlibListCached();
+
+  try {
+    const resp = await fetch(VLIB_API);
+    if (!resp.ok) throw new Error('API ' + resp.status);
+    const files = await resp.json();
+    vlibVoices = files
+      .filter(f => f.path.endsWith('.wav'))
+      .map(f => {
+        const fname = f.path.split('/').pop();
+        return { name: fname, pretty: vlibPrettyName(fname), size: f.size || 0 };
+      })
+      .sort((a, b) => {
+        const ac = vlibCachedSet.has(a.name) ? 0 : 1;
+        const bc = vlibCachedSet.has(b.name) ? 0 : 1;
+        if (ac !== bc) return ac - bc;
+        return a.pretty.localeCompare(b.pretty);
+      });
+
+    $('vlibBadge').textContent = vlibVoices.length + ' voices';
+    vlibRenderGrid('');
+  } catch (e) {
+    console.warn('Failed to load voice catalog:', e);
+    $('vlibCount').textContent = 'Failed to load catalog — check connection';
+  }
+}
+
+$('vlibSearch').addEventListener('input', function() {
+  vlibRenderGrid(this.value);
+});
+
+vlibInit();
+
 /* ───────── Auto Model Loading ───────── */
 function formatMB(b) { return (b / 1048576).toFixed(1) + ' MB'; }
 
@@ -1785,7 +2107,7 @@ goBtn.addEventListener('click', async () => {
   progressBar.classList.add('show');
   progressFill.style.width = '0%';
 
-  const voiceName = state.useClone ? 'Cloned' : state.voice;
+  const voiceName = state.voice.startsWith('vlib:') ? vlibPrettyName(state.voice.slice(5)) : (state.useClone ? 'Cloned' : state.voice);
   genText.textContent = 'Generating with ' + voiceName + '...';
   statusText.textContent = 'Generating speech...';
 
@@ -1798,7 +2120,7 @@ goBtn.addEventListener('click', async () => {
     const tokenizer = engine.tokenizer;
 
     // Pick voice snapshot (use selected voice name, fall back to default)
-    const voiceKey = state.useClone ? 'cloned' : state.voice;
+    const voiceKey = state.voice.startsWith('vlib:') ? state.voice : (state.useClone ? 'cloned' : state.voice);
     const voiceSnap = engine.voiceSnapshots.get(voiceKey) || engine.defaultVoiceSnap;
 
     // Split text into sentence chunks
@@ -1816,8 +2138,11 @@ goBtn.addEventListener('click', async () => {
       const terminal = lastChunk || isTerminalBoundary(sentences[si]);
       const chunkEosExtra = terminal ? eosExtra : 1;
 
-      // 1. Restore voice KV state
-      mainRunner.restore(voiceSnap);
+      // 1. Restore voice KV state (only on first sentence — subsequent
+      //    sentences carry the established voice identity forward)
+      if (si === 0) {
+        mainRunner.restore(voiceSnap);
+      }
 
       // 2. Tokenize text and run through text conditioner
       const ids = tokenizer.encode(prepared);
@@ -1854,7 +2179,7 @@ goBtn.addEventListener('click', async () => {
           text_embeddings: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_COND_DIM]),
         });
 
-        const conditioning = arOut.conditioning; // [1, 1024]
+        const conditioning = arOut.conditioning;
         const eosLogit = arOut.eos_logit.data[0];
 
         if (!eos && eosLogit > TTS_EOS_THRESHOLD) eos = true;
@@ -1898,7 +2223,8 @@ goBtn.addEventListener('click', async () => {
             latent: new ort.Tensor('float32', lat, [1, T, TTS_LATENT_DIM]),
           });
           const audioFrame = decOut.audio_frame || decOut[Object.keys(decOut)[0]];
-          allAudio.push(Float32Array.from(audioFrame.data));
+          const audioData = Float32Array.from(audioFrame.data);
+          allAudio.push(audioData);
           chunkTarget = Math.min(chunkTarget * 2, 8);
         }
 

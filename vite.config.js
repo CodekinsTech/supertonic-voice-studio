@@ -8,6 +8,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        app: resolve(__dirname, 'app.html'),
         studio: resolve(__dirname, 'studio.html'),
         supertonic: resolve(__dirname, 'supertonic.html'),
         wave: resolve(__dirname, 'wave.html'),

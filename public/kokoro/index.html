@@ -31,7 +31,7 @@
 html,body{margin:0;color:var(--ink-mid)}
 body{
   font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
-  min-height:100vh;padding:14px;
+  min-height:100vh;padding:14px;padding-top:calc(24px + env(safe-area-inset-top));
   background:
     radial-gradient(900px 600px at 12% -10%, rgba(37,99,255,.10), transparent 60%),
     radial-gradient(700px 500px at 110% 5%, rgba(0,184,212,.10), transparent 65%),
@@ -42,6 +42,10 @@ body{
   max-width:720px;margin:0 auto;
 }
 header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:10px}
+.page-nav{display:flex;gap:6px;padding:0 6px 8px;flex-wrap:wrap}
+.page-nav a{font-size:12px;font-weight:600;padding:4px 12px;border-radius:8px;background:var(--bg-2);color:var(--ink-soft);text-decoration:none;transition:all .2s}
+.page-nav a:hover{background:var(--brand);color:#fff}
+.page-nav a.active{background:var(--brand);color:#fff;pointer-events:none}
 .brand-mark{display:flex;align-items:center;gap:16px}
 .brand-mark .glyph{
   width:88px;height:88px;border-radius:18px;
@@ -881,6 +885,13 @@ h3 small{display:none}
   </div>
 </header>
 
+<nav class="page-nav">
+  <a href="/">Home</a>
+  <a href="/wave.html">Wave</a>
+  <a href="/supertonic.html">Supertonic</a>
+  <a href="/kokoro/" class="active">Kokoro</a>
+</nav>
+
 <!-- Tab nav hidden in v2 — single-page progressive disclosure -->
 <div style="display:none">
 <nav class="app-tabs" role="tablist" aria-label="Studio sections">
@@ -906,35 +917,12 @@ h3 small{display:none}
   <!-- ═══════════════ MAIN FLOW — TEXT + VOICE + GENERATE ═══════════════ -->
   <div class="col">
 
-    <!-- Voice Source (always visible) -->
+    <!-- Simple voice picker -->
     <section class="panel panel-sapphire">
-      <h3><span class="swatch"></span>Voice Source</h3>
-      <div class="vrow">
-        <div class="vbead" id="beadA"></div>
-        <div class="vinfo">
-          <div class="vlabel">Voice A <span id="metaA"></span></div>
-          <select id="voiceA"></select>
-        </div>
-        <button class="del-btn" id="delA" title="Delete saved voice" disabled>🗑</button>
-        <button class="preview-voice-btn" id="previewA" title="Preview voice A">&#9654;</button>
-      </div>
-      <div class="vrow">
-        <div class="vbead" id="beadB"></div>
-        <div class="vinfo">
-          <div class="vlabel">Voice B <span id="metaB"></span></div>
-          <select id="voiceB"></select>
-        </div>
-        <button class="del-btn" id="delB" title="Delete saved voice" disabled>🗑</button>
-        <button class="preview-voice-btn" id="previewB" title="Preview voice B">&#9654;</button>
-      </div>
-      <div class="row" style="margin-top:8px">
-        <label>Mix</label>
-        <div class="slider-wrap">
-          <span class="endpt">A</span>
-          <input type="range" id="factor" min="-2" max="2" step="0.05" value="0">
-          <span class="endpt">B</span>
-          <span class="factor-val" id="factorVal">0.00</span>
-        </div>
+      <h3><span class="swatch"></span>Voice</h3>
+      <div class="row">
+        <select id="voiceQuick" style="flex:1"></select>
+        <button class="preview-voice-btn" id="previewQuick" title="Preview voice">&#9654;</button>
       </div>
       <div class="row">
         <label>Speed</label>
@@ -1034,6 +1022,37 @@ h3 small{display:none}
       <span class="arrow">▼</span>
     </button>
     <div class="v2-collapsible" id="v2AdvancedSection">
+
+    <section class="panel panel-sapphire">
+      <h3><span class="swatch"></span>Voice Mixer</h3>
+      <div class="vrow">
+        <div class="vbead" id="beadA"></div>
+        <div class="vinfo">
+          <div class="vlabel">Voice A <span id="metaA"></span></div>
+          <select id="voiceA"></select>
+        </div>
+        <button class="del-btn" id="delA" title="Delete saved voice" disabled>🗑</button>
+        <button class="preview-voice-btn" id="previewA" title="Preview voice A">&#9654;</button>
+      </div>
+      <div class="vrow">
+        <div class="vbead" id="beadB"></div>
+        <div class="vinfo">
+          <div class="vlabel">Voice B <span id="metaB"></span></div>
+          <select id="voiceB"></select>
+        </div>
+        <button class="del-btn" id="delB" title="Delete saved voice" disabled>🗑</button>
+        <button class="preview-voice-btn" id="previewB" title="Preview voice B">&#9654;</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <label>Mix</label>
+        <div class="slider-wrap">
+          <span class="endpt">A</span>
+          <input type="range" id="factor" min="-2" max="2" step="0.05" value="0">
+          <span class="endpt">B</span>
+          <span class="factor-val" id="factorVal">0.00</span>
+        </div>
+      </div>
+    </section>
 
     <section class="panel" style="--g1:#3D7BC9;--g2:#B2DAE4">
       <h3><span class="swatch"></span> Language <small>10 languages</small></h3>
@@ -1592,6 +1611,24 @@ window.KVS_FREE_MODE = false;
   }
   fill('voiceA','af_heart');
   fill('voiceB','bf_emma');
+  fill('voiceQuick','af_heart');
+
+  // Sync voiceQuick ↔ voiceA
+  var vq=document.getElementById('voiceQuick');
+  var va=document.getElementById('voiceA');
+  if(vq&&va){
+    vq.addEventListener('change',function(){va.value=vq.value;va.dispatchEvent(new Event('change'));});
+    va.addEventListener('change',function(){if(vq.value!==va.value)vq.value=va.value;});
+  }
+  // Preview button for simple picker
+  var pq=document.getElementById('previewQuick');
+  if(pq){
+    pq.addEventListener('click',function(){
+      var pa=document.getElementById('previewA');
+      if(va&&vq)va.value=vq.value;
+      if(pa)pa.click();
+    });
+  }
 })();
 
 // Close save/recipe dropdown after menu item click, and close others when one opens
@@ -1864,6 +1901,7 @@ document.addEventListener('click',function(e){
     try{
       // Need model loaded
       if(typeof C==='function')await C();
+      if(!window.__kokoroTTS){throw new Error('Model not loaded yet — wait for loading to finish');}
       var result=await window.__kokoroTTS.generate('Hello, how are you doing today?',{voice:voice,speed:1});
       var samples=result.audio instanceof Float32Array?result.audio:new Float32Array(result.audio);
       var sr=result.sampling_rate;

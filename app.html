@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0B0F1A" />
+<title>Wave Voice Studio</title>
+<style>
+:root{
+  --bg:#0B0F1A;--bg-card:rgba(255,255,255,.06);--ink:#E8ECF4;--ink-soft:#8A92BE;
+  --brand:#7C3AED;--brand-light:#A855F7;--aqua:#00B8D4;--mint:#10D9A0;
+  --bar-bg:rgba(255,255,255,.08);--bar-fill:linear-gradient(90deg,#7C3AED,#06B6D4);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  background:var(--bg);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;padding-top:calc(24px + env(safe-area-inset-top));
+  padding-bottom:calc(24px + env(safe-area-inset-bottom));
+}
+
+.logo{width:80px;height:80px;margin-bottom:16px;border-radius:20px;overflow:hidden}
+.logo img{width:100%;height:100%}
+.app-title{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px;
+  background:linear-gradient(135deg,#7C3AED,#06B6D4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.app-sub{font-size:13px;color:var(--ink-soft);margin-bottom:32px}
+
+/* Download section */
+.dl-section{width:100%;max-width:360px;text-align:center}
+.dl-status{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:12px;min-height:20px}
+.dl-detail{font-size:11px;color:var(--ink-soft);margin-bottom:8px;min-height:16px}
+
+.progress-outer{width:100%;height:8px;border-radius:99px;background:var(--bar-bg);overflow:hidden;margin-bottom:6px}
+.progress-inner{height:100%;border-radius:99px;background:var(--bar-fill);width:0%;transition:width .3s ease}
+
+.dl-size{font-size:11px;color:var(--ink-soft);margin-bottom:24px}
+
+/* Engine cards */
+.engines{display:flex;flex-direction:column;gap:10px;width:100%;max-width:360px;margin-bottom:24px}
+.engine-card{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;
+  background:var(--bg-card);border:1px solid rgba(255,255,255,.06);
+  transition:all .2s;
+}
+.engine-card.done{border-color:rgba(16,217,160,.3)}
+.engine-card.active{border-color:rgba(124,58,237,.4);box-shadow:0 0 20px rgba(124,58,237,.15)}
+.engine-card.pending{opacity:.5}
+.engine-ico{font-size:24px;width:36px;text-align:center;flex-shrink:0}
+.engine-info{flex:1;min-width:0}
+.engine-name{font-size:14px;font-weight:600}
+.engine-size{font-size:11px;color:var(--ink-soft)}
+.engine-check{font-size:16px;flex-shrink:0}
+
+/* Start button */
+.start-btn{
+  display:none;width:100%;max-width:360px;padding:14px;border:none;border-radius:14px;
+  font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;
+  background:var(--bar-fill);color:#fff;
+  box-shadow:0 4px 20px rgba(124,58,237,.3);
+  transition:transform .15s;
+}
+.start-btn:active{transform:scale(.97)}
+.start-btn.show{display:block}
+
+/* Skip button */
+.skip-btn{
+  display:none;margin-top:12px;padding:8px 20px;border:1px solid rgba(255,255,255,.15);
+  border-radius:99px;background:transparent;color:var(--ink-soft);font-size:12px;
+  font-weight:600;font-family:inherit;cursor:pointer;
+}
+.skip-btn.show{display:inline-block}
+
+/* Ready state */
+.ready .dl-section{display:none}
+</style>
+</head>
+<body>
+
+<div class="logo"><img src="./logo-color-trans.png" alt="Wave"></div>
+<div class="app-title">Wave Voice Studio</div>
+<div class="app-sub">Text-to-Speech · On Device</div>
+
+<div class="dl-section" id="dlSection">
+  <div class="dl-status" id="dlStatus">Preparing download...</div>
+  <div class="dl-detail" id="dlDetail"></div>
+  <div class="progress-outer"><div class="progress-inner" id="dlBar"></div></div>
+  <div class="dl-size" id="dlSize"></div>
+
+  <div class="engines" id="engineCards"></div>
+</div>
+
+<button class="start-btn" id="startBtn" onclick="location.href='./wave.html'">Open Wave Studio</button>
+<button class="skip-btn" id="skipBtn">Skip — download later</button>
+
+<script>
+const ENGINES = [
+  {
+    id: 'wave',
+    name: 'Wave TTS (Pocket)',
+    icon: '🌊',
+    size: 146,
+    files: [
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/flow_lm_main_int8.onnx',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/flow_lm_flow_int8.onnx',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/mimi_decoder_int8.onnx',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/mimi_encoder_int8.onnx',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/text_conditioner_int8.onnx',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/bundle.json',
+      'https://huggingface.co/KevinAHM/pocket-tts-onnx/resolve/main/onnx/english_2026-04/bos_before_voice.npy',
+    ]
+  },
+  {
+    id: 'supertonic',
+    name: 'Supertonic TTS',
+    icon: '🎙',
+    size: 120,
+    files: [
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/duration_predictor.onnx',
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/text_encoder.onnx',
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/vector_estimator.onnx',
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/vocoder.onnx',
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/tts.json',
+      'https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/unicode_indexer.json',
+    ]
+  },
+  {
+    id: 'kokoro',
+    name: 'Kokoro TTS',
+    icon: '🎵',
+    size: 83,
+    selfManaged: true,
+    files: []
+  }
+];
+
+const CACHE_NAME = 'wave-models-v1';
+const status = document.getElementById('dlStatus');
+const detail = document.getElementById('dlDetail');
+const bar = document.getElementById('dlBar');
+const sizeEl = document.getElementById('dlSize');
+const startBtn = document.getElementById('startBtn');
+const skipBtn = document.getElementById('skipBtn');
+const cardsEl = document.getElementById('engineCards');
+
+function formatMB(bytes) { return (bytes / 1048576).toFixed(1) + ' MB'; }
+
+function renderCards(engines, states) {
+  cardsEl.innerHTML = engines.map((e, i) => {
+    const s = states[i];
+    const cls = s === 'done' ? 'done' : s === 'active' ? 'active' : 'pending';
+    const check = s === 'done' ? '✅' : s === 'active' ? '⏳' : '⬜';
+    const sizeLabel = e.selfManaged
+      ? `~${e.size} MB · downloads on first use`
+      : `~${e.size} MB · ${e.files.length} files`;
+    return `<div class="engine-card ${cls}">
+      <div class="engine-ico">${e.icon}</div>
+      <div class="engine-info">
+        <div class="engine-name">${e.name}</div>
+        <div class="engine-size">${sizeLabel}</div>
+      </div>
+      <div class="engine-check">${check}</div>
+    </div>`;
+  }).join('');
+}
+
+async function checkCached(url) {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const resp = await cache.match(url);
+    return !!resp;
+  } catch { return false; }
+}
+
+async function downloadFile(url, onProgress) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(url);
+  if (cached) return cached;
+
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${url.split('/').pop()}`);
+
+  const reader = resp.body.getReader();
+  const contentLength = +resp.headers.get('Content-Length') || 0;
+  const chunks = [];
+  let received = 0;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    received += value.length;
+    if (onProgress) onProgress(received, contentLength);
+  }
+
+  const blob = new Blob(chunks);
+  const cacheResp = new Response(blob, {
+    headers: { 'Content-Type': resp.headers.get('Content-Type') || 'application/octet-stream' }
+  });
+  await cache.put(url, cacheResp);
+  return cacheResp;
+}
+
+async function run() {
+  const states = ENGINES.map(() => 'pending');
+  const totalSize = ENGINES.filter(e => !e.selfManaged).reduce((s, e) => s + e.size, 0);
+
+  // Check which engines are already cached
+  let allCached = true;
+  for (let i = 0; i < ENGINES.length; i++) {
+    if (ENGINES[i].selfManaged) {
+      states[i] = 'done';
+      continue;
+    }
+    const checks = await Promise.all(ENGINES[i].files.map(f => checkCached(f)));
+    if (checks.every(Boolean)) {
+      states[i] = 'done';
+    } else {
+      allCached = false;
+    }
+  }
+
+  if (allCached) {
+    status.textContent = 'All engines ready!';
+    bar.style.width = '100%';
+    startBtn.classList.add('show');
+    renderCards(ENGINES, states);
+    return;
+  }
+
+  renderCards(ENGINES, states);
+  skipBtn.classList.add('show');
+  skipBtn.onclick = () => { location.href = './wave.html'; };
+
+  let totalDownloaded = 0;
+  let totalBytes = totalSize * 1048576;
+
+  for (let i = 0; i < ENGINES.length; i++) {
+    if (states[i] === 'done' || ENGINES[i].selfManaged) {
+      if (!ENGINES[i].selfManaged) totalDownloaded += ENGINES[i].size * 1048576;
+      continue;
+    }
+
+    states[i] = 'active';
+    renderCards(ENGINES, states);
+    status.textContent = `Downloading ${ENGINES[i].name}...`;
+
+    let engineDownloaded = 0;
+
+    for (let j = 0; j < ENGINES[i].files.length; j++) {
+      const url = ENGINES[i].files[j];
+      const fname = url.split('/').pop();
+      detail.textContent = `${fname} (${j + 1}/${ENGINES[i].files.length})`;
+
+      const cached = await checkCached(url);
+      if (cached) {
+        continue;
+      }
+
+      await downloadFile(url, (received, total) => {
+        const pct = ((totalDownloaded + engineDownloaded + received) / totalBytes * 100);
+        bar.style.width = Math.min(100, pct).toFixed(1) + '%';
+        sizeEl.textContent = formatMB(totalDownloaded + engineDownloaded + received) + ' / ~' + totalSize + ' MB';
+      });
+
+      const resp = await caches.open(CACHE_NAME).then(c => c.match(url));
+      if (resp) {
+        const blob = await resp.blob();
+        engineDownloaded += blob.size;
+      }
+    }
+
+    totalDownloaded += engineDownloaded || ENGINES[i].size * 1048576;
+    states[i] = 'done';
+    renderCards(ENGINES, states);
+  }
+
+  status.textContent = 'All engines ready!';
+  detail.textContent = '';
+  bar.style.width = '100%';
+  sizeEl.textContent = '~' + totalSize + ' MB downloaded';
+  startBtn.classList.add('show');
+  skipBtn.classList.remove('show');
+}
+
+run().catch(err => {
+  status.textContent = 'Download failed — check connection';
+  detail.textContent = err.message;
+  skipBtn.classList.add('show');
+  skipBtn.onclick = () => { location.href = './wave.html'; };
+});
+</script>
+</body>
+</html>

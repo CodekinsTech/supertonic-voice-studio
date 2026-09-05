@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>if(window.Capacitor)location.replace('./app.html');</script>
 <meta name="theme-color" content="#F7F9FD">
 <title>Wave · Voice Studio — On-device AI voices for the web</title>
 <meta name="description" content="Wave Voice Studio — 50+ studio-grade AI voices, real-time mixing, emotion controls and pro DSP, all running in your browser. No server, no upload, your audio never leaves your device.">
@@ -42,7 +43,7 @@ a{color:var(--brand);text-decoration:none;transition:.15s}
 a:hover{color:var(--brand-deep)}
 
 /* ───── nav ───── */
-.nav-wrap{position:sticky;top:0;z-index:50;padding:10px 18px}
+.nav-wrap{position:sticky;top:0;z-index:50;padding:10px 18px;padding-top:calc(20px + env(safe-area-inset-top))}
 .nav{
   max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:14px;
   padding:9px 14px;border-radius:99px;
@@ -489,6 +490,9 @@ footer{
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="./supertonic.html">Supertonic</a>
+      <a href="./wave.html">Wave</a>
+      <a href="./kokoro/">Kokoro</a>
       <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       <a href="./studio.html" class="cta">Launch Studio &rarr;</a>
     </div>
@@ -498,6 +502,9 @@ footer{
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="./supertonic.html">Supertonic</a>
+      <a href="./wave.html">Wave</a>
+      <a href="./kokoro/">Kokoro</a>
       <a href="./studio.html">Launch Studio &rarr;</a>
     </div>
   </nav>

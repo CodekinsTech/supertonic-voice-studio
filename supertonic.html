@@ -20,7 +20,7 @@
 html,body{margin:0;color:var(--ink-mid)}
 body{
   font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
-  min-height:100vh;padding:14px;
+  min-height:100vh;padding:14px;padding-top:calc(24px + env(safe-area-inset-top));
   background:
     radial-gradient(900px 600px at 12% -10%, rgba(37,99,255,.10), transparent 60%),
     radial-gradient(700px 500px at 110% 5%, rgba(61,165,255,.10), transparent 65%),
@@ -33,6 +33,10 @@ body{
 
 /* Header */
 header{display:flex;align-items:center;justify-content:space-between;padding:2px 6px;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.page-nav{display:flex;gap:6px;padding:0 6px 8px;flex-wrap:wrap}
+.page-nav a{font-size:12px;font-weight:600;padding:4px 12px;border-radius:8px;background:var(--bg-2);color:var(--ink-soft);text-decoration:none;transition:all .2s}
+.page-nav a:hover{background:var(--brand);color:#fff}
+.page-nav a.active{background:var(--brand);color:#fff;pointer-events:none}
 .brand-mark h1{
   margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em;
   color:transparent;
@@ -393,6 +397,13 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   </div>
 </header>
 
+<nav class="page-nav">
+  <a href="./">Home</a>
+  <a href="./wave.html">Wave</a>
+  <a href="./supertonic.html" class="active">Supertonic</a>
+  <a href="./kokoro/">Kokoro</a>
+</nav>
+
 <!-- Status -->
 <div class="status-bar" id="statusBar">
   <span id="statusText">Loading models…</span>
@@ -469,7 +480,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div class="row">
       <label style="min-width:60px">Steps</label>
       <div class="slider-wrap">
-        <input type="range" id="totalStep" min="1" max="20" step="1" value="8" />
+        <input type="range" id="totalStep" min="1" max="32" step="1" value="8" />
         <span class="factor-val" id="stepVal">8</span>
       </div>
     </div>
