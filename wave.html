@@ -1978,7 +1978,7 @@ async function fetchWithProgress(url, onProgress) {
     window.__waveTTS.voiceSnapshots = new Map();
     window.__waveTTS.voiceSnapshots.set('default', window.__waveTTS.defaultVoiceSnap);
 
-    // Fetch and parse voices.bin for distinct built-in voices (non-blocking)
+    // Fetch and parse voices.bin for distinct built-in voices
     status.textContent = 'Loading predefined voices...';
     try {
       const vResp = await fetch(VOICES_BIN_URL);
@@ -1991,17 +1991,20 @@ async function fetchWithProgress(url, onProgress) {
             window.__waveTTS.voiceSnapshots.set(uiName, snap);
           }
         }
-        console.log('Loaded voice snapshots:', [...window.__waveTTS.voiceSnapshots.keys()]);
-        // Debug: verify snapshots are distinct
+        const loaded = window.__waveTTS.voiceSnapshots.size - 1;
+        console.log('Loaded ' + loaded + '/8 voice snapshots:', [...window.__waveTTS.voiceSnapshots.keys()]);
         for (const [k, snap] of window.__waveTTS.voiceSnapshots) {
           const stepT = snap.get('state_2');
-          console.log('[voices.bin] ' + k + ': step=' + (stepT ? stepT.data[0] : 'N/A') + ', entries=' + snap.size);
+          console.log('[voice] ' + k + ': step=' + (stepT ? stepT.data[0] : 'N/A'));
         }
+        statusText.textContent = loaded + '/8 voices loaded';
       } else {
-        console.warn('voices.bin not found (' + vResp.status + '), using BOS-only voices');
+        console.error('voices.bin fetch failed: HTTP ' + vResp.status);
+        statusText.textContent = 'Voice data failed to load — all voices will sound the same';
       }
     } catch (e) {
-      console.warn('Failed to load voices.bin, using BOS-only voices:', e);
+      console.error('voices.bin fetch error:', e);
+      statusText.textContent = 'Voice data failed to load — all voices will sound the same';
     }
 
     // Free raw ArrayBuffers (sessions hold their own copies)
