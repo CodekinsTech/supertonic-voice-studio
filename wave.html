@@ -2023,7 +2023,8 @@ async function fetchWithProgress(url, onProgress) {
   state.modelLoaded = true;
   status.textContent = 'All models loaded';
   sizeEl.textContent = formatMB(TOTAL_BYTES);
-  statusText.textContent = 'Ready to generate';
+  const voiceCount = window.__waveTTS.voiceSnapshots ? window.__waveTTS.voiceSnapshots.size - 1 : 0;
+  statusText.textContent = voiceCount > 0 ? 'Ready — ' + voiceCount + '/8 voices' : 'Ready (no voice data)';
   runtimeBadge.style.display = '';
   runtimeBadge.classList.add('ok');
   runtimeBadge.textContent = 'ONNX';
