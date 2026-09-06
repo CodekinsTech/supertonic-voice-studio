@@ -610,6 +610,9 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 <div style="text-align:center;padding:12px 16px;font-size:8.5px;color:#8A92BE;line-height:1.5;max-width:600px;margin:10px auto 0">By using this tool you agree not to clone or misuse generated voices without the speaker's consent. You are solely responsible for how you use generated audio.</div>
 
 <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})</script>
+<script type="importmap">
+{"imports":{"onnxruntime-web":"https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.0/+esm","lamejs":"https://cdn.jsdelivr.net/npm/lamejs@1.2.1/+esm"}}
+</script>
 <script type="module" src="/main.js"></script>
 <script>
 document.querySelectorAll('.section-toggle').forEach(btn => {

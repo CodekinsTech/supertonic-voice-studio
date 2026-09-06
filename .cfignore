@@ -1,0 +1,9 @@
+node_modules/
+.voice-cache/
+.vite/
+.git/
+android/
+dist/
+public/voice-snapshots/
+public/voice-snapshots-bin/
+*.log
