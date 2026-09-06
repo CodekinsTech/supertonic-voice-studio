@@ -1992,6 +1992,11 @@ async function fetchWithProgress(url, onProgress) {
           }
         }
         console.log('Loaded voice snapshots:', [...window.__waveTTS.voiceSnapshots.keys()]);
+        // Debug: verify snapshots are distinct
+        for (const [k, snap] of window.__waveTTS.voiceSnapshots) {
+          const stepT = snap.get('state_2');
+          console.log('[voices.bin] ' + k + ': step=' + (stepT ? stepT.data[0] : 'N/A') + ', entries=' + snap.size);
+        }
       } else {
         console.warn('voices.bin not found (' + vResp.status + '), using BOS-only voices');
       }
@@ -2053,6 +2058,8 @@ goBtn.addEventListener('click', async () => {
     // Pick voice snapshot (use selected voice name, fall back to default)
     const voiceKey = state.voice.startsWith('vlib:') ? state.voice : (state.useClone ? 'cloned' : state.voice);
     const voiceSnap = engine.voiceSnapshots.get(voiceKey) || engine.defaultVoiceSnap;
+    const isDefault = voiceSnap === engine.defaultVoiceSnap;
+    console.log('[TTS] voice key:', voiceKey, '| found in map:', engine.voiceSnapshots.has(voiceKey), '| using default:', isDefault, '| available:', [...engine.voiceSnapshots.keys()]);
 
     // Split text into sentence chunks
     const sentences = splitSentences(text);
