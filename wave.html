@@ -587,7 +587,16 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   <div id="outputArea">
     <div class="empty-state" id="emptyOutput">
       <div class="icon">🎙️</div>
-      <p>Generated speech will appear here</p>
+      <p id="emptyMsg">Generated speech will appear here</p>
+      <div id="modelLoader" style="width:100%;max-width:280px;margin:8px auto 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span id="modelStatus" style="font-size:11px;font-weight:600;color:var(--ink-soft)">Downloading models...</span>
+          <span id="modelSize" style="font-size:10px;color:var(--muted)"></span>
+        </div>
+        <div style="height:4px;border-radius:4px;background:rgba(0,0,0,.08);overflow:hidden">
+          <div id="modelProgressFill" style="height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
+        </div>
+      </div>
     </div>
     <div id="outputResult" style="display:none;position:relative;z-index:1">
       <div class="waveform-bar show" id="waveformBar">
@@ -610,21 +619,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   </div>
 </div>
 
-<!-- ===== MODEL LOADER (auto) ===== -->
-<div class="panel" style="--g1:#E89A2B;--g2:#FF6B5C" id="modelPanel">
-  <h3><span class="swatch"></span> Model</h3>
-  <div style="position:relative;z-index:1">
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
-      <span id="modelStatus" style="font-size:11px;font-weight:700;color:var(--ink-soft)">Preparing to download...</span>
-      <span id="modelSize" style="font-size:10px;font-weight:600;color:var(--muted);margin-left:auto">0 / ~146 MB</span>
-    </div>
-    <div class="progress-bar show" id="modelProgressBar" style="height:8px;border-radius:6px;background:rgba(0,0,0,.06);overflow:hidden;margin-bottom:6px">
-      <div class="progress-fill" id="modelProgressFill" style="height:100%;width:0%;border-radius:6px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
-    </div>
-    <div id="modelFileList" style="display:none"></div>
-    <div style="font-size:9px;color:var(--muted);margin-top:6px">INT8 quantized &middot; cached after first download &middot; runs 100% on-device</div>
-  </div>
-</div>
 
 <!-- ===== VOICE CLONING (star feature) ===== -->
 <div class="panel panel-clone">
@@ -1230,9 +1224,40 @@ class StateRunner {
   }
   restore(snap) {
     this.states = new Map();
-    for (const [name, t] of snap) {
-      this.states.set(name, new ort.Tensor(t.type, t.data.slice(), [...t.dims]));
+    const snapKeys = [...snap.keys()];
+    let matched = 0, missed = 0, padded = 0;
+    for (const entry of this.manifest) {
+      const src = snap.get(entry.input_name);
+      if (!src) {
+        missed++;
+        console.warn('[restore] MISS:', entry.input_name, '| snap keys sample:', snapKeys.slice(0, 3));
+        this.states.set(entry.input_name, this._createTensor(entry));
+        continue;
+      }
+      matched++;
+      const targetShape = entry.shape.slice();
+      const targetSize = targetShape.reduce((a, b) => a * b, 1);
+      const srcSize = src.dims.reduce((a, b) => a * b, 1);
+      if (srcSize === targetSize) {
+        this.states.set(entry.input_name, new ort.Tensor(src.type, src.data.slice(), [...src.dims]));
+      } else {
+        padded++;
+        if (src.type === 'int64') {
+          const d = new BigInt64Array(targetSize);
+          d.set(src.data.subarray(0, Math.min(src.data.length, targetSize)));
+          this.states.set(entry.input_name, new ort.Tensor('int64', d, targetShape));
+        } else if (src.type === 'bool') {
+          const d = new Uint8Array(targetSize);
+          d.set(src.data.subarray(0, Math.min(src.data.length, targetSize)));
+          this.states.set(entry.input_name, new ort.Tensor('bool', d, targetShape));
+        } else {
+          const d = new Float32Array(targetSize);
+          copyPartial(src.data, [...src.dims], d, targetShape);
+          this.states.set(entry.input_name, new ort.Tensor('float32', d, targetShape));
+        }
+      }
     }
+    console.log('[restore] matched:', matched, '| missed:', missed, '| padded:', padded, '| manifest:', this.manifest.length, '| snap:', snap.size);
   }
   async run(inputs) {
     const feeds = { ...inputs };
@@ -1257,8 +1282,8 @@ const TTS_SAMPLE_RATE = 24000;
 const TTS_LATENT_DIM = 32;
 const TTS_COND_DIM = 1024;
 const TTS_TEMPERATURE = 0.7;
-const TTS_EOS_THRESHOLD = -4.0;
-const TTS_MAX_FRAMES = 500;
+const TTS_EOS_THRESHOLD = -1.5;
+const TTS_MAX_FRAMES = 300;
 const TTS_SAMPLES_PER_FRAME = 1920;
 
 /* ───────── DOM refs ───────── */
@@ -1879,50 +1904,40 @@ async function fetchWithProgress(url, onProgress) {
   const status = $('modelStatus');
   const sizeEl = $('modelSize');
   const fill = $('modelProgressFill');
-  const fileList = $('modelFileList');
+  const loader = $('modelLoader');
+  const emptyMsg = $('emptyMsg');
   let totalLoaded = 0;
 
-  statusText.textContent = 'Downloading Wave models...';
+  emptyMsg.textContent = '';
+  statusText.textContent = 'Downloading models...';
 
   // Phase 1: Download all files
   for (let i = 0; i < MODEL_FILES.length; i++) {
     const m = MODEL_FILES[i];
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--ink-soft)';
-    row.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:#E89A2B;flex-shrink:0"></span>' +
-      '<span style="flex:1">' + m.name + '</span>' +
-      '<span class="dl-size" style="color:var(--muted)">0 / ' + formatMB(m.bytes) + '</span>';
-    fileList.appendChild(row);
-
-    status.textContent = 'Downloading ' + m.name + '...';
+    status.textContent = 'Downloading ' + (i+1) + '/' + MODEL_FILES.length + '...';
 
     try {
       const data = await fetchWithProgress(MODEL_BASE + m.file, (loaded) => {
         const fileLoaded = Math.min(loaded, m.bytes);
         const pct = ((totalLoaded + fileLoaded) / TOTAL_BYTES * 100);
         fill.style.width = pct + '%';
-        sizeEl.textContent = formatMB(totalLoaded + fileLoaded) + ' / ' + formatMB(TOTAL_BYTES);
-        row.querySelector('.dl-size').textContent = formatMB(fileLoaded) + ' / ' + formatMB(m.bytes);
+        sizeEl.textContent = Math.round(pct) + '%';
       });
 
       totalLoaded += m.bytes;
-      row.querySelector('span').style.background = '#4CAF50';
-      row.querySelector('.dl-size').textContent = formatMB(m.bytes);
       window.__waveTTS.models[m.name] = { name: m.name, loaded: true, data: data };
     } catch(e) {
-      row.querySelector('span').style.background = '#E0457B';
-      row.querySelector('.dl-size').textContent = 'Failed';
-      status.textContent = 'Failed to load ' + m.name + ' — check connection';
-      statusText.textContent = 'Model download failed';
+      status.textContent = 'Download failed — check connection';
+      statusText.textContent = 'Download failed';
       return;
     }
 
     fill.style.width = ((totalLoaded) / TOTAL_BYTES * 100) + '%';
-    sizeEl.textContent = formatMB(totalLoaded) + ' / ' + formatMB(TOTAL_BYTES);
+    sizeEl.textContent = Math.round(totalLoaded / TOTAL_BYTES * 100) + '%';
   }
 
   // Phase 2: Initialize ONNX sessions and inference engine
-  status.textContent = 'Initializing inference engine...';
+  status.textContent = 'Setting up engine...';
 
   try {
     ort.env.wasm.numThreads = navigator.hardwareConcurrency ? Math.min(navigator.hardwareConcurrency, 4) : 2;
@@ -1933,16 +1948,16 @@ async function fetchWithProgress(url, onProgress) {
     const bosData = parseNpyF32(window.__waveTTS.models.bos_embedding.data);
 
     // Load tokenizer vocab from site (not HuggingFace)
-    status.textContent = 'Loading tokenizer...';
+    status.textContent = 'Almost ready...';
     const vocabResp = await fetch(SPM_VOCAB_URL);
     if (!vocabResp.ok) throw new Error('Failed to load tokenizer vocabulary');
     const vocabData = await vocabResp.json();
 
     // Create ONNX sessions for each model
-    status.textContent = 'Creating ONNX sessions (this may take a moment)...';
+    status.textContent = 'Preparing engine...';
     const onnxModels = MODEL_FILES.filter(m => m.onnx);
     for (const m of onnxModels) {
-      status.textContent = 'Loading session: ' + m.name + '...';
+      status.textContent = 'Preparing engine...';
       const buf = new Uint8Array(window.__waveTTS.models[m.name].data);
       window.__waveTTS.sessions[m.name] = await ort.InferenceSession.create(buf, sessionOpts);
     }
@@ -1967,7 +1982,7 @@ async function fetchWithProgress(url, onProgress) {
     window.__waveTTS.encoderSession = window.__waveTTS.sessions.mimi_encoder;
 
     // Prepare default voice (BOS-only conditioning)
-    status.textContent = 'Preparing default voice...';
+    status.textContent = 'Loading voices...';
     window.__waveTTS.mainRunner.reset();
     // Voice conditioning pass: feed BOS embedding through flow_lm_main
     await window.__waveTTS.mainRunner.run({
@@ -1979,7 +1994,7 @@ async function fetchWithProgress(url, onProgress) {
     window.__waveTTS.voiceSnapshots.set('default', window.__waveTTS.defaultVoiceSnap);
 
     // Fetch and parse voices.bin for distinct built-in voices
-    status.textContent = 'Loading predefined voices...';
+    status.textContent = 'Loading voices...';
     try {
       const vResp = await fetch(VOICES_BIN_URL);
       if (vResp.ok) {
@@ -2021,16 +2036,14 @@ async function fetchWithProgress(url, onProgress) {
 
   window.__waveTTS.ready = true;
   state.modelLoaded = true;
-  status.textContent = 'All models loaded';
-  sizeEl.textContent = formatMB(TOTAL_BYTES);
+  loader.style.display = 'none';
+  emptyMsg.textContent = 'Ready — tap Generate Speech';
   const voiceCount = window.__waveTTS.voiceSnapshots ? window.__waveTTS.voiceSnapshots.size - 1 : 0;
   statusText.textContent = voiceCount > 0 ? 'Ready — ' + voiceCount + '/8 voices' : 'Ready (no voice data)';
   runtimeBadge.style.display = '';
   runtimeBadge.classList.add('ok');
   runtimeBadge.textContent = 'ONNX';
-  fill.style.background = 'linear-gradient(90deg,#4CAF50,#10D9A0)';
   goBtn.disabled = false;
-  $('modelPanel').style.opacity = '.6';
 })();
 
 /* ───────── Generate (real Pocket-TTS inference) ───────── */
@@ -2047,7 +2060,7 @@ goBtn.addEventListener('click', async () => {
   progressBar.classList.add('show');
   progressFill.style.width = '0%';
 
-  const voiceName = state.voice.startsWith('vlib:') ? vlibPrettyName(state.voice.slice(5)) : (state.useClone ? 'Cloned' : state.voice);
+  const voiceName = state.voice.startsWith('vlib:') ? ((vlibVoices.find(v => v.name === state.voice.slice(5)) || {}).pretty || state.voice.slice(5)) : (state.useClone ? 'Cloned' : state.voice);
   genText.textContent = 'Generating with ' + voiceName + '...';
   statusText.textContent = 'Generating speech...';
 
@@ -2082,14 +2095,15 @@ goBtn.addEventListener('click', async () => {
 
       // 1. Restore voice KV state (only on first sentence — subsequent
       //    sentences carry the established voice identity forward)
-      if (si === 0) {
-        mainRunner.restore(voiceSnap);
-      }
+      console.log('[TTS] restoring voice snap for sentence', si);
+      mainRunner.restore(voiceSnap);
 
       // 2. Tokenize text and run through text conditioner
       const ids = tokenizer.encode(prepared);
+      console.log('[TTS] tokenized:', ids.length, 'tokens');
       const tokTensor = new ort.Tensor('int64', BigInt64Array.from(ids, v => BigInt(v)), [1, ids.length]);
       const condOut = await textCondSess.run({ token_ids: tokTensor });
+      console.log('[TTS] text cond done');
       const textEmbKey = textCondSess.outputNames[0];
       let textEmb = condOut[textEmbKey]; // [1, T, 1024]
       // Reshape to 3D if the model returns 2D
@@ -2097,10 +2111,13 @@ goBtn.addEventListener('click', async () => {
       if (embDims.length === 2) embDims = [1, embDims[0], embDims[1]];
 
       // 3. Text conditioning pass through flow_lm_main
+      console.log('[TTS] running text cond pass through mainRunner...');
+      const t0 = performance.now();
       await mainRunner.run({
         sequence: new ort.Tensor('float32', new Float32Array(0), [1, 0, TTS_LATENT_DIM]),
         text_embeddings: new ort.Tensor('float32', new Float32Array(textEmb.data), embDims),
       });
+      console.log('[TTS] text cond mainRunner done in', (performance.now()-t0).toFixed(0), 'ms');
 
       // 4. Reset decoder for this sentence
       decoderRunner.reset();
@@ -2111,6 +2128,7 @@ goBtn.addEventListener('click', async () => {
       let eos = false, extra = 0, frames = 0;
       let pending = []; // accumulated latent frames for batched decode
       let chunkTarget = 1;
+      const minFrames = Math.max(20, Math.ceil(prepared.length * 0.5));
 
       genText.textContent = 'Sentence ' + (si+1) + '/' + sentences.length + ' — generating latents...';
 
@@ -2124,7 +2142,7 @@ goBtn.addEventListener('click', async () => {
         const conditioning = arOut.conditioning;
         const eosLogit = arOut.eos_logit.data[0];
 
-        if (!eos && eosLogit > TTS_EOS_THRESHOLD) eos = true;
+        if (!eos && frames >= minFrames && eosLogit > TTS_EOS_THRESHOLD) eos = true;
         if (eos && ++extra > chunkEosExtra) break;
 
         // LSD decode: generate latent from noise using flow network
