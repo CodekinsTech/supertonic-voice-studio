@@ -288,6 +288,14 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .vlib-card .vlib-gender.male{color:#3B82F6}
 .vlib-card .vlib-gender.female{color:#EC4899}
 .vlib-card .vlib-gender.unknown{color:var(--muted)}
+.vlib-tag{font-size:7px;font-weight:700;padding:1px 5px;border-radius:8px;margin-top:2px;display:inline-block;letter-spacing:.3px;text-transform:uppercase}
+.vlib-tag.deep{background:rgba(99,102,241,.15);color:#6366F1}
+.vlib-tag.warm{background:rgba(245,158,11,.15);color:#D97706}
+.vlib-tag.clear{background:rgba(16,185,129,.15);color:#059669}
+.vlib-tag.bright{background:rgba(236,72,153,.15);color:#DB2777}
+.vlib-fav{position:absolute;top:3px;right:5px;font-size:12px;color:rgba(0,0,0,.15);cursor:pointer;z-index:2;line-height:1}
+.vlib-fav.on{color:#E89A2B}
+.vlib-fav:hover{transform:scale(1.3)}
 .vlib-filters{display:flex;gap:4px;position:relative;z-index:1;margin-bottom:6px;flex-wrap:wrap}
 .vlib-filter-btn{padding:3px 10px;border-radius:20px;border:1px solid var(--hair);background:rgba(255,255,255,.85);font-size:10px;font-weight:600;color:var(--ink-mid);cursor:pointer;transition:.15s;font-family:inherit}
 .vlib-filter-btn:hover{border-color:var(--hair-strong);background:#fff}
@@ -555,12 +563,24 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     </div>
     <div class="vlib-filters" id="vlibFilters">
       <button class="vlib-filter-btn active" data-filter="all">All</button>
+      <button class="vlib-filter-btn" data-filter="favs" style="color:#E89A2B">&#9733; Saved</button>
       <button class="vlib-filter-btn" data-filter="male">&#9794; Male</button>
       <button class="vlib-filter-btn" data-filter="female">&#9792; Female</button>
     </div>
     <div class="vlib-count" id="vlibCount">Loading voice catalog...</div>
     <div class="vlib-grid" id="vlibGrid"></div>
     <div class="vlib-status" id="vlibStatus"></div>
+  </div>
+</div>
+
+<!-- ===== MODEL DOWNLOAD BAR ===== -->
+<div id="modelLoader" style="margin:10px 0;padding:8px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(232,154,43,.08),rgba(255,107,92,.08))">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <span id="modelStatus" style="font-size:11px;font-weight:600;color:#E89A2B">Downloading models...</span>
+    <span id="modelSize" style="font-size:10px;color:var(--muted)"></span>
+  </div>
+  <div style="height:3px;border-radius:3px;background:rgba(0,0,0,.06);overflow:hidden">
+    <div id="modelProgressFill" style="height:100%;width:0%;border-radius:3px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
   </div>
 </div>
 
@@ -588,15 +608,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div class="empty-state" id="emptyOutput">
       <div class="icon">🎙️</div>
       <p id="emptyMsg">Generated speech will appear here</p>
-      <div id="modelLoader" style="width:100%;max-width:280px;margin:8px auto 0">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span id="modelStatus" style="font-size:11px;font-weight:600;color:var(--ink-soft)">Downloading models...</span>
-          <span id="modelSize" style="font-size:10px;color:var(--muted)"></span>
-        </div>
-        <div style="height:4px;border-radius:4px;background:rgba(0,0,0,.08);overflow:hidden">
-          <div id="modelProgressFill" style="height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,#E89A2B,#FF6B5C);transition:width .3s"></div>
-        </div>
-      </div>
     </div>
     <div id="outputResult" style="display:none;position:relative;z-index:1">
       <div class="waveform-bar show" id="waveformBar">
@@ -1722,6 +1733,36 @@ $('clearCloneBtn').addEventListener('click', () => {
 const VLIB_SNAP_BASE = 'https://huggingface.co/datasets/hiteshluke/wave-voice-snapshots/resolve/main/';
 let vlibVoices = [];
 let vlibGenderFilter = 'all';
+let vlibFavs = new Set();
+try { vlibFavs = new Set(JSON.parse(localStorage.getItem('wave_vlib_favs') || '[]')); } catch(e) {}
+function vlibSaveFavs() { try { localStorage.setItem('wave_vlib_favs', JSON.stringify([...vlibFavs])); } catch(e) {} }
+function vlibToggleFav(name, e) {
+  if (e) e.stopPropagation();
+  if (vlibFavs.has(name)) vlibFavs.delete(name); else vlibFavs.add(name);
+  vlibSaveFavs();
+  vlibRenderGrid($('vlibSearch').value);
+}
+
+const VLIB_NAMES_M = ['Atlas','Brooks','Canyon','Drake','Echo','Falcon','Grant','Hayes','Ivan','Jasper','Knox','Levi','Mason','Nash','Orion','Pierce','Quinn','Reed','Stone','Trent','Vale','Wade','Xander','York','Zane','Archer','Blaze','Cole','Dane','Ellis','Fox','Gage','Hart','Jett','Kane','Lake','Miles','Nolan','Otto','Pike','Rex','Sage','Troy','Voss','Wolf','Axel','Brock','Cruz','Dash','Finn','Hugo','Ray','Theo','Kai','Ace','Beau','Clay','Duke','Earl','Gene','Hugh','Ian','Joel','Kurt','Lane','Max','Ned','Owen','Paul','Ross','Seth','Todd','Vick','Walt','Abe','Ben','Cal','Don','Ed','Gus','Hank','Jay','Ken','Leo','Mack','Nick','Phil','Rob','Sam','Ted','Van','Will','Zeke','Alden','Baron','Clark','Devin','Elton','Floyd','Glenn','Holden','Irving','Jules','Keats','Lewis','Monte','Nero','Oscar','Perry','Quill','Rufus','Silas','Tyson','Urban','Vance','Wyatt','Xavier','Yates','Ziggy','Arden','Byron','Cyrus','Doyle','Edgar','Felix','Grady','Hiram','Issac','Jarvis','Kelvin','Luther','Morris','Newton','Otis','Palmer','Quincy','Roland','Sawyer','Tobias','Ulric','Vernon','Wilson','Yosef','Angus','Brady','Craig','Darin','Emmet','Fritz','Gavin','Hector','Inigo','Jasper','Kermit','Linus','Myron','Norris','Ogden','Phelps','Ramsey','Stefan','Travis','Vaughn','Werner','Yannis','Boris','Colton','Dwayne','Erwin','Foster','Gordon','Harvey','Jagger','Kellan','Logan','Murray','Nelson','Osborn','Parker','Ryland','Soren','Tucker','Victor','Warren','Yardley','Alton','Briggs','Curtis','Dalton','Ernest','Farley','Gareth','Henrik','Irving','Jensen','Keegan','Layton','Melvin','Norton','Osmond','Preston','Radley','Sheldon','Turner','Ulysses','Vinson','Weston','Xerxes','Yannick','Abbott','Bergen','Corbin','Daxton','Elwood','Finley','Gibson','Harlan','Idris','Judson','Kelsey','Lennox','Marvin','Nestor','Oakley','Patton','Remick','Sutton','Theron','Upton','Vesper','Wilder','Yohan','Aldric','Bolton','Camden','Decker','Edison','Forbes','Gentry','Holmes','Ingram','Jorvik','Kirby','Leland','Magnus','Niles','Oswin','Phineas','Randal','Sander','Truman','Umber','Virgo','Walden','Yves','Alonso','Beckett','Cormac','Delmar','Everett','Forrest','Grover','Hadley','Irwin','Jarrett','Kelton','Lennard','Mercer','Newell','Ogilvie','Padgett','Redmond','Sinclair','Terrance','Ulfred','Volker','Whitman','Yorick','Anders','Benton','Colbert','Dunstan','Elmore','Fletcher','Gerard','Horace','Igor','Judah','Kendall','Lionel','Merrick','Norman','Odell','Phalen','Renard','Stanton','Tilden','Ulmer','Varden','Wheeler','Yardell','Barton','Casper','Dermot','Elbert','Fenwick','Gilbert','Halston','Iker','Jarvis','Kepler','Larkin','Montague','Neville','Ormond','Percival','Rathbone','Spencer','Thoreau','Ulbrecht','Voight','Willard'];
+const VLIB_NAMES_F = ['Aria','Brynn','Cleo','Dawn','Eden','Faye','Grace','Haven','Iris','Jade','Kaia','Luna','Mira','Nova','Opal','Pearl','Quinn','Rose','Sage','Thea','Uma','Vera','Wren','Xena','Yara','Zara','Alma','Belle','Coral','Diva','Elara','Flora','Gaia','Haze','Ivy','Joy','Kit','Lark','Maze','Nyx','Olive','Pax','Rain','Sky','Tess','Unity','Veil','Wave','Xyla','Yuki','Amber','Beth','Cara','Della','Ella','Fern','Gwen','Holly','Isla','June','Kira','Lily','Mae','Nell','Oona','Pia','Roma','Stella','Tara','Ursa','Viola','Zoe','Ada','Bess','Cora','Dot','Eve','Fleur','Greta','Helen','Ines','Jan','Kate','Lola','Mabel','Nina','Ora','Penny','Ruth','Sara','Tina','Una','Val','Winnie','Xia','Zelda','Adele','Bonnie','Celeste','Dahlia','Effie','Freya','Gloria','Hazel','Ingrid','Jewel','Keira','Lena','Margot','Nadia','Odette','Paloma','Raine','Selene','Tamsin','Ula','Vesna','Willa','Xiomara','Yolanda','Zinnia','Astrid','Blythe','Camille','Darcy','Elise','Fiona','Geneva','Hilda','Iona','Jolene','Katya','Lucia','Maxine','Noelle','Octavia','Petra','Ramona','Sylvie','Tatum','Undine','Valerie','Wendy','Ximena','Yvette','Zadie','Agatha','Bridget','Clara','Daphne','Estelle','Gemma','Helena','Ilona','Joelle','Keara','Lorena','Maeve','Nola','Olympia','Priya','Renata','Sable','Tilda','Ursina','Vanya','Wanda','Xanthe','Yasmin','Zena','Ailsa','Beryl','Cosima','Dinah','Edith','Frida','Gladys','Hester','Ida','Juno','Krista','Luisa','Mona','Nell','Orla','Phoebe','Roslyn','Sibyl','Trista','Ulla','Velma','Whitley','Xara','Yael','Zola','Anya','Bliss','Clover','Dove','Ember','Farrah','Goldie','Honor','Imani','Jessamy','Kenza','Lyra','Maren','Niobe','Odessa','Perdita','Rhea','Soleil','Tansy','Umi','Viveca','Winter','Yolanda','Allegra','Beatrix','Callista','Delphine','Elowen','Fenella','Ginevra','Hattie','Isolde','Jessamine','Kalista','Linnea','Mathilde','Nerissa','Oriana','Pandora','Reverie','Seraphina','Tabitha','Undina','Venetia','Waverly','Xanthia','Yvaine','Zephyra','Anthea','Bryony','Camellia','Dorothea','Eulalia','Fernanda','Gracia','Hermione','Isadora','Jovanna','Katarina','Lorelei','Minerva','Nicolette','Ophelia','Portia','Rosalind','Sybilla','Theodosia','Ulrike','Valentina','Wilhelmina','Ximara','Yolande','Zillah','Alberta','Bernadine','Cassandra','Dorinda','Evangeline','Florinda','Georgina','Henrietta','Isabella','Josephine','Katarina','Lavender','Mirabelle','Natasha','Ottilie','Philomena','Raphaela','Sophronia','Thomasina','Ursuline','Veronica','Winifred','Xiomara','Yseult','Zenobia'];
+
+let vlibNameMap = {};
+try { vlibNameMap = JSON.parse(localStorage.getItem('wave_vlib_names') || '{}'); } catch(e) {}
+function vlibAssignNames(voices) {
+  let mi = 0, fi = 0;
+  for (const v of voices) {
+    if (vlibNameMap[v.name]) { v.pretty = vlibNameMap[v.name]; continue; }
+    if (v.dir === 'alba-mackenna') continue;
+    const pool = v.gender === 'female' ? VLIB_NAMES_F : VLIB_NAMES_M;
+    const idx = v.gender === 'female' ? fi++ : mi++;
+    const suffix = v.name.includes('_enhanced') ? ' HD' : '';
+    const round = Math.floor(idx / pool.length);
+    const base = pool[idx % pool.length] || 'Voice ' + idx;
+    v.pretty = base + (round > 0 ? ' ' + (round + 1) : '') + suffix;
+    vlibNameMap[v.name] = v.pretty;
+  }
+  try { localStorage.setItem('wave_vlib_names', JSON.stringify(vlibNameMap)); } catch(e) {}
+}
 
 function vlibDeserializeSnapshot(buf) {
   const view = new DataView(buf);
@@ -1756,29 +1797,54 @@ function vlibRenderGrid(filter) {
   const grid = $('vlibGrid');
   const q = (filter || '').toLowerCase().trim();
   let filtered = vlibVoices;
-  if (vlibGenderFilter !== 'all') filtered = filtered.filter(v => v.gender === vlibGenderFilter);
-  if (q) filtered = filtered.filter(v => v.pretty.toLowerCase().includes(q));
-  $('vlibCount').textContent = filtered.length + ' of ' + vlibVoices.length + ' voices';
+  if (vlibGenderFilter === 'favs') filtered = filtered.filter(v => vlibFavs.has(v.name));
+  else if (vlibGenderFilter !== 'all') filtered = filtered.filter(v => v.gender === vlibGenderFilter);
+  if (q) filtered = filtered.filter(v => {
+    if (v.pretty.toLowerCase().includes(q)) return true;
+    const tag = v.gender === 'male' ? (v.f0 < 110 ? 'deep' : v.f0 < 135 ? 'warm' : v.f0 < 165 ? 'clear' : 'bright') : (v.f0 < 190 ? 'deep' : v.f0 < 220 ? 'warm' : v.f0 < 260 ? 'clear' : 'bright');
+    return tag.includes(q);
+  });
+  const label = vlibGenderFilter === 'favs' ? filtered.length + ' saved' : filtered.length + ' of ' + vlibVoices.length;
+  $('vlibCount').textContent = label;
 
   const genderBadge = (g) => {
     if (g === 'male') return '<div class="vlib-gender male">♂ M</div>';
     if (g === 'female') return '<div class="vlib-gender female">♀ F</div>';
     return '';
   };
+  const pitchTag = (v) => {
+    if (!v.f0) return '';
+    if (v.gender === 'male') {
+      if (v.f0 < 110) return '<div class="vlib-tag deep">Deep</div>';
+      if (v.f0 < 135) return '<div class="vlib-tag warm">Warm</div>';
+      if (v.f0 < 165) return '<div class="vlib-tag clear">Clear</div>';
+      return '<div class="vlib-tag bright">Bright</div>';
+    } else {
+      if (v.f0 < 190) return '<div class="vlib-tag deep">Deep</div>';
+      if (v.f0 < 220) return '<div class="vlib-tag warm">Warm</div>';
+      if (v.f0 < 260) return '<div class="vlib-tag clear">Clear</div>';
+      return '<div class="vlib-tag bright">Bright</div>';
+    }
+  };
 
   grid.innerHTML = filtered.map(v => {
     const active = state.voice === 'vlib:' + v.name && state.useClone;
     const loaded = window.__waveTTS && window.__waveTTS.voiceSnapshots && window.__waveTTS.voiceSnapshots.has('vlib:' + v.name);
+    const fav = vlibFavs.has(v.name);
     return '<div class="vlib-card' + (active ? ' active' : '') + '" data-vlib="' + v.name + '">' +
       (loaded ? '<div class="vlib-cached" title="Loaded"></div>' : '') +
+      '<div class="vlib-fav' + (fav ? ' on' : '') + '" data-fav="' + v.name + '" title="' + (fav ? 'Remove from saved' : 'Save voice') + '">★</div>' +
       '<div class="vlib-name">' + v.pretty + '</div>' +
       genderBadge(v.gender) +
-      '<div class="vlib-tag">' + v.license + '</div>' +
+      pitchTag(v) +
       '</div>';
   }).join('');
 
   grid.querySelectorAll('.vlib-card').forEach(card => {
     card.addEventListener('click', () => vlibSelectVoice(card.dataset.vlib));
+  });
+  grid.querySelectorAll('.vlib-fav').forEach(btn => {
+    btn.addEventListener('click', (e) => vlibToggleFav(btn.dataset.fav, e));
   });
 }
 
@@ -1856,6 +1922,7 @@ async function vlibInit() {
       if (qa !== qb) return qa - qb;
       return a.pretty.localeCompare(b.pretty);
     });
+    vlibAssignNames(vlibVoices);
     $('vlibBadge').textContent = vlibVoices.length + ' voices';
     vlibRenderGrid('');
   } catch (e) {
@@ -2363,7 +2430,43 @@ dlMp3.addEventListener('click', async () => {
   dlMp3.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> MP3';
 });
 
-function downloadBlob(blob, filename) {
+if (window.Capacitor) console.log('[CAP_DEBUG] keys:', Object.keys(window.Capacitor).join(', '), '| Plugins:', window.Capacitor.Plugins ? Object.keys(window.Capacitor.Plugins).join(', ') : 'none');
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.textContent = msg;
+  toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s';
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.style.opacity = '1');
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2500);
+}
+
+async function downloadBlob(blob, filename) {
+  const isNative = window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform();
+  if (isNative) {
+    try {
+      const plugin = window.Capacitor.Plugins.AudioDownload;
+      if (!plugin) throw new Error('AudioDownload plugin missing');
+      const buf = await blob.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      const chunkSize = 32768;
+      let binary = '';
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+      }
+      const base64 = btoa(binary);
+      const ts = Date.now();
+      const saveName = filename.replace(/(\.\w+)$/, '-' + ts + '$1');
+      const mime = filename.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
+      const result = await window.Capacitor.nativePromise('AudioDownload', 'saveAudio', { data: base64, filename: saveName, mime: mime });
+      console.log('[download] saved:', JSON.stringify(result));
+      showToast('Saved to ' + (result && result.path ? result.path : 'Downloads'));
+    } catch(e) {
+      console.error('[download] save failed:', e, e.message);
+      showToast('Save failed: ' + (e.message || e));
+    }
+    return;
+  }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = filename;
